@@ -1,4 +1,4 @@
-package com.example.tabexample;
+package com.app.potatoidentifer.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
