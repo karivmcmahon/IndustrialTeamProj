@@ -1,0 +1,4 @@
+INDEX VERSION 1.126+C:\Users\Robert\University\Year 4\Semester 1\Industrial Project\.metadata\.plugins\org.eclipse.jdt.core
+3982245793.index
+3610256451.index
+4198070765.index
