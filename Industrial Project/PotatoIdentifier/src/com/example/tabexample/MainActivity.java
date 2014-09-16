@@ -9,6 +9,8 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 
+//No change was really made all i added was a comment.
+
 // The way i have done the tabs is deprecated so perhaps there is a better way of doing them
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity 
