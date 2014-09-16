@@ -23,8 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.app.potatoidentifer.activities.GlossaryTab"></activity>
-        <activity android:name="com.app.potatoidentifer.activities.QuestionTab"></activity>
-        <activity android:name="com.app.potatoidentifer.activities.VideoTab"></activity>
+        <activity android:name="com.app.potatoidentifer.activities.QuestionFragment"></activity>
+        <activity android:name="com.app.potatoidentifer.activities.VideoFragment"></activity>
         
     </application>
 
