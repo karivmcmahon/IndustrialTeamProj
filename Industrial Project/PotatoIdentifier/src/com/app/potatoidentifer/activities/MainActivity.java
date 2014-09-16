@@ -5,7 +5,7 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import com.example.potatoidentifer.R;
+import com.example.potatoidentifier.R;
 
 // The way i have done the tabs is deprecated so perhaps there is a better way of doing them
 @SuppressWarnings("deprecation")

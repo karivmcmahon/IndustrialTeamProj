@@ -2,7 +2,7 @@ package com.app.potatoidentifer.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import com.example.potatoidentifer.R;
+import com.example.potatoidentifier.R;
 
 public class GlossaryTab extends Activity {
         @Override
