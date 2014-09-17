@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.potatoidentifier"
+    package="com.example.tabexample"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.app.potatoidentifer.activities.MainActivity"
+            android:name="com.example.tabexample.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.app.potatoidentifer.activities.GlossaryTab"></activity>
-        <activity android:name="com.app.potatoidentifer.activities.QuestionTab"></activity>
-        <activity android:name="com.app.potatoidentifer.activities.VideoTab"></activity>
+        <activity android:name=".GlossaryTab"></activity>
+        <activity android:name=".QuestionTab"></activity>
+        <activity android:name=".VideoTab"></activity>
+        <activity android:name=".FutherInfo"></activity>
         
     </application>
 
