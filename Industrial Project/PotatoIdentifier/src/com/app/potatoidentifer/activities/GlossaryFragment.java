@@ -1,12 +1,10 @@
 package com.app.potatoidentifer.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.app.potatoidentifer.R;
 
 public class GlossaryFragment extends BaseFragment {
     private int slideshowImageArray[] = { R.drawable.leaf, R.drawable.leaf2, R.drawable.leaf3, R.drawable.leaf4, R.drawable.leaf5 , R.drawable.leaf6 };

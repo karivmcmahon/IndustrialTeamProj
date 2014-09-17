@@ -12,7 +12,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import com.app.potatoidentifer.R;
 
 public class SlideshowViewPagerAdapter extends PagerAdapter {
 
