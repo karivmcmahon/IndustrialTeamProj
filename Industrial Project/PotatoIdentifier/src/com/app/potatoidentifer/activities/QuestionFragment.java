@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.potatoidentifier.R;
+import com.app.potatoidentifer.R;
 
 public class QuestionFragment extends BaseFragment {
     @Override

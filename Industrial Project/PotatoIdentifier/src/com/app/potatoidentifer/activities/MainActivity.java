@@ -3,7 +3,7 @@ package com.app.potatoidentifer.activities;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
-import com.example.potatoidentifier.R;
+import com.app.potatoidentifer.R;
 
 public class MainActivity extends FragmentActivity {
     private FragmentTabHost mTabHost;
