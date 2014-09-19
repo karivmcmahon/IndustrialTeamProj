@@ -12,7 +12,7 @@ import android.util.Log;
  * Class that handles connection to the sqlite database and a series of CRUD methods.
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "test.db";
+    private static final String DATABASE_NAME = "custom_list_view.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String CREATE_TEST_TABLE = "";
