@@ -12,10 +12,13 @@ import java.util.List;
 
 
 
+
+
 import android.app.ListFragment;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,13 +54,15 @@ public class GlossaryListFragment extends android.support.v4.app.ListFragment im
 
 	        super.onActivityCreated(savedInstanceState);
 
+
 	        //Get the array from the values folder for the list of titles.
-	        menutitles = getResources().getStringArray(R.array.titles);
+	        menutitles = getResources().getStringArray(R.array.glossary_string_array);
 	        
 	        // does this need fixed?
 	        //Same for the items.
-	        menuIcons = getResources().obtainTypedArray(R.array.icons);
-
+	        menuIcons = getResources().obtainTypedArray(R.array.glossary_item_link);
+	        
+	        
 	       
 	        
 	        rowItems = new ArrayList<GlossaryRowBean>();
@@ -80,12 +85,26 @@ public class GlossaryListFragment extends android.support.v4.app.ListFragment im
 	    @Override
 	    public void onItemClick(AdapterView<?> parent, View view, int position,
 	            long id) {
-
+	/*    	FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(android.R.id.tabcontent, new FurtherInfo());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();*/
+            
+            
+            FragmentManager fragmentManager = getFragmentManager();
+            Fragment fragment = new FurtherInfo();
+	         // Insert the fragment by replacing any existing fragment
+	         fragmentManager.beginTransaction()
+                        .replace(android.R.id.tabcontent, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            
 	    	// Will be changed to add more functionality.
-	        Toast.makeText(getActivity(), menutitles[position], Toast.LENGTH_SHORT)
-	                .show();
+	       /* Toast.makeText(getActivity(), menutitles[position], Toast.LENGTH_SHORT)
+	                .show();*/
 	        
-	     // Create new fragment and transaction
+	 /*    // Create new fragment and transaction
 	        TestFragment newFragment = new TestFragment();
 	        FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -96,7 +115,7 @@ public class GlossaryListFragment extends android.support.v4.app.ListFragment im
 
 	        // Commit the transaction
 	        transaction.commit();
-	        
+	        */
 	    }
 	    
 }

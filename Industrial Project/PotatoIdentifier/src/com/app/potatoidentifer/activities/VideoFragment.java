@@ -9,6 +9,9 @@ public class VideoFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.video_fragment_layout, container, false);
+        
+
+        
         return v;
     }
 }

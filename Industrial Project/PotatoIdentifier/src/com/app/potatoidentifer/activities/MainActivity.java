@@ -21,7 +21,7 @@ public class MainActivity extends FragmentActivity {
 		mTabHost.addTab(
 				mTabHost.newTabSpec("glossaryTab").setIndicator("",
 						res.getDrawable(R.drawable.book1)),
-				GlossaryFragment.class, null);
+				GlossaryCategoriesListFragment.class, null);
 		mTabHost.addTab(
 				mTabHost.newTabSpec("questionTab").setIndicator("",
 						res.getDrawable(R.drawable.question1)),
@@ -30,5 +30,8 @@ public class MainActivity extends FragmentActivity {
 				mTabHost.newTabSpec("videoTab").setIndicator("",
 						res.getDrawable(R.drawable.button_play_blue)),
 				VideoFragment.class, null);
+		
+	    this.getSupportFragmentManager().executePendingTransactions();      // <----- This is the key 
+
 	}
 }

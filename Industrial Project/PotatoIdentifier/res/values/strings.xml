@@ -3,4 +3,25 @@
     <string name="app_name">Potato Identifier</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    
+    <string-array name="glossary_string_array">
+        <item>hi</item>
+        <item>bye</item>
+        <item>leaf</item>
+        <item>potato</item>
+        <item>insect</item>
+        <item>oxygen</item>
+        <item>ladybug</item>
+    </string-array>
+    
+    <array name="glossary_item_link">
+        <item>@drawable/about</item>
+        <item>@drawable/about</item>
+        <item>@drawable/about</item>
+        <item>@drawable/about</item>
+        <item>@drawable/about</item>
+        <item>@drawable/about</item>
+        <item>@drawable/about</item>
+    </array>
+    
 </resources>

@@ -21,6 +21,8 @@ public class FurtherInfo extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.further_info_layout, container, false);
 
+
+        
         SlideshowViewPagerAdapter adapter = new SlideshowViewPagerAdapter(getActivity(), slideshowImageArray);
         myViewPager = (ViewPager) v.findViewById(R.id.slideshowviewpager);
         myViewPager.setAdapter(adapter);
