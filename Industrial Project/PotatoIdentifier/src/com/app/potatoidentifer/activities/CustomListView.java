@@ -1,8 +1,12 @@
 package com.app.potatoidentifer.activities;
 
-import android.view.*;
-import android.widget.*;
-import android.app.*;
+import android.app.Activity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 import com.example.potatoidentifier.R;
 
 public class CustomListView extends ArrayAdapter<String> {

@@ -1,11 +1,8 @@
 package com.app.potatoidentifer.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +41,6 @@ public class GlossaryFragment extends BaseFragment {
         return v;
     }
 
-    //Create a message handling object as an anonymous class.
     private AdapterView.OnItemClickListener listViewListenerHandler = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
             FragmentManager fragmentManager = getFragmentManager();
@@ -52,7 +48,6 @@ public class GlossaryFragment extends BaseFragment {
             fragmentTransaction.replace(android.R.id.tabcontent, new FurtherInfo());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-            Log.d(GlossaryFragment.class.getName(), "FUCK SAKE");
         }
     };
 }
