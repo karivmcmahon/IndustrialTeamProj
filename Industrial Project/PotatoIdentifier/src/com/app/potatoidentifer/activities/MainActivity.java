@@ -4,7 +4,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
-import com.example.potatoidentifier.R;
 
 public class MainActivity extends FragmentActivity {
 	private FragmentTabHost mTabHost;

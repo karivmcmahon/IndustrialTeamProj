@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
-import com.example.potatoidentifier.R;
 
 public class SlideshowViewPagerAdapter extends PagerAdapter {
 
