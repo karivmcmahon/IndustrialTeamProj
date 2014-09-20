@@ -10,7 +10,7 @@
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
  
-    android:background="@drawable/round_cell_on" />
+    android:background="@layout/roundedcell" />
  
      <Button android:layout_height="10dp" android:layout_width="10dp"
     android:id="@+id/btn2"
@@ -18,7 +18,7 @@
     android:layout_marginLeft="5dip"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    android:background="@drawable/round_cell_on" />
+    android:background="@layout/roundedcell" />
      
       <Button android:layout_height="10dp" android:layout_width="10dp"
     android:id="@+id/btn3"
@@ -26,7 +26,7 @@
     android:layout_marginLeft="5dip"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    android:background="@drawable/round_cell_on" />
+    android:background="@layout/roundedcell" />
       
     <Button android:layout_height="10dp" android:layout_width="10dp"
     android:id="@+id/btn4"
@@ -34,7 +34,7 @@
     android:layout_marginLeft="5dip"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    android:background="@drawable/round_cell_on" />
+    android:background="@layout/roundedcell" />
     
      <Button android:layout_height="10dp" android:layout_width="10dp"
     android:id="@+id/btn5"
@@ -42,7 +42,7 @@
     android:layout_marginLeft="5dip"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    android:background="@drawable/round_cell_on" />
+    android:background="@layout/roundedcell" />
      
      <Button android:layout_height="10dp" android:layout_width="10dp"
     android:id="@+id/btn6"
@@ -50,6 +50,6 @@
     android:layout_marginLeft="5dip"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    android:background="@drawable/round_cell_on" />
+    android:background="@layout/roundedcell" />
  
 </RelativeLayout>

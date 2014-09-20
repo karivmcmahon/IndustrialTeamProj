@@ -12,7 +12,6 @@ import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
@@ -35,13 +34,13 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 		return imageArray.length;
 	}
 
-	public Object instantiateItem(ViewGroup collection, final int position) {
+	public Object instantiateItem(View collection, final int position) {
 		ImageView view = new ImageView(activity);
-		view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-				LayoutParams.MATCH_PARENT));
+		view.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+				LayoutParams.FILL_PARENT));
 		view.setScaleType(ScaleType.FIT_XY);
 		view.setBackgroundResource(imageArray[position]);
-		collection.addView(view, 0);
+		((ViewPager) collection).addView(view, 0);
 		view.setOnClickListener(new OnClickListener() {
 
 			@SuppressLint("NewApi")
@@ -66,6 +65,11 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialog.setContentView(R.layout.full_screen_image);
 				dialog.setCancelable(true);
+
+				// Regular image view
+				// ImageView img = (ImageView)
+				// dialog.findViewById(R.id.imageView1);
+				// img.setBackground(resizedBitmap);
 
 				// TODO set up image view with pinch for zoom - Needs tested on
 				// device not sure it works
@@ -92,13 +96,13 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 	}
 
 	@Override
-	public void destroyItem(ViewGroup arg0, int arg1, Object arg2) {
-		arg0.removeView((View) arg2);
+	public void destroyItem(View arg0, int arg1, Object arg2) {
+		((ViewPager) arg0).removeView((View) arg2);
 	}
 
 	@Override
 	public boolean isViewFromObject(View arg0, Object arg1) {
-		return arg0 == arg1;
+		return arg0 == ((View) arg1);
 	}
 
 	@Override

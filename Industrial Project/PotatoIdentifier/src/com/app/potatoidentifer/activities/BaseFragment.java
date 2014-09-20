@@ -1,14 +1,26 @@
 package com.app.potatoidentifer.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 
-/**
- * Created by Mark on 16/09/2014.
- */
 public class BaseFragment extends Fragment {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+	protected MainActivity fragmentTabActivity;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		fragmentTabActivity =  (MainActivity) this.getActivity();
+	}
+	
+
+	public boolean onBackPressed() {
+		return false;
+	}
+
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		
+	}
 }

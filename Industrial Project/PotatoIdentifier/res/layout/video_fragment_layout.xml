@@ -1,8 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-</LinearLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+  
+	<LinearLayout 
+	              android:orientation="vertical"
+	              android:layout_width="match_parent"
+	              android:layout_height="match_parent">
+	
+		<TextView
+			        android:id="@+id/titleTextView"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal"
+			        android:text="Tutorials"
+			        android:textSize="22sp"
+			        android:textStyle="bold"
+			        android:padding="10dp" />
+		
+		<TextView
+			        android:id="@+id/test1TextView"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="LFD Test"
+			        android:textSize="22sp"
+			        android:textStyle="bold"
+			        android:paddingBottom ="10dp" />
+		
+		<FrameLayout
+		  android:id="@+id/video_frame"
+		  android:layout_width="fill_parent"
+		  android:layout_height="200dp"
+		  android:background="#000"
+		  >
+  
+			<VideoView
+			    android:id="@+id/videoView1"
+			    android:layout_width="match_parent"
+			    android:layout_height="200dp"
+			    android:gravity="center" />
+			
+			 <ImageButton
+			    android:id="@+id/play_button"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center_vertical|center_horizontal"
+			    android:src="@drawable/button_play_blue"
+			    />
+		 
+    </FrameLayout>
+    
+	<TextView
+	        android:id="@+id/test2TextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="FTA Test"
+	        android:textSize="22sp"
+	        android:textStyle="bold"
+	        android:paddingBottom ="10dp" />
+    
+	<FrameLayout
+	  android:id="@+id/video_frame2"
+	  android:layout_width="fill_parent"
+	  android:layout_height="200dp"
+	  android:background="#000"
+	  >
+  
+		<VideoView
+		    android:id="@+id/videoView2"
+		    android:layout_width="match_parent"
+		    android:layout_height="200dp"
+		    android:gravity="center" />
+		
+		 <ImageButton
+		    android:id="@+id/play_button2"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_vertical|center_horizontal"
+		    android:src="@drawable/button_play_blue"
+		    />
+		 
+    </FrameLayout>
+		
+	
+	
+	
+	</LinearLayout>
+</ScrollView>
