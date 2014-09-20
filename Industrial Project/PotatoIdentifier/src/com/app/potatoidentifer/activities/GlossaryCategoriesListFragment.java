@@ -43,5 +43,4 @@ public class GlossaryCategoriesListFragment extends BaseFragment
 					new GlossaryFragment(),  true);
 		}
 	};
-
 }

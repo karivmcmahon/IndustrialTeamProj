@@ -348,5 +348,3 @@ public class MainActivity extends FragmentActivity implements
 			addView(tv);
 		}
 	}
-
-}
