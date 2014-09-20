@@ -1,5 +1,7 @@
 package com.app.potatoidentifer.activities;
 
+import com.example.potatoidentifier.R;
+
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
