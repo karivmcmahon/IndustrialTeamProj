@@ -14,6 +14,11 @@ import com.example.potatoidentifier.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class creates the further information page for a selected glossary item
+ * @author Kari
+ *
+ */
 public class FurtherInfo extends BaseFragment {
 	ArrayList<Integer> slideshowImageArray = new ArrayList<Integer>() {{
   	   add(R.drawable.leaf);

@@ -10,6 +10,11 @@ import android.widget.TextView;
 
 import com.example.potatoidentifier.R;
 
+/**
+ * This class creates a custom list view for the categories in the glossary
+ * @author Kari
+ *
+ */
 public class CategoriesCustomListView extends ArrayAdapter<String>  {
 	private final Activity context;
     private final String[] glossaryNames;
@@ -26,10 +31,13 @@ public class CategoriesCustomListView extends ArrayAdapter<String>  {
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.custom_list_view, null, false);
+        
         TextView glossaryListText = (TextView) rowView.findViewById(R.id.txt);
-        ImageView glossaryListImage = (ImageView) rowView.findViewById(R.id.img);
         glossaryListText.setText(glossaryNames[position]);
+        
+        ImageView glossaryListImage = (ImageView) rowView.findViewById(R.id.img);
         glossaryListImage.setImageResource(imageId[position]);
+        
         return rowView;
     }
 }

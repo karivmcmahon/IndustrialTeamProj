@@ -12,6 +12,11 @@ import android.widget.TextView;
 
 import com.example.potatoidentifier.R;
 
+/**
+ * This class creates the custom list view for the glossary items in the list
+ * @author Kari
+ *
+ */
 public class CustomListView extends ArrayAdapter<String> {
     private final Activity context;
     private final  ArrayList<String> glossarySymptomNames;

@@ -17,6 +17,11 @@ import android.widget.VideoView;
 
 import com.example.potatoidentifier.R;
 
+/**
+ * This class creates a video fragment to display the video tutorials
+ * @author Kari
+ *
+ */
 public class VideoFragment extends BaseFragment {
 	View v;
 	MediaController mediaControls;

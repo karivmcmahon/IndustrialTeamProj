@@ -23,16 +23,20 @@ import android.widget.TextView;
 
 import com.example.potatoidentifier.R;
 
+/**
+ * This class creates the scrollable slideshow for the app
+ * @author Kari
+ *
+ */
 public class SlideshowViewPagerAdapter extends PagerAdapter {
 
 	Activity activity;
 	ArrayList<Integer> imageArray;
-	//ArrayList<String>  basicFactsArray;
 
 	public SlideshowViewPagerAdapter(Activity activity, ArrayList<Integer> imageArray ) {
 		this.imageArray = imageArray;
 		this.activity = activity;
-		//this.basicFactsArray = basicFactsArray;
+
 	}
 
 	public int getCount() {
@@ -40,8 +44,6 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 	}
 
 	public Object instantiateItem(View collection, final int position) {
-		//final TextView facts = (TextView) activity.findViewById(R.id.basicFactTextView);
-		//facts.setText(basicFactsArray.get(position));
 		
 		ImageView view = new ImageView(activity);
 		view.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,

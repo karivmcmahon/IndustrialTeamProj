@@ -6,6 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.potatoidentifier.R;
 
+/**
+ * This class sets up the fragment for the expert system
+ * @author Kari
+ *
+ */
 public class QuestionFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

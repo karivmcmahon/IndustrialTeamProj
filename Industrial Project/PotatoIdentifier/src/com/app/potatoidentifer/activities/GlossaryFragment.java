@@ -13,6 +13,11 @@ import android.widget.ListView;
 
 import com.example.potatoidentifier.R;
 
+/**
+ * This class sets up the glossary list once a category has been selected
+ * @author Kari
+ *
+ */
 public class GlossaryFragment extends BaseFragment {
     ListView list;
     ArrayList<String> glossary_list;
