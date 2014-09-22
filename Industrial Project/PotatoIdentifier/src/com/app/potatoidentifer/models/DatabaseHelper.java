@@ -14,10 +14,13 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "test.db";
     private static final int DATABASE_VERSION = 1;
+   
 
+    static final String TEST_TABLE = "table";
+
+ // Database creation sql statement
     private static final String CREATE_TEST_TABLE = "";
-    private static final String TEST_TABLE = "";
-
+    
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
