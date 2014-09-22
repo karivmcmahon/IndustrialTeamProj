@@ -1,15 +1,14 @@
 package com.app.potatoidentifer.models;
 
-import java.util.*;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+import java.util.ArrayList;
+import java.util.List;
 
-public class GlossaryDataSource {
-	private SQLiteDatabase database;
-	private DatabaseHelper dbHelper;
+/**
+ * Created by Mark on 22/09/2014.
+ */
+public class GlossaryDataSource extends BaseDataSource {
     private final String GLOSSARY_TABLE = "glossary";
     private final String GLOSSARY_TITLE_CATEGORY = "type";
     private final String GLOSSARY_IMAGE = "imageid";
@@ -17,17 +16,10 @@ public class GlossaryDataSource {
 	private String[] allGlossaryColumns = { GLOSSARY_ID, GLOSSARY_TITLE_CATEGORY, GLOSSARY_IMAGE };
 
     public GlossaryDataSource(Context context) {
-        dbHelper = new DatabaseHelper(context);
+        super(context);
     }
 
-    public void open() throws SQLException {
-        database = dbHelper.getWritableDatabase();
-    }
-
-    public void close() {
-	    dbHelper.close();
-	}
-	
+    //Searches the database for the information required for the categories page.
 	public List<GlossaryBean> getGlossaryCategoryInfo() {
         List<GlossaryBean> glossaryList = new ArrayList<GlossaryBean>();
         Cursor cursor = database.query(true, GLOSSARY_TABLE, allGlossaryColumns, null, null, GLOSSARY_TITLE_CATEGORY, null, null, null);
@@ -47,5 +39,5 @@ public class GlossaryDataSource {
 	    glossaryItem.setTitle(cursor.getString(1));
 	    glossaryItem.setImageID(cursor.getString(2));
 	    return glossaryItem;
-	  }
+    }
 }
