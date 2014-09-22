@@ -23,10 +23,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class GlossaryListFragment extends android.support.v4.app.ListFragment implements OnItemClickListener{
