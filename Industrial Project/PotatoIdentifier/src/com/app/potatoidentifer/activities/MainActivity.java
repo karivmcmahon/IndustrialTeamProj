@@ -1,12 +1,7 @@
 package com.app.potatoidentifer.activities;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.content.Context;
 import android.content.Intent;
-import android.database.SQLException;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +18,10 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
 import com.app.potatoidentifer.models.DatabaseHelper;
 import com.example.potatoidentifier.R;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MainActivity extends FragmentActivity implements
@@ -189,6 +188,11 @@ public class MainActivity extends FragmentActivity implements
 			}
 		});
 
+        //Build the database required for the app.
+        buildDatabase();
+    }
+
+	public void buildDatabase() {
         DatabaseHelper myDbHelper = new DatabaseHelper(this);
         myDbHelper.deleteDatabase();
         try {
@@ -196,22 +200,8 @@ public class MainActivity extends FragmentActivity implements
         } catch (IOException ioe) {
             throw new Error("Unable to create database");
         }
-
-        try {
-            myDbHelper.openDataBase();
-        } catch (SQLException sqle) {
-            throw new Error("Unable to open the database.");
-        }
     }
 
-	
-	/**
-	 * Adds Fragments 
-	 * @param tabName
-	 * @param fragment
-	 * @param animate
-	 * @param add
-	 */
 	public void addFragments(String tabName, Fragment fragment, boolean add) 
 	{
 		if (add) 

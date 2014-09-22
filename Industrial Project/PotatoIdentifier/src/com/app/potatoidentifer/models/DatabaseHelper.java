@@ -3,26 +3,28 @@ package com.app.potatoidentifer.models;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static String DB_PATH;
     private static String DB_NAME = "projectDB.sqlite";
     private SQLiteDatabase myDataBase;
     private Context myContext;
-    private Resources res;
+    private Resources resources;
 
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, 1);
         this.myContext = context;
         DB_PATH = "/data/data/" + context.getApplicationContext().getPackageName() + "/databases/";
-        res = myContext.getResources();
+        resources = myContext.getResources();
     }
 
     public void createDataBase() throws IOException {
@@ -47,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private boolean databaseFileExists() {
-        AssetManager mg = res.getAssets();
+        AssetManager mg = resources.getAssets();
         try {
             mg.open("databases/projectDB.sqlite");
             Log.v("Database Debug", DB_NAME+" does exist.");
@@ -78,49 +80,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void copyDataBase() throws IOException {
         //Open your local db as the input stream
-        Log.v("SHIT", "FUCK");
         InputStream myInput = myContext.getAssets().open("databases/projectDB.sqlite");
-        Log.v("Database Debug", "1");
 
         // Path to the just created empty db
         String outFileName = DB_PATH + DB_NAME;
-        Log.v("Database Debug", "2");
 
         //Open the empty db as the output stream
         OutputStream myOutput = new FileOutputStream(outFileName);
-        Log.v("Database Debug", "3");
 
-        //transfer bytes from the inputfile to the outputfile
+        //Transfer bytes from the inputfile to the outputfile
         byte[] buffer = new byte[1024];
-        Log.v("Database Debug", "4");
         int length;
-        Log.v("Database Debug", "5");
         while ((length = myInput.read(buffer)) > 0) {
-            Log.v("Database Debug", "6");
             myOutput.write(buffer, 0, length);
         }
-        Log.v("Database Debug", "7");
         //Close the streams
         myOutput.flush();
         myOutput.close();
         myInput.close();
     }
 
-    public void openDataBase() throws SQLException {
+    public SQLiteDatabase openDataBase() throws SQLException {
         //Open the database
         String myPath = DB_PATH + DB_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-        Log.v("Database Debug", "database opened successfully.");
-
-        //Testing if it worked by getting the names of the tables.
-        Cursor c = myDataBase.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
-        if (c.moveToFirst()) {
-            while ( !c.isAfterLast() ) {
-                Log.v("Testing", c.getString(0));
-                c.moveToNext();
-            }
-        }
-        myDataBase.close();
+        Log.v("Database Debug", "Database opened successfully.");
+        close();
+        return myDataBase;
     }
 
     public void deleteDatabase() throws SQLException {

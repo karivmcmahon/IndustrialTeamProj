@@ -22,10 +22,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.app.potatoidentifer.activities.GlossaryTab"></activity>
-        <activity android:name="com.app.potatoidentifer.activities.QuestionFragment"></activity>
-        <activity android:name="com.app.potatoidentifer.activities.VideoFragment"></activity>
-        
     </application>
-
 </manifest>
