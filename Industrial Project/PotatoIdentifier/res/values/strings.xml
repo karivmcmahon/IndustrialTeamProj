@@ -15,13 +15,13 @@
     </string-array>
     
     <array name="glossary_item_link">
-        <item>@drawable/about</item>
-        <item>@drawable/about</item>
-        <item>@drawable/about</item>
-        <item>@drawable/about</item>
-        <item>@drawable/about</item>
-        <item>@drawable/about</item>
-        <item>@drawable/about</item>
+        <item>@drawable/question1</item>
+        <item>@drawable/question1</item>
+        <item>@drawable/question1</item>
+        <item>@drawable/question1</item>
+        <item>@drawable/question1</item>
+        <item>@drawable/question1</item>
+        <item>@drawable/question1</item>
     </array>
     
 </resources>

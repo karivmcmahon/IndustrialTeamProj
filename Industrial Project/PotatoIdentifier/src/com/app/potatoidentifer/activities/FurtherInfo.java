@@ -7,23 +7,87 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.potatoidentifier.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class FurtherInfo extends BaseFragment {
-    private int slideshowImageArray[] = {R.drawable.leaf, R.drawable.leaf2, R.drawable.leaf3, R.drawable.leaf4, R.drawable.leaf5, R.drawable.leaf6};
+	ArrayList<Integer> slideshowImageArray = new ArrayList<Integer>() {{
+  	   add(R.drawable.leaf);
+  	   add(R.drawable.leaf2);
+  	   add( R.drawable.leaf3);
+  	   add(R.drawable.leaf4);
+  	   add( R.drawable.leaf5);
+  	   add( R.drawable.leaf6);
+  	}};
+  	
+ 
     private int buttonIds[] = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6};
     private List<Button> buttonArray;
     private View v;
     private ViewPager myViewPager;
+    private String basicFacts;
+    private String symptomTitle;
+    private String diagnostics;
+    private String control;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.further_info_layout, container, false);
-
-
+        v = inflater.inflate(R.layout.futher_info_layout, container, false);
+// 
+//		FutherInfoDataSourcw datasource = new FutherInfoDataSource();
+//	    datasource.open();
+//	    List<FurtherInfoBean> val = datasource.getGlossaryInfo();
+//	    for (FurtherInfoBean val : values)
+//	    { 
+//	    	slideshowImageArray.add(val.getImageID());
+            //slideshowImageArray.add(val.getImageID2());
+        //slideshowImageArray.add(val.getImageID3());
+        //slideshowImageArray.add(val.getImageID4());
+        //slideshowImageArray.add(val.getImageID5());
+        //slideshowImageArray.add(val.getImageID6());
+//			symptomTitle = val.getSymptom();
+//			basicFacts = val.getBasicFacts();
+        //	diagnostics = val.getDiagnostics();
+        //  control = val.getControl();
+//	    }
+//      	final View v = inflater.inflate(R.layout.glossary_fragment_layout,
+//				container, false);
+//		CustomListView adapter = new CustomListView(getActivity(),
+//				glossary_list, imageId);
+//		list = (ListView) v.findViewById(R.id.glossary_listview);
+//		list.setAdapter(adapter);
+//		list.setOnItemClickListener(listViewListenerHandler);
+//		return v;
+//        TextView basicFactsTextView = (TextView) v.findViewById(R.id.basicFactTextView);
+//        basicFactsTextView.setText( basicFacts );
+//        TextView diagnosticsTextView = (TextView) v.findViewById(R.id.diagnosticsTextView);
+//        diagnosticsTextView.setText(  diagnostics );
+//        TextView controlTextView = (TextView) v.findViewById(R.id.controlTextView);
+//        controlTextView.setText( control);
+//        TextView symptomTitleTextView = (TextView) v.findViewById(R.id.titleTextView);
+//        symptomTitleTextView.setText( symptomTitle );
+//        SlideshowViewPagerAdapter adapter = new SlideshowViewPagerAdapter(getActivity(), slideshowImageArray );
+//        myViewPager = (ViewPager) v.findViewById(R.id.slideshowviewpager);
+//        myViewPager.setAdapter(adapter);
+//        myViewPager.setCurrentItem(0);
+//        myViewPager.setOnPageChangeListener(viewPagerListenerHandler);
+//        initButton();
+//        return v;
         
-        SlideshowViewPagerAdapter adapter = new SlideshowViewPagerAdapter(getActivity(), slideshowImageArray);
+        
+        TextView basicFactsTextView = (TextView) v.findViewById(R.id.basicFactTextView);
+        basicFactsTextView.setText( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis libero consectetur, hendrerit est ut, fringilla quam. Mauris varius, nisi non interdum dapibus, nisl velit pretium eros, nec venenatis sapien risus id dolor. Proin sit amet dolor sagittis, finibus ex nec, auctor tortor. Duis eu tristique sapien, eget placerat urna. Nulla facilisi. Suspendisse ac erat dolor. In hac ");
+        TextView diagnosticsTextView = (TextView) v.findViewById(R.id.diagnosticsTextView);
+        diagnosticsTextView.setText( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis libero consectetur, hendrerit est ut, fringilla quam. Mauris varius, nisi non interdum dapibus, nisl velit pretium eros, nec venenatis sapien risus id dolor. Proin sit amet dolor sagittis, finibus ex nec, auctor tortor. Duis eu tristique sapien, eget placerat urna. Nulla facilisi. Suspendisse ac erat dolor. In hac ");
+        TextView controlTextView = (TextView) v.findViewById(R.id.controlTextView);
+        controlTextView.setText( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis libero consectetur, hendrerit est ut, fringilla quam. Mauris varius, nisi non interdum dapibus, nisl velit pretium eros, nec venenatis sapien risus id dolor. Proin sit amet dolor sagittis, finibus ex nec, auctor tortor. Duis eu tristique sapien, eget placerat urna. Nulla facilisi. Suspendisse ac erat dolor. In hac ");
+        TextView symptomTitleTextView = (TextView) v.findViewById(R.id.titleTextView);
+        symptomTitleTextView.setText( "Symptom XYZ");
+        SlideshowViewPagerAdapter adapter = new SlideshowViewPagerAdapter(getActivity(), slideshowImageArray );
         myViewPager = (ViewPager) v.findViewById(R.id.slideshowviewpager);
         myViewPager.setAdapter(adapter);
         myViewPager.setCurrentItem(0);

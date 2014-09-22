@@ -1,5 +1,7 @@
 package com.app.potatoidentifer.activities;
 
+import java.util.ArrayList;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -12,35 +14,41 @@ import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.TextView;
 
+import com.example.potatoidentifier.R;
 
 public class SlideshowViewPagerAdapter extends PagerAdapter {
 
 	Activity activity;
-	int imageArray[];
+	ArrayList<Integer> imageArray;
+	//ArrayList<String>  basicFactsArray;
 
-	public SlideshowViewPagerAdapter(Activity activity, int[] imageArray) {
+	public SlideshowViewPagerAdapter(Activity activity, ArrayList<Integer> imageArray ) {
 		this.imageArray = imageArray;
 		this.activity = activity;
+		//this.basicFactsArray = basicFactsArray;
 	}
 
 	public int getCount() {
-		return imageArray.length;
+		return imageArray.size();
 	}
 
-	public Object instantiateItem(ViewGroup collection, final int position) {
+	public Object instantiateItem(View collection, final int position) {
+		//final TextView facts = (TextView) activity.findViewById(R.id.basicFactTextView);
+		//facts.setText(basicFactsArray.get(position));
+		
 		ImageView view = new ImageView(activity);
-		view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-				LayoutParams.MATCH_PARENT));
+		view.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+				LayoutParams.FILL_PARENT));
 		view.setScaleType(ScaleType.FIT_XY);
-		view.setBackgroundResource(imageArray[position]);
-		collection.addView(view, 0);
+		view.setBackgroundResource(imageArray.get(position));
+		((ViewPager) collection).addView(view, 0);
 		view.setOnClickListener(new OnClickListener() {
 
 			@SuppressLint("NewApi")
@@ -52,7 +60,7 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 				int height = dm.heightPixels;
 
 				Bitmap bitmap = BitmapFactory.decodeResource(
-						activity.getResources(), imageArray[position]);
+						activity.getResources(), imageArray.get(position));
 				// Get target image size
 				int bitmapHeight = bitmap.getHeight();
 				int bitmapWidth = bitmap.getWidth();
@@ -65,6 +73,11 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialog.setContentView(R.layout.full_screen_image);
 				dialog.setCancelable(true);
+
+				// Regular image view
+				// ImageView img = (ImageView)
+				// dialog.findViewById(R.id.imageView1);
+				// img.setBackground(resizedBitmap);
 
 				// TODO set up image view with pinch for zoom - Needs tested on
 				// device not sure it works
@@ -91,13 +104,13 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 	}
 
 	@Override
-	public void destroyItem(ViewGroup arg0, int arg1, Object arg2) {
-		arg0.removeView((View) arg2);
+	public void destroyItem(View arg0, int arg1, Object arg2) {
+		((ViewPager) arg0).removeView((View) arg2);
 	}
 
 	@Override
 	public boolean isViewFromObject(View arg0, Object arg1) {
-		return arg0 == arg1;
+		return arg0 == ((View) arg1);
 	}
 
 	@Override
