@@ -1,10 +1,12 @@
 package com.app.potatoidentifer.activities;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.SQLException;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +22,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
 
+import com.app.potatoidentifer.models.DatabaseHelper;
 import com.example.potatoidentifier.R;
 
 public class MainActivity extends FragmentActivity implements
@@ -186,7 +189,20 @@ public class MainActivity extends FragmentActivity implements
 			}
 		});
 
-	}
+        DatabaseHelper myDbHelper = new DatabaseHelper(this);
+        myDbHelper.deleteDatabase();
+        try {
+            myDbHelper.createDataBase();
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
+        }
+
+        try {
+            myDbHelper.openDataBase();
+        } catch (SQLException sqle) {
+            throw new Error("Unable to open the database.");
+        }
+    }
 
 	
 	/**
