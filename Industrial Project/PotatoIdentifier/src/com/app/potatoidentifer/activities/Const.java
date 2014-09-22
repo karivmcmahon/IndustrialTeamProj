@@ -1,5 +1,10 @@
 package com.app.potatoidentifer.activities;
 
+/**
+ * Class contains the constants for the tabs
+ * @author Kari
+ *
+ */
 public class Const {
 	
 	public static String TAB_FIRST="tabfirst";
