@@ -1,6 +1,6 @@
 package com.app.potatoidentifer.activities;
 
-import com.example.potatoidentifier.R;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,16 +10,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.potatoidentifier.R;
 
+/**
+ * This class creates the custom list view for the glossary items in the list
+ * @author Kari
+ *
+ */
 public class CustomListView extends ArrayAdapter<String> {
     private final Activity context;
-    private final String[] glossaryNames;
-    private final Integer[] imageId;
+    private final  ArrayList<String> glossarySymptomNames;
+    private final ArrayList<Integer> imageId;
 
-    public CustomListView(Activity context, String[] web, Integer[] imageId) {
-        super(context, R.layout.glossary_fragment_layout, web);
+    public CustomListView(Activity context,  ArrayList<String> glossarySymptomNames, ArrayList<Integer> imageId) {
+        super(context, R.layout.glossary_fragment_layout, glossarySymptomNames);
         this.context = context;
-        this.glossaryNames = web;
+        this.glossarySymptomNames = glossarySymptomNames;
         this.imageId = imageId;
     }
 
@@ -29,8 +35,8 @@ public class CustomListView extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.custom_list_view, null, false);
         TextView glossaryListText = (TextView) rowView.findViewById(R.id.txt);
         ImageView glossaryListImage = (ImageView) rowView.findViewById(R.id.img);
-        glossaryListText.setText(glossaryNames[position]);
-        glossaryListImage.setImageResource(imageId[position]);
+        glossaryListText.setText( glossarySymptomNames.get(position));
+        glossaryListImage.setImageResource( imageId.get(position));
         return rowView;
     }
 }

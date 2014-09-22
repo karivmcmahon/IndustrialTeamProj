@@ -21,9 +21,9 @@ import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
-
 import com.app.potatoidentifer.models.DatabaseHelper;
 import com.example.potatoidentifier.R;
+
 
 public class MainActivity extends FragmentActivity implements
 		OnTabChangeListener {
@@ -364,5 +364,5 @@ public class MainActivity extends FragmentActivity implements
 			addView(tv);
 		}
 	}
+
 }
-	

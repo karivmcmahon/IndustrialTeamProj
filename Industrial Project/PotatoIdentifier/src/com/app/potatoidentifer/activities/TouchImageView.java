@@ -1,6 +1,6 @@
 package com.app.potatoidentifer.activities;
 
-// **** Code from Android Hive - Pinch Zooming Functionality ****
+// **** Code from Android Hive - Pinch Zooming Functionality - Does not currently work ****
 // TODO check this functionality
 import android.content.Context;
 import android.graphics.Matrix;

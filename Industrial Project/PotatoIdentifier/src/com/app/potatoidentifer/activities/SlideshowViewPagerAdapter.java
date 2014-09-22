@@ -1,5 +1,7 @@
 package com.app.potatoidentifer.activities;
 
+import java.util.ArrayList;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -17,29 +19,37 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.TextView;
 
 import com.example.potatoidentifier.R;
 
+/**
+ * This class creates the scrollable slideshow for the app
+ * @author Kari
+ *
+ */
 public class SlideshowViewPagerAdapter extends PagerAdapter {
 
 	Activity activity;
-	int imageArray[];
+	ArrayList<Integer> imageArray;
 
-	public SlideshowViewPagerAdapter(Activity activity, int[] imageArray) {
+	public SlideshowViewPagerAdapter(Activity activity, ArrayList<Integer> imageArray ) {
 		this.imageArray = imageArray;
 		this.activity = activity;
+
 	}
 
 	public int getCount() {
-		return imageArray.length;
+		return imageArray.size();
 	}
 
 	public Object instantiateItem(View collection, final int position) {
+		
 		ImageView view = new ImageView(activity);
 		view.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
 		view.setScaleType(ScaleType.FIT_XY);
-		view.setBackgroundResource(imageArray[position]);
+		view.setBackgroundResource(imageArray.get(position));
 		((ViewPager) collection).addView(view, 0);
 		view.setOnClickListener(new OnClickListener() {
 
@@ -52,7 +62,7 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 				int height = dm.heightPixels;
 
 				Bitmap bitmap = BitmapFactory.decodeResource(
-						activity.getResources(), imageArray[position]);
+						activity.getResources(), imageArray.get(position));
 				// Get target image size
 				int bitmapHeight = bitmap.getHeight();
 				int bitmapWidth = bitmap.getWidth();
