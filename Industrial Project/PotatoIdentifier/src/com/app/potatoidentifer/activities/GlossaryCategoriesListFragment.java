@@ -23,10 +23,10 @@ public class GlossaryCategoriesListFragment extends BaseFragment
 {
 	ListView list;
 	//An array of categories 
+	
 	String[] glossary_list = { "Leaf Symptoms", "Insect Symptoms", "Tubers Symptoms" };
 	//Image to be displayed next to category in list view
-	Integer[] imageId = { R.drawable.book1, R.drawable.book1, R.drawable.book1,
-			R.drawable.book1, };
+	Integer[] imageId = { R.drawable.book1, R.drawable.book1, R.drawable.book1 };
 
 
 
