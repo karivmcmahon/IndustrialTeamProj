@@ -5,7 +5,7 @@ import android.util.Pair;
 import java.util.*;
 
 /**
- * Created by Entitywan on 19/09/2014.
+ * Created by Ewan on 19/09/2014.
  */
 public class QuestionEngine<Entity,Property> {
 
@@ -14,7 +14,7 @@ public class QuestionEngine<Entity,Property> {
     protected Map<Property, Boolean> knowledge = new HashMap<Property, Boolean>();
 
 
-    public void QuestionEngine(List<Pair<Entity,Property>> rels)
+    public QuestionEngine(List<Pair<Entity,Property>> rels)
     {
         propertyMap = new HashMap<Entity, List<Property>>();
         for(Pair<Entity, Property> P : rels)
