@@ -75,6 +75,8 @@ public class QuestionEngine<Entity, Property> {
         HashMap<Property, Integer> counts = new HashMap<Property, Integer>();
         for (Entity key : candidates.keySet()) {
             for (Property c : candidates.get(key)) {
+                if (!counts.containsKey(c))
+                    counts.put(c,0);
                 counts.put(c, counts.get(c) + 1);
             }
 
