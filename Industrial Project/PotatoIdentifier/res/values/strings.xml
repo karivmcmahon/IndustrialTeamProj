@@ -15,13 +15,13 @@
     </string-array>
     
     <array name="glossary_item_link">
-        <item>@drawable/question1</item>
-        <item>@drawable/question1</item>
-        <item>@drawable/question1</item>
-        <item>@drawable/question1</item>
-        <item>@drawable/question1</item>
-        <item>@drawable/question1</item>
-        <item>@drawable/question1</item>
+        <item>@drawable/ic_question_tab</item>
+        <item>@drawable/ic_question_tab</item>
+        <item>@drawable/ic_question_tab</item>
+        <item>@drawable/ic_question_tab</item>
+        <item>@drawable/ic_question_tab</item>
+        <item>@drawable/ic_question_tab</item>
+        <item>@drawable/ic_question_tab</item>
     </array>
     
 </resources>

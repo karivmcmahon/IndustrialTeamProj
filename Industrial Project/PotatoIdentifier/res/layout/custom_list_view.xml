@@ -34,7 +34,5 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:clickable="true"
-        android:src="@drawable/arrow" />
-        
-   
+        android:src="@drawable/ic_image_arrow" />
 </RelativeLayout>

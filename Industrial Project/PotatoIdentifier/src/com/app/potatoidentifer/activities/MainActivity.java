@@ -54,7 +54,7 @@ public class MainActivity extends FragmentActivity implements
 
 		TabHost.TabSpec spec = tabHost.newTabSpec(Const.TAB_FIRST);
 		tabHost.setCurrentTab(0);
-		arrTabs[0] = new MyTabView(this, "", R.drawable.book1);
+		arrTabs[0] = new MyTabView(this, "", R.drawable.ic_glossary_tab);
 		spec.setContent(new TabHost.TabContentFactory() 
 		{
 			public View createTabContent(String tag)
@@ -66,7 +66,7 @@ public class MainActivity extends FragmentActivity implements
 		tabHost.addTab(spec);
 
 		spec = tabHost.newTabSpec(Const.TAB_SECOND);
-		arrTabs[1] = new MyTabView(this,  "",R.drawable.question1);
+		arrTabs[1] = new MyTabView(this,  "",R.drawable.ic_question_tab);
 		spec.setContent(new TabHost.TabContentFactory() 
 		{
 			public View createTabContent(String tag) 
@@ -78,7 +78,7 @@ public class MainActivity extends FragmentActivity implements
 		tabHost.addTab(spec);
 
 		spec = tabHost.newTabSpec(Const.TAB_THIRD);
-		arrTabs[2] = new MyTabView(this,  "",R.drawable.button_play_blue);
+		arrTabs[2] = new MyTabView(this,  "",R.drawable.ic_video_tab);
 		spec.setContent(new TabHost.TabContentFactory() 
 		{
 			public View createTabContent(String tag) 
@@ -90,7 +90,7 @@ public class MainActivity extends FragmentActivity implements
 		tabHost.addTab(spec);
 
 		spec = tabHost.newTabSpec(Const.TAB_FORTH);
-		arrTabs[3] = new MyTabView(this,  "",R.drawable.application_x_desktop1);
+		arrTabs[3] = new MyTabView(this,  "",R.drawable.ic_settings_tab);
 		spec.setContent(new TabHost.TabContentFactory() 
 		{
 			public View createTabContent(String tag) 
