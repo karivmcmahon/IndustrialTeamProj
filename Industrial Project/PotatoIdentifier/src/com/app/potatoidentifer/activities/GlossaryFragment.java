@@ -1,15 +1,18 @@
 package com.app.potatoidentifer.activities;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import com.app.potatoidentifer.models.GlossaryBean;
+import com.app.potatoidentifer.models.GlossaryDataSource;
 import com.example.potatoidentifier.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class sets up the glossary list once a category has been selected
@@ -18,52 +21,39 @@ import java.util.ArrayList;
  */
 public class GlossaryFragment extends BaseFragment {
     ListView list;
-    ArrayList<String> glossary_list;
-    ArrayList<Integer> glossary_id;
+    ArrayList<String> glossaryList;
+    ArrayList<Integer> glossaryId;
     ArrayList<Integer> imageId;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bundle bundle = this.getArguments();
         String category = bundle.getString("category");
-        Log.v("TESTING", category);
-    	glossary_list = new ArrayList<String>() {{
-     	   add("Leaf");
-     	   add("Potato");
-     	   add("Placeholder");
-     	   add("Bug");
-     	   add("Window");
-     	   add("Insect");
-     	   add("Nitrogen");
-     	}};
-     	
-     	imageId = new ArrayList<Integer>() {{
-      	   add(R.drawable.leaf);
-      	   add(R.drawable.leaf);
-      	   add(R.drawable.leaf);
-      	   add(R.drawable.leaf);
-      	   add(R.drawable.leaf);
-      	   add(R.drawable.leaf);
-      	   add(R.drawable.leaf);
-      	}};
 
-//        Context context = this.getActivity();
-//        GlossaryDataSource ds = new GlossaryDataSource(context);
-//        ds.open();
-//        ds.getGlossaryCategoryInfo();
+        Context context = this.getActivity();
+        GlossaryDataSource gs = new GlossaryDataSource(context);
+        gs.open();
+        List<GlossaryBean> categoryInfo = gs.getGlossaryInfo(category);
 
-//	    List<GlossaryBean> val = ds.getGlossaryCategoryInfo();
-//	    for (val : values) {
-//	    	glossary_id.add(val.getID());
-//			glossary_list.add(val.getSymptom());
-//			imageId.add(val.getImageID());
-//	    }
+        //Set sizes of arrays when we know the size of the list.
+        glossaryList = new ArrayList<String>(categoryInfo.size());
+        imageId = new ArrayList<Integer>(categoryInfo.size());
+        glossaryId = new ArrayList<Integer>(categoryInfo.size());
+
+        //Convert and add the list to the appropriate arrays.
+        for(int i = 0; i < categoryInfo.size(); i++) {
+            glossaryId.add(i, categoryInfo.get(i).getId());
+            //Converting strings to a drawable.
+            String mDrawableName = categoryInfo.get(i).getImageId();
+            int resID = getResources().getIdentifier(mDrawableName , "drawable", context.getPackageName());
+            imageId.add(i, resID);
+            glossaryList.add(i, categoryInfo.get(i).getType());
+        }
 
       	final View v = inflater.inflate(R.layout.glossary_fragment_layout,
 				container, false);
 		CustomListView adapter = new CustomListView(getActivity(),
-				glossary_list, imageId);
+				glossaryList, imageId);
 		list = (ListView) v.findViewById(R.id.glossary_listview);
 		list.setAdapter(adapter);
 		list.setOnItemClickListener(listViewListenerHandler);
