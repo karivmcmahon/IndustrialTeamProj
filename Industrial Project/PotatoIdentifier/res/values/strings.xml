@@ -13,7 +13,14 @@
         <item>oxygen</item>
         <item>ladybug</item>
     </string-array>
-    
+
+    <string-array name="questions">
+        <item></item>
+
+    </string-array>
+
+
+
     <array name="glossary_item_link">
         <item>@drawable/ic_question_tab</item>
         <item>@drawable/ic_question_tab</item>
