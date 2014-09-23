@@ -30,7 +30,7 @@ public class FurtherInfoDataSource extends BaseDataSource {
         gb.setSymptom(cursor.getString(getIndex(GLOSSARY_SYMPTOM, cursor)));
         gb.setImageID(cursor.getString(getIndex(GLOSSARY_IMAGE1, cursor)));
         gb.setImageID2(cursor.getString(getIndex(GLOSSARY_IMAGE2, cursor)));
-        gb.setImageID3(cursor.getString(getIndex(GLOSSARY_IMAGE2, cursor)));
+        gb.setImageID3(cursor.getString(getIndex(GLOSSARY_IMAGE3, cursor)));
         gb.setImageID4(cursor.getString(getIndex(GLOSSARY_IMAGE4, cursor)));
         gb.setImageID5(cursor.getString(getIndex(GLOSSARY_IMAGE5, cursor)));
         gb.setImageID6(cursor.getString(getIndex(GLOSSARY_IMAGE6, cursor)));

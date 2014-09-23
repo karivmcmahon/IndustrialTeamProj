@@ -49,56 +49,44 @@ public class FurtherInfo extends BaseFragment {
             symptomTitle = furtherInfo.get(i).getSymptom();
 
             String id1 = furtherInfo.get(i).getImageID();
-            if(id1 != null) {
+            if (id1 != null) {
                 int resID = getResources().getIdentifier(id1, "drawable", context.getPackageName());
                 slideshowImageArray.add(resID);
             }
 
-            String id2 = furtherInfo.get(i).getImageID();
-            if(id2 != null) {
+            String id2 = furtherInfo.get(i).getImageID2();
+            if (id2 != null) {
                 int resID = getResources().getIdentifier(id2, "drawable", context.getPackageName());
                 slideshowImageArray.add(resID);
             }
 
-            String id3 = furtherInfo.get(i).getImageID();
-            if(id3 != null) {
+            String id3 = furtherInfo.get(i).getImageID3();
+            if (id3 != null) {
                 int resID = getResources().getIdentifier(id3, "drawable", context.getPackageName());
                 slideshowImageArray.add(resID);
             }
 
-            String id4 = furtherInfo.get(i).getImageID();
-            if(id4 != null) {
+            String id4 = furtherInfo.get(i).getImageID4();
+            if (id4 != null) {
                 int resID = getResources().getIdentifier(id4, "drawable", context.getPackageName());
                 slideshowImageArray.add(resID);
             }
 
-            String id5 = furtherInfo.get(i).getImageID();
-            if(id5 != null) {
+            String id5 = furtherInfo.get(i).getImageID5();
+            if (id5 != null) {
                 int resID = getResources().getIdentifier(id5, "drawable", context.getPackageName());
                 slideshowImageArray.add(resID);
             }
 
-            String id6 = furtherInfo.get(i).getImageID();
-            if(id6 != null) {
+            String id6 = furtherInfo.get(i).getImageID6();
+            if (id6 != null) {
                 int resID = getResources().getIdentifier(id6, "drawable", context.getPackageName());
                 slideshowImageArray.add(resID);
             }
 
-            String placeholderText = "No information available.";
             basicFacts = furtherInfo.get(i).getBasicFacts();
-            if(basicFacts.equals("")) {
-                basicFacts = placeholderText;
-            }
-
             control = furtherInfo.get(i).getControl();
-            if(control.equals("")) {
-                control = placeholderText;
-            }
-
             diagnostics = furtherInfo.get(i).getDiagnostics();
-            if(diagnostics == null) {
-                diagnostics = placeholderText;
-            }
         }
 
         TextView basicFactsTextView = (TextView) v.findViewById(R.id.basicFactTextView);
