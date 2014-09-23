@@ -16,7 +16,7 @@ public class BaseFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//Sets up the tabs for the activity in the application
-		fragmentTabActivity =  (MainActivity) this.getActivity();
+		fragmentTabActivity = (MainActivity) this.getActivity();
 	}
 	
 

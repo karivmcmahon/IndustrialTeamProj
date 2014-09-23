@@ -2,23 +2,24 @@ package com.app.potatoidentifer.models;
 
 import android.util.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Ewan on 19/09/2014.
  */
-public class QuestionEngine<Entity,Property> {
+public class QuestionEngine<Entity, Property> {
 
 
     protected HashMap<Entity, List<Property>> propertyMap;
     protected Map<Property, Boolean> knowledge = new HashMap<Property, Boolean>();
 
-
     public QuestionEngine(List<Pair<Entity,Property>> rels)
     {
         propertyMap = new HashMap<Entity, List<Property>>();
-        for(Pair<Entity, Property> P : rels)
-        {
+        for (Pair<Entity, Property> P : rels) {
             if (!propertyMap.containsKey(P.first))
                 propertyMap.put(P.first, new ArrayList<Property>());
             propertyMap.get(P.first).add(P.second);
@@ -47,25 +48,22 @@ public class QuestionEngine<Entity,Property> {
         }
 
 
-        for(Entity t : dead)
+        for (Entity t : dead)
             candidates.remove(t);
 
         return candidates;
     }
 
-    public List<Entity> getPossibleAnswers()
-    {
+    public List<Entity> getPossibleAnswers() {
         List<Entity> a = new ArrayList<Entity>();
-        for (Entity A : getCandidates().keySet())
-        {
+        for (Entity A : getCandidates().keySet()) {
             a.add(A);
         }
         return a;
     }
 
 
-    public Property determineNextQuestion()
-    {
+    public Property determineNextQuestion() {
         HashMap<Entity, List<Property>> candidates = getCandidates();
 
         if (candidates.size() < 2) // We know enough to narrow down the choice to 1 thing, or we have contradictory answers.
@@ -76,33 +74,28 @@ public class QuestionEngine<Entity,Property> {
 
         HashMap<Property, Integer> counts = new HashMap<Property, Integer>();
         for (Entity key : candidates.keySet()) {
-            for (Property c : candidates.get(key))
-            {
-                counts.put(c, counts.get(c)+1);
+            for (Property c : candidates.get(key)) {
+                counts.put(c, counts.get(c) + 1);
             }
 
         }
 
         Property bestCandidate = null;
         int smallestDifference = Integer.MAX_VALUE;
-        int targetValue = candidates.size()/2;
+        int targetValue = candidates.size() / 2;
 
-        for(Property v : counts.keySet())
-        {
-            if (Math.abs(counts.get(v) - targetValue) < smallestDifference && candidates.size() != counts.get(v))
-            {
+        for (Property v : counts.keySet()) {
+            if (Math.abs(counts.get(v) - targetValue) < smallestDifference && candidates.size() != counts.get(v)) {
                 bestCandidate = v;
             }
         }
 
         return bestCandidate;
     }
-    
+
     public void Inform(Property P, boolean userAnswer) {
         knowledge.put(P, userAnswer);
     }
-
-
 
 
 }

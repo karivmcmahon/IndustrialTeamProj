@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
@@ -43,14 +44,14 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 		return imageArray.size();
 	}
 
-	public Object instantiateItem(View collection, final int position) {
+	public Object instantiateItem(ViewGroup collection, final int position) {
 		
 		ImageView view = new ImageView(activity);
-		view.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-				LayoutParams.FILL_PARENT));
+		view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT));
 		view.setScaleType(ScaleType.FIT_XY);
 		view.setBackgroundResource(imageArray.get(position));
-		((ViewPager) collection).addView(view, 0);
+		collection.addView(view, 0);
 		view.setOnClickListener(new OnClickListener() {
 
 			@SuppressLint("NewApi")
@@ -106,8 +107,8 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 	}
 
 	@Override
-	public void destroyItem(View arg0, int arg1, Object arg2) {
-		((ViewPager) arg0).removeView((View) arg2);
+	public void destroyItem(ViewGroup arg0, int arg1, Object arg2) {
+		arg0.removeView((View) arg2);
 	}
 
 	@Override

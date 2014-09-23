@@ -3,23 +3,20 @@ package com.app.potatoidentifer.models;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-public class FutherInfoDataSource 
-{
-	private SQLiteDatabase database;
-	private DatabaseHelper dbHelper;
-	//private String[] allColumns = { DatabaseHelper.COLUMN_NAME,
-		//      DatabaseHelper.COLUMN_IMAGE };
-	
-	public void open() throws SQLException 
-	{
-	    database = dbHelper.getWritableDatabase();
-	}
-	
-	public void close() 
-	{
-	    dbHelper.close();
-	}
-	
+public class FutherInfoDataSource {
+    private SQLiteDatabase database;
+    private DatabaseHelper dbHelper;
+    //private String[] allColumns = { DatabaseHelper.COLUMN_NAME,
+    //      DatabaseHelper.COLUMN_IMAGE };
+
+    public void open() throws SQLException {
+        database = dbHelper.getWritableDatabase();
+    }
+
+    public void close() {
+        dbHelper.close();
+    }
+
 //	public List<FurtherInfoBean> getGlossaryInfo( int id )
 //	{
 //		List<FurtherInfoBean> glossaryInfo = new ArrayList<FurtherInfoBean>();

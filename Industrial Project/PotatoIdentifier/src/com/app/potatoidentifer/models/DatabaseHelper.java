@@ -1,56 +1,131 @@
 package com.app.potatoidentifer.models;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-/**
- * Created by Mark on 16/09/2014.
- * Class that handles connection to the sqlite database and a series of CRUD methods.
- */
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "test.db";
-    private static final int DATABASE_VERSION = 1;
-   
+    private static String DB_PATH;
+    private static String DB_NAME = "projectDB.sqlite";
+    private SQLiteDatabase myDataBase;
+    private Context myContext;
+    private Resources resources;
 
-    static final String TEST_TABLE = "table";
-
- // Database creation sql statement
-    private static final String CREATE_TEST_TABLE = "";
-    
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DB_NAME, null, 1);
+        this.myContext = context;
+        DB_PATH = "/data/data/" + context.getApplicationContext().getPackageName() + "/databases/";
+        resources = myContext.getResources();
+    }
+
+    public void createDataBase() throws IOException {
+        if (databaseFileExists()) {
+            if (checkDataBase()) {
+                Log.v("Database Debug", "Database has already been created.");
+            } else {
+                this.getReadableDatabase();
+                this.close();
+                try {
+                    copyDataBase();
+                    Log.v("Database Debug", "Copied database successfully");
+                } catch (IOException e) {
+                    Log.v("Database Debug", "Error copying the database");
+                    e.printStackTrace();
+                    throw new Error("Error copying database");
+                }
+            }
+        } else {
+            Log.v("Database Debug", "Database file does not exist in assets folder.");
+        }
+    }
+
+    private boolean databaseFileExists() {
+        AssetManager mg = resources.getAssets();
+        try {
+            mg.open("databases/projectDB.sqlite");
+            Log.v("Database Debug", DB_NAME + " does exist.");
+            return true;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Log.v("Database Debug", DB_NAME + " does not exist.");
+            return false;
+        }
+    }
+
+    private boolean checkDataBase() {
+        SQLiteDatabase checkDB = null;
+        try {
+            String myPath = DB_PATH + DB_NAME;
+            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+            Log.v("Database Debug", "Database does exist");
+
+        } catch (SQLiteException e) {
+            Log.v("Database Debug", "Database doesn't exist yet.");
+        }
+
+        if (checkDB != null) {
+            checkDB.close();
+        }
+        return checkDB != null ? true : false;
+    }
+
+    private void copyDataBase() throws IOException {
+        //Open your local db as the input stream
+        InputStream myInput = myContext.getAssets().open("databases/projectDB.sqlite");
+
+        // Path to the just created empty db
+        String outFileName = DB_PATH + DB_NAME;
+
+        //Open the empty db as the output stream
+        OutputStream myOutput = new FileOutputStream(outFileName);
+
+        //Transfer bytes from the inputfile to the outputfile
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = myInput.read(buffer)) > 0) {
+            myOutput.write(buffer, 0, length);
+        }
+        //Close the streams
+        myOutput.flush();
+        myOutput.close();
+        myInput.close();
+    }
+
+    public SQLiteDatabase openDataBase() throws SQLException {
+        //Open the database
+        String myPath = DB_PATH + DB_NAME;
+        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+        Log.v("Database Debug", "Database opened successfully.");
+        close();
+        return myDataBase;
+    }
+
+    public void deleteDatabase() throws SQLException {
+        myContext.deleteDatabase(DB_NAME);
+    }
+
+    @Override
+    public synchronized void close() {
+        if (myDataBase != null)
+            myDataBase.close();
+        super.close();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TEST_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TEST_TABLE);
-        onCreate(db);
-    }
-
-    public void insert() {
-
-    }
-
-    public void delete() {
-
-    }
-
-    public void find() {
-
-    }
-
-    public void closeDB() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        if (db != null && db.isOpen())
-            db.close();
     }
 }

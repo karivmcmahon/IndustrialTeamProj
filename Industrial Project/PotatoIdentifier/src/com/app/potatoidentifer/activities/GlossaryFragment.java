@@ -1,8 +1,5 @@
 package com.app.potatoidentifer.activities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,8 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import com.example.potatoidentifier.R;
+
+import java.util.ArrayList;
 
 /**
  * This class sets up the glossary list once a category has been selected
@@ -26,8 +24,10 @@ public class GlossaryFragment extends BaseFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Bundle bundle = this.getArguments();
+        String category = bundle.getString("category");
+        Log.v("TESTING", category);
     	glossary_list = new ArrayList<String>() {{
      	   add("Leaf");
      	   add("Potato");
@@ -47,26 +47,20 @@ public class GlossaryFragment extends BaseFragment {
       	   add(R.drawable.leaf);
       	   add(R.drawable.leaf);
       	}};
-      	
-//		GlossaryDataSource datasource = new GlossaryDataSource();
-//	    datasource.open();
-//	    List<GlossaryBean> val = datasource.getGlossaryList();
-//	    for (GlossaryBean val : values)
-//	    { 
+
+//        Context context = this.getActivity();
+//        GlossaryDataSource ds = new GlossaryDataSource(context);
+//        ds.open();
+//        ds.getGlossaryCategoryInfo();
+
+//	    List<GlossaryBean> val = ds.getGlossaryCategoryInfo();
+//	    for (val : values) {
 //	    	glossary_id.add(val.getID());
 //			glossary_list.add(val.getSymptom());
 //			imageId.add(val.getImageID());
 //	    }
-//      	final View v = inflater.inflate(R.layout.glossary_fragment_layout,
-//				container, false);
-//		CustomListView adapter = new CustomListView(getActivity(),
-//				glossary_list, imageId);
-//		list = (ListView) v.findViewById(R.id.glossary_listview);
-//		list.setAdapter(adapter);
-//		list.setOnItemClickListener(listViewListenerHandler);
-//		return v;
-      	
-		final View v = inflater.inflate(R.layout.glossary_fragment_layout,
+
+      	final View v = inflater.inflate(R.layout.glossary_fragment_layout,
 				container, false);
 		CustomListView adapter = new CustomListView(getActivity(),
 				glossary_list, imageId);

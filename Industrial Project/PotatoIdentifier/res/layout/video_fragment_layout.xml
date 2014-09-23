@@ -67,6 +67,8 @@
 	  android:background="#000"
 	  >
   
+	    
+	    
 		<VideoView
 		    android:id="@+id/videoView2"
 		    android:layout_width="match_parent"
