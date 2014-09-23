@@ -10,20 +10,16 @@ import java.util.List;
  * Created by Mark on 22/09/2014.
  */
 public class GlossaryCategoriesDataSource extends BaseDataSource {
-    private final String GLOSSARY_TABLE = "glossary";
-    private final String GLOSSARY_TITLE_CATEGORY = "type";
-    private final String GLOSSARY_IMAGE = "imageid";
-    private final String GLOSSARY_ID = "_id";
-    private String[] allGlossaryColumns = {GLOSSARY_ID, GLOSSARY_TITLE_CATEGORY, GLOSSARY_IMAGE};
+    private String[] categoryColumnsInfoQuery = { GLOSSARY_ID, GLOSSARY_TYPE, GLOSSARY_IMAGE1};
 
     public GlossaryCategoriesDataSource(Context context) {
         super(context);
     }
 
     //Searches the database for the information required for the categories page.
-    public List<GlossaryCategoriesBean> getGlossaryCategoryInfo() {
-        List<GlossaryCategoriesBean> glossaryList = new ArrayList<GlossaryCategoriesBean>();
-        Cursor cursor = database.query(true, GLOSSARY_TABLE, allGlossaryColumns, null, null, GLOSSARY_TITLE_CATEGORY, null, null, null);
+    public ArrayList<GlossaryCategoriesBean> getGlossaryCategoryInfo() {
+        ArrayList<GlossaryCategoriesBean> glossaryList = new ArrayList<GlossaryCategoriesBean>();
+        Cursor cursor = database.query(true, GLOSSARY_TABLE, categoryColumnsInfoQuery, null, null, GLOSSARY_TYPE, null, null, null);
         if (cursor != null && cursor.getCount() > 0) {
             for (int i = 0; i < cursor.getCount(); i++) {
                 cursor.moveToPosition(i);
