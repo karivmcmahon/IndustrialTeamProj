@@ -9,11 +9,11 @@
 
         <ImageView
                 android:id="@+id/img"
-                android:layout_width="200dp"
+                android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:layout_alignParentLeft="true"
            		android:scaleType="fitXY"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="12dp"
 
                 
         />
