@@ -2,9 +2,7 @@ package com.app.potatoidentifer.models;
 
 import android.content.Context;
 import android.database.Cursor;
-
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Mark on 22/09/2014.
@@ -26,15 +24,16 @@ public class GlossaryCategoriesDataSource extends BaseDataSource {
                 glossaryList.add(cursorToGlossary(cursor));
             }
         }
+        cursor.close();
         close();
         return glossaryList;
     }
 
     private GlossaryCategoriesBean cursorToGlossary(Cursor cursor) {
-        GlossaryCategoriesBean glossaryItem = new GlossaryCategoriesBean();
-        glossaryItem.setID(cursor.getInt(0));
-        glossaryItem.setTitle(cursor.getString(1));
-        glossaryItem.setImageID(cursor.getString(2));
-        return glossaryItem;
+        GlossaryCategoriesBean gi = new GlossaryCategoriesBean();
+        gi.setID(cursor.getInt(getIndex(GLOSSARY_ID, cursor)));
+        gi.setTitle(cursor.getString(getIndex(GLOSSARY_TYPE, cursor)));
+        gi.setImageID(cursor.getString(getIndex(GLOSSARY_IMAGE1, cursor)));
+        return gi;
     }
 }

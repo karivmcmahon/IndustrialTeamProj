@@ -45,7 +45,7 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
         }
 
 		//Sets up custom list view for categories
-		CategoriesCustomListView adapter = new CategoriesCustomListView(getActivity(),glossary_list,imageId);
+		CategoriesCustomListView adapter = new CategoriesCustomListView(getActivity(), glossary_list, imageId);
 		list = (ListView) v.findViewById(R.id.glossary_listview);
 		list.setAdapter(adapter);
 		//Sets up on an item click listener - to check for when a click occurs on the item list
@@ -57,10 +57,10 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 	private AdapterView.OnItemClickListener listViewListenerHandler = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView parent, View v, int position, long id) {
             Bundle bundle = new Bundle();
-            bundle.putString("category", glossary_list[position]);
+            bundle.putString("symptom", glossary_list[position]);
             GlossaryFragment gf = new GlossaryFragment();
             gf.setArguments(bundle);
-			 fragmentTabActivity.addFragments(Const.TAB_FIRST, gf, true);
+			fragmentTabActivity.addFragments(Const.TAB_FIRST, gf, true);
 		}
 	};
 }

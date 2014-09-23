@@ -1,6 +1,7 @@
 package com.app.potatoidentifer.models;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -16,10 +17,11 @@ public abstract class BaseDataSource {
     protected final String GLOSSARY_SYMPTOM = "symptom";
     protected final String GLOSSARY_TYPE = "type";
     protected final String GLOSSARY_IMAGE1 = "imageid";
-    protected final String GLOSSARY_IMAGE2 = "imageid3";
-    protected final String GLOSSARY_IMAGE3 = "imageid4";
-    protected final String GLOSSARY_IMAGE4 = "imageid5";
-    protected final String GLOSSARY_IMAGE5 = "imageid6";
+    protected final String GLOSSARY_IMAGE2 = "imageid2";
+    protected final String GLOSSARY_IMAGE3 = "imageid3";
+    protected final String GLOSSARY_IMAGE4 = "imageid4";
+    protected final String GLOSSARY_IMAGE5 = "imageid5";
+    protected final String GLOSSARY_IMAGE6 = "imageid6";
     protected final String GLOSSARY_BASIC_FACTS = "basicFacts";
     protected final String GLOSSARY_CONTROL = "control";
     protected final String GLOSSARY_DIAGNOSTICS = "diagnostics";
@@ -34,5 +36,10 @@ public abstract class BaseDataSource {
 
     public void close() {
         dbHelper.close();
+    }
+
+    protected int getIndex(String columnName, Cursor cursor) {
+        int controlIndex = cursor.getColumnIndex(columnName);
+        return controlIndex;
     }
 }

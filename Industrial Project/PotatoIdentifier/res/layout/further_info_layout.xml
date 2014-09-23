@@ -14,7 +14,7 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:gravity="center_horizontal"
-	        android:text="Title"
+	        android:text=""
 	        android:textSize="22sp"
 	        android:textStyle="bold"
 	        android:padding="10dp" />
@@ -42,7 +42,7 @@
 	        android:id="@+id/basicFactTextView"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis libero consectetur, hendrerit est ut, fringilla quam. Mauris varius, nisi non interdum dapibus, nisl velit pretium eros, nec venenatis sapien risus id dolor. Proin sit amet dolor sagittis, finibus ex nec, auctor tortor. Duis eu tristique sapien, eget placerat urna. Nulla facilisi. Suspendisse ac erat dolor. In hac " 
+	        android:text= ""
 	        android:paddingBottom ="10dp"/>
 		 
 		 <TextView
@@ -58,7 +58,7 @@
 	        android:id="@+id/diagnosticsTextView"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis libero consectetur, hendrerit est ut, fringilla quam. Mauris varius, nisi non interdum dapibus, nisl velit pretium eros, nec venenatis sapien risus id dolor. Proin sit amet dolor sagittis, finibus ex nec, auctor tortor. Duis eu tristique sapien, eget placerat urna. Nulla facilisi. Suspendisse ac erat dolor. In hac " 
+	        android:text="" 
 	        android:paddingBottom ="10dp"/>
 		 
 		 
@@ -75,7 +75,7 @@
 	        android:id="@+id/controlTextView"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis libero consectetur, hendrerit est ut, fringilla quam. Mauris varius, nisi non interdum dapibus, nisl velit pretium eros, nec venenatis sapien risus id dolor. Proin sit amet dolor sagittis, finibus ex nec, auctor tortor. Duis eu tristique sapien, eget placerat urna. Nulla facilisi. Suspendisse ac erat dolor. In hac "
+	        android:text=" "
 	         android:paddingBottom ="10dp" />
     </LinearLayout>
 </ScrollView>
