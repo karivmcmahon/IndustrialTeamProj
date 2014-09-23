@@ -75,6 +75,8 @@ public class QuestionEngine<Entity, Property> {
         HashMap<Property, Integer> counts = new HashMap<Property, Integer>();
         for (Entity key : candidates.keySet()) {
             for (Property c : candidates.get(key)) {
+                if (!counts.containsKey(c))
+                    counts.put(c,0);
                 counts.put(c, counts.get(c) + 1);
             }
 
@@ -96,6 +98,9 @@ public class QuestionEngine<Entity, Property> {
     public void Inform(Property P, boolean userAnswer) {
         knowledge.put(P, userAnswer);
     }
+
+    public void Forget(Property P) { knowledge.remove(P); }
+    public void ForgetAll() { knowledge.clear(); }
 
 
 }
