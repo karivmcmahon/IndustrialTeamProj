@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,11 +53,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         AssetManager mg = resources.getAssets();
         try {
             mg.open("databases/projectDB.sqlite");
-            Log.v("Database Debug", DB_NAME+" does exist.");
+            Log.v("Database Debug", DB_NAME + " does exist.");
             return true;
         } catch (IOException ex) {
             ex.printStackTrace();
-            Log.v("Database Debug", DB_NAME+" does not exist.");
+            Log.v("Database Debug", DB_NAME + " does not exist.");
             return false;
         }
     }
@@ -121,8 +122,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {}
+    public void onCreate(SQLiteDatabase db) {
+    }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    }
 }

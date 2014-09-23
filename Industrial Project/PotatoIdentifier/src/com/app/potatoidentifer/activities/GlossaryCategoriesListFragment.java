@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.app.potatoidentifer.models.GlossaryBean;
-import com.app.potatoidentifer.models.GlossaryDataSource;
+import com.app.potatoidentifer.models.GlossaryCategoriesBean;
+import com.app.potatoidentifer.models.GlossaryCategoriesDataSource;
 import com.example.potatoidentifier.R;
 import java.util.List;
 
@@ -25,10 +25,10 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 				container, false);
 
         Context context = this.getActivity();
-        GlossaryDataSource ds = new GlossaryDataSource(context);
+        GlossaryCategoriesDataSource ds = new GlossaryCategoriesDataSource(context);
         ds.open();
 
-        List<GlossaryBean> categories = ds.getGlossaryCategoryInfo();
+        List<GlossaryCategoriesBean> categories = ds.getGlossaryCategoryInfo();
         //Set sizes of arrays when we know the size of the list.
         glossary_list = new String[categories.size()];
         imageId = new Integer[categories.size()];
@@ -54,19 +54,13 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 
 	}
 
-	private AdapterView.OnItemClickListener listViewListenerHandler = new AdapterView.OnItemClickListener() 
-	{
-		public void onItemClick(AdapterView parent, View v, int position,
-				long id) 
-		{
-			//When a category item is clicked a new fragment is opened with glossary items relating to this category
-			/**
-			 * Database code - When database is available
-			 * fragmentTabActivity.addFragments(Const.TAB_FIRST,
-					new GlossaryFragment( glossary_list[position] ),  true);
-			 */
-			fragmentTabActivity.addFragments(Const.TAB_FIRST,
-					new GlossaryFragment(),  true);
+	private AdapterView.OnItemClickListener listViewListenerHandler = new AdapterView.OnItemClickListener() {
+		public void onItemClick(AdapterView parent, View v, int position, long id) {
+            Bundle bundle = new Bundle();
+            bundle.putString("category", glossary_list[position]);
+            GlossaryFragment gf = new GlossaryFragment();
+            gf.setArguments(bundle);
+			 fragmentTabActivity.addFragments(Const.TAB_FIRST, gf, true);
 		}
 	};
 }

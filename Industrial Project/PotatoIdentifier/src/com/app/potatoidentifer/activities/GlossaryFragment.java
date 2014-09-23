@@ -1,6 +1,7 @@
 package com.app.potatoidentifer.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,10 @@ public class GlossaryFragment extends BaseFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Bundle bundle = this.getArguments();
+        String category = bundle.getString("category");
+        Log.v("TESTING", category);
     	glossary_list = new ArrayList<String>() {{
      	   add("Leaf");
      	   add("Potato");
