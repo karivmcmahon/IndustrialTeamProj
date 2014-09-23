@@ -5,12 +5,9 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.VideoView;
@@ -25,6 +22,7 @@ import com.example.potatoidentifier.R;
 public class VideoFragment extends BaseFragment {
 	View v;
 	MediaController mediaControls;
+	MediaController mediaControls2;
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +44,11 @@ public class VideoFragment extends BaseFragment {
     	 if (mediaControls == null) 
     	 {
     	      mediaControls = new MediaController(getActivity());
-    	}
+    	 }
+    	 if (mediaControls2 == null)
+    	 {
+    		 mediaControls2 = new MediaController(getActivity());
+    	 }
     	 mediaControls.setAnchorView(videoHolderTest1);
     	 videoHolderTest1.setMediaController(mediaControls);
     	 videoHolderTest1.setVideoURI(video1);
@@ -68,8 +70,8 @@ public class VideoFragment extends BaseFragment {
     	  }
     	 });
     	 
-    	 mediaControls.setAnchorView(videoHolderTest2);
-    	 videoHolderTest2.setMediaController(mediaControls);
+    	 mediaControls2.setAnchorView(videoHolderTest2);
+    	 videoHolderTest2.setMediaController(mediaControls2);
     	 videoHolderTest2.setVideoURI(video2);
     	 playButton2.setOnClickListener(new OnClickListener() {
 
@@ -77,7 +79,7 @@ public class VideoFragment extends BaseFragment {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				videoHolderTest2.start();
-				mediaControls.show();
+				mediaControls2.show();
 				playButton2.setVisibility(View.GONE);
 			}
     		 
