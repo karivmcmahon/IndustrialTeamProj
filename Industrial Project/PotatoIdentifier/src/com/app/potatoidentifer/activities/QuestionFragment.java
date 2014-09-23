@@ -24,7 +24,7 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
     TextView textQuestion;
     Button btnYes, btnNo;
     QuestionEngine<String, String> QE; 
-
+    String currentQuestion;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,21 +70,44 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
 
         QE = new QuestionEngine<String, String>(relations);
 
-
-        String q = QE.determineNextQuestion() + "?";
-
-        textQuestion.setText(q.toCharArray(), 0, q.length());
+        refresh();
 
         return v;
     }
 
+
+    protected void refresh()
+    {
+        if (QE.getPossibleAnswers().size() == 1)
+        {
+            textQuestion.setText("It is a " + QE.getPossibleAnswers().get(0));
+            QE.ForgetAll();
+        }
+        else
+        {
+            currentQuestion = QE.determineNextQuestion();
+            String q = currentQuestion + "?";
+            textQuestion.setText(q.toCharArray(), 0, q.length());
+        }
+    }
 
 
 
     @Override
     public void onClick(View v)
     {
-        v.setLeft(v.getLeft() -10);
+        if (btnYes.equals(v))
+        {
+            QE.Inform(currentQuestion, true);
+        }
+        else if (btnNo.equals(v))
+        {
+            QE.Inform(currentQuestion, true);
+        }else
+        {
+
+        }
+        refresh();
     }
 
 }

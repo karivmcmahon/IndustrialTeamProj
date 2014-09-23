@@ -99,5 +99,8 @@ public class QuestionEngine<Entity, Property> {
         knowledge.put(P, userAnswer);
     }
 
+    public void Forget(Property P) { knowledge.remove(P); }
+    public void ForgetAll() { knowledge.clear(); }
+
 
 }
