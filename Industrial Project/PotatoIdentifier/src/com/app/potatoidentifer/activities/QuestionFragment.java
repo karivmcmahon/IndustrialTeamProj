@@ -12,6 +12,14 @@ import com.example.potatoidentifier.R;
  *
  */
 public class QuestionFragment extends BaseFragment {
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.question_fragment_layout, container, false);
