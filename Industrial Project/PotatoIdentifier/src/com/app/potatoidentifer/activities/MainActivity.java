@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
@@ -38,7 +39,6 @@ public class MainActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_main);
-		
 
 		hashMapTabs = new HashMap<String, ArrayList<Fragment>>();
 		hashMapTabs.put(Const.TAB_FIRST, new ArrayList<Fragment>());
