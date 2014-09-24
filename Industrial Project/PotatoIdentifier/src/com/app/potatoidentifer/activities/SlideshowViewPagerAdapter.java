@@ -47,7 +47,7 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 		ImageView view = new ImageView(activity);
 		view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 				LayoutParams.MATCH_PARENT));
-		view.setScaleType(ScaleType.FIT_XY);
+		view.setScaleType(ScaleType.CENTER);
 		view.setBackgroundResource(imageArray.get(position));
 		collection.addView(view, 0);
 		view.setOnClickListener(new OnClickListener() {
