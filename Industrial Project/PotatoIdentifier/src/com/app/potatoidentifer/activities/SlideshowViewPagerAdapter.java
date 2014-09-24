@@ -33,27 +33,27 @@ import com.example.potatoidentifier.R;
  */
 public class SlideshowViewPagerAdapter extends PagerAdapter {
 
-	Activity activity;
-	ArrayList<Integer> imageArray;
+    Activity activity;
+    ArrayList<Integer> imageArray;
     Context context;
 
-	public SlideshowViewPagerAdapter(Activity activity, ArrayList<Integer> imageArray, Context context) {
-		this.imageArray = imageArray;
-		this.activity = activity;
+    public SlideshowViewPagerAdapter(Activity activity, ArrayList<Integer> imageArray, Context context) {
+        this.imageArray = imageArray;
+        this.activity = activity;
         this.context = context;
-	}
+    }
 
-	public int getCount() {
-		return imageArray.size();
-	}
+    public int getCount() {
+        return imageArray.size();
+    }
 
-	public Object instantiateItem(ViewGroup collection, final int position) {
-		final BitmapScaler scaler;
-		ImageView view = new ImageView(activity);
-		view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-				LayoutParams.MATCH_PARENT));
-		view.setScaleType(ScaleType.FIT_XY);
-		//view.setBackgroundResource(imageArray.get(position));
+    public Object instantiateItem(ViewGroup collection, final int position) {
+        final BitmapScaler scaler;
+        ImageView view = new ImageView(activity);
+        view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT));
+        view.setScaleType(ScaleType.FIT_XY);
+//view.setBackgroundResource(imageArray.get(position));
 
         Resources res = context.getResources();
         try {
@@ -62,84 +62,74 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
         } catch(IOException e) {
             e.printStackTrace();
         }
-       
-		collection.addView(view, 0);
-		view.setOnClickListener(new OnClickListener() {
 
-			@SuppressLint("NewApi")
-			@Override
-			public void onClick(View arg0) {
-				DisplayMetrics dm = new DisplayMetrics();
-				activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-				int width = dm.widthPixels;
-				int height = dm.heightPixels;
+        collection.addView(view, 0);
+        view.setOnClickListener(new OnClickListener() {
 
-				
+            @SuppressLint("NewApi")
+            @Override
+            public void onClick(View arg0) {
+                DisplayMetrics dm = new DisplayMetrics();
+                activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+                int width = dm.widthPixels;
+                int height = dm.heightPixels;
 
-				final Dialog dialog = new Dialog(activity);
-				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				dialog.setContentView(R.layout.full_screen_image);
-				dialog.setCancelable(true);
-				
-				Bitmap bitmap = BitmapFactory.decodeResource(
-						activity.getResources(), imageArray.get(position));
-				// Get target image size
-				int bitmapHeight = bitmap.getHeight();
-				int bitmapWidth = bitmap.getWidth();
+                final Dialog dialog = new Dialog(activity);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.full_screen_image);
+                dialog.setCancelable(true);
 
-				BitmapDrawable resizedBitmap = new BitmapDrawable(activity
-						.getResources(), Bitmap.createScaledBitmap(bitmap,
-						width, width * bitmapHeight / bitmapWidth, false));
 
-				// Regular image view
-				// ImageView img = (ImageView)
-				// dialog.findViewById(R.id.imageView1);
-				// img.setBackground(resizedBitmap);
+                Resources res = context.getResources();
+// TODO set up image view with pinch for zoom - Needs tested on
+// device not sure it works
+                TouchImageView img = (TouchImageView) dialog
+                        .findViewById(R.id.imageView1);
+                try {
+                    BitmapScaler scaler2 = new BitmapScaler(res, imageArray.get(position), 750);
+                    int bitmapHeight = scaler2.getHeight();
+                    int bitmapWidth = scaler2.getWidth();
+                    BitmapDrawable resizedBitmap = new BitmapDrawable(activity
+                            .getResources(), Bitmap.createScaledBitmap(scaler2.getScaled(),
+                            width, width * bitmapHeight / bitmapWidth, false));
+                    img.setBackground(resizedBitmap);
 
-				// TODO set up image view with pinch for zoom - Needs tested on
-				// device not sure it works
-				TouchImageView img = (TouchImageView) dialog
-						.findViewById(R.id.imageView1);
-				img.setBackground(resizedBitmap);
+                } catch (IOException e) {
+// TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
-//                Resources res = context.getResources();
-//                try {
-//                    BitmapScaler scaler = new BitmapScaler(res, imageArray.get(position), 100);
-//                    img.setImageBitmap(scaler.getScaled());
-//                } catch(IOException e) {
-//                    e.printStackTrace();
-//                }
 
-				final Button next = (Button) dialog.findViewById(R.id.button1);
-				next.setBackgroundResource(R.drawable.ic_image_zoom_cross);
+                final Button next = (Button) dialog.findViewById(R.id.button1);
+                next.setBackgroundResource(R.drawable.ic_image_zoom_cross);
 
-				next.setOnClickListener(new OnClickListener() {
+                next.setOnClickListener(new OnClickListener() {
 
-					@Override
-					public void onClick(View v) {
-						dialog.dismiss();
-					}
-				});
-				// now that the dialog is set up, it's time to show it
-				dialog.show();
-			}
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+// now that the dialog is set up, it's time to show it
+                dialog.show();
+            }
 
-	});
-		return view;
-	}
+        });
+        return view;
+    }
 
-	@Override
-	public void destroyItem(ViewGroup arg0, int arg1, Object arg2) {
-		arg0.removeView((View) arg2);
-	}
+    @Override
+    public void destroyItem(ViewGroup arg0, int arg1, Object arg2) {
+        arg0.removeView((View) arg2);
+    }
 
-	@Override
-	public boolean isViewFromObject(View arg0, Object arg1) {
-		return arg0 == ((View) arg1);
-	}
+    @Override
+    public boolean isViewFromObject(View arg0, Object arg1) {
+        return arg0 == ((View) arg1);
+    }
 
-	@Override
-	public Parcelable saveState() {
-		return null;
-	}
+    @Override
+    public Parcelable saveState() {
+        return null;
+    }
 }

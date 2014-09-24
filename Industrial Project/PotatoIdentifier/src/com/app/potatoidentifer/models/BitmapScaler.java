@@ -139,4 +139,16 @@ public class BitmapScaler {
         }
         return size;
     }
+
+    public int getWidth()
+    {
+        return scaled.getWidth();
+    }
+
+    public int getHeight()
+    {
+        return scaled.getHeight();
+    }
+
+
 }
