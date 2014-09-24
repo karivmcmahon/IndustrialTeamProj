@@ -87,6 +87,7 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
         {
             currentQuestion = QE.determineNextQuestion();
             String q = currentQuestion + "?";
+
             textQuestion.setText(q.toCharArray(), 0, q.length());
         }
     }
@@ -102,7 +103,7 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
         }
         else if (btnNo.equals(v))
         {
-            QE.Inform(currentQuestion, true);
+            QE.Inform(currentQuestion, false);
         }else
         {
 
