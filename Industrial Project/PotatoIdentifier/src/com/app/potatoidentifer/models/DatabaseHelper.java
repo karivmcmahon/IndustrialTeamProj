@@ -75,13 +75,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (checkDB != null) {
             checkDB.close();
+            SQLiteDatabase.releaseMemory();
         }
         return checkDB != null ? true : false;
     }
 
     private void copyDataBase() throws IOException {
         //Open your local db as the input stream
-        InputStream myInput = myContext.getAssets().open("databases/projectDB.sqlite");
+        AssetManager mg = resources.getAssets();
+        InputStream myInput = mg.open("databases/projectDB.sqlite");
 
         // Path to the just created empty db
         String outFileName = DB_PATH + DB_NAME;
@@ -105,6 +107,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //Open the database
         String myPath = DB_PATH + DB_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+        myDataBase.close();
+        SQLiteDatabase.releaseMemory();
         Log.v("Database Debug", "Database opened successfully.");
         close();
         return myDataBase;

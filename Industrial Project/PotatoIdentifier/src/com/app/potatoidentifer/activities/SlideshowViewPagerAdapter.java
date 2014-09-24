@@ -1,10 +1,13 @@
 package com.app.potatoidentifer.activities;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
+import com.app.potatoidentifer.models.BitmapScaler;
 import com.example.potatoidentifier.R;
 
 /**
@@ -31,11 +35,12 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 
 	Activity activity;
 	ArrayList<Integer> imageArray;
+    Context context;
 
-	public SlideshowViewPagerAdapter(Activity activity, ArrayList<Integer> imageArray ) {
+	public SlideshowViewPagerAdapter(Activity activity, ArrayList<Integer> imageArray, Context context) {
 		this.imageArray = imageArray;
 		this.activity = activity;
-
+        this.context = context;
 	}
 
 	public int getCount() {
@@ -43,12 +48,21 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 	}
 
 	public Object instantiateItem(ViewGroup collection, final int position) {
-		
+		final BitmapScaler scaler;
 		ImageView view = new ImageView(activity);
 		view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 				LayoutParams.MATCH_PARENT));
 		view.setScaleType(ScaleType.FIT_XY);
-		view.setBackgroundResource(imageArray.get(position));
+		//view.setBackgroundResource(imageArray.get(position));
+
+        Resources res = context.getResources();
+        try {
+            scaler = new BitmapScaler(res, imageArray.get(position), 750);
+            view.setImageBitmap(scaler.getScaled());
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+       
 		collection.addView(view, 0);
 		view.setOnClickListener(new OnClickListener() {
 
@@ -60,6 +74,13 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 				int width = dm.widthPixels;
 				int height = dm.heightPixels;
 
+				
+
+				final Dialog dialog = new Dialog(activity);
+				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				dialog.setContentView(R.layout.full_screen_image);
+				dialog.setCancelable(true);
+				
 				Bitmap bitmap = BitmapFactory.decodeResource(
 						activity.getResources(), imageArray.get(position));
 				// Get target image size
@@ -69,11 +90,6 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 				BitmapDrawable resizedBitmap = new BitmapDrawable(activity
 						.getResources(), Bitmap.createScaledBitmap(bitmap,
 						width, width * bitmapHeight / bitmapWidth, false));
-
-				final Dialog dialog = new Dialog(activity);
-				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				dialog.setContentView(R.layout.full_screen_image);
-				dialog.setCancelable(true);
 
 				// Regular image view
 				// ImageView img = (ImageView)
@@ -85,6 +101,14 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 				TouchImageView img = (TouchImageView) dialog
 						.findViewById(R.id.imageView1);
 				img.setBackground(resizedBitmap);
+
+//                Resources res = context.getResources();
+//                try {
+//                    BitmapScaler scaler = new BitmapScaler(res, imageArray.get(position), 100);
+//                    img.setImageBitmap(scaler.getScaled());
+//                } catch(IOException e) {
+//                    e.printStackTrace();
+//                }
 
 				final Button next = (Button) dialog.findViewById(R.id.button1);
 				next.setBackgroundResource(R.drawable.ic_image_zoom_cross);
@@ -100,7 +124,7 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 				dialog.show();
 			}
 
-		});
+	});
 		return view;
 	}
 
