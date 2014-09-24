@@ -28,8 +28,10 @@ public class VideoFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.video_fragment_layout, container, false);
+       
+        ScrollView sv = (ScrollView) v.findViewById(R.id.scrollview);
+        sv.smoothScrollTo(0, 0);
         splashPlayer();
-        
         return v;
     }
     
