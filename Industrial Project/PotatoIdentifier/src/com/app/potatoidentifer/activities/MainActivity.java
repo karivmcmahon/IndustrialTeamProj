@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
@@ -19,25 +18,19 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
 import com.app.potatoidentifer.models.DatabaseHelper;
 import com.example.potatoidentifier.R;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-public class MainActivity extends FragmentActivity implements
-		OnTabChangeListener {
-
+public class MainActivity extends FragmentActivity implements OnTabChangeListener {
 	private TabHost tabHost;
 	private String currentSelectedTab;
 	private HashMap<String, ArrayList<Fragment>> hashMapTabs;
 	final int TEXT_ID = 100;
 	private MyTabView arrTabs[] = new MyTabView[4];
 
-	protected void onCreate(Bundle savedInstanceState) 
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_main);
 
 		hashMapTabs = new HashMap<String, ArrayList<Fragment>>();
@@ -49,8 +42,6 @@ public class MainActivity extends FragmentActivity implements
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setOnTabChangedListener(this);
 		tabHost.setup();
-
-	
 
 		TabHost.TabSpec spec = tabHost.newTabSpec(Const.TAB_FIRST);
 		tabHost.setCurrentTab(0);
@@ -104,8 +95,8 @@ public class MainActivity extends FragmentActivity implements
 		// set background for Selected Tab
 		TextView tv = (TextView) tabHost.getCurrentTabView().findViewById(TEXT_ID);
 		tv.setTextColor(Color.parseColor("#ffffff"));
-		View iv = (View) tabHost.getCurrentTabView();
-		iv.setBackgroundResource(R.color.twitter);
+		View iv = tabHost.getCurrentTabView();
+		iv.setBackgroundColor(getResources().getColor(R.color.darkgray));
 
 		// Listner for Tab 1//
 		tabHost.getTabWidget().getChildAt(0).setOnClickListener(new OnClickListener() 
@@ -202,10 +193,8 @@ public class MainActivity extends FragmentActivity implements
         }
     }
 
-	public void addFragments(String tabName, Fragment fragment, boolean add) 
-	{
-		if (add) 
-		{
+	public void addFragments(String tabName, Fragment fragment, boolean add) {
+		if (add) {
 			hashMapTabs.get(tabName).add(fragment);
 		}
 		FragmentManager manager = getSupportFragmentManager();
@@ -214,13 +203,11 @@ public class MainActivity extends FragmentActivity implements
 		ft.commit();
 	}
 
-	
 	/**
 	 * Removes fragments
 	 * 
 	 */
-	public void removeFragment() 
-	{
+	public void removeFragment() {
 		Fragment fragment = hashMapTabs.get(currentSelectedTab).get(
 				hashMapTabs.get(currentSelectedTab).size() - 2);
 		hashMapTabs.get(currentSelectedTab).remove(
@@ -242,24 +229,20 @@ public class MainActivity extends FragmentActivity implements
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(android.R.id.tabcontent, fragment);
 		ft.commit();
-
 	}
 
 	@Override
 	public void onBackPressed() {
-
 		if (hashMapTabs.get(currentSelectedTab).size() <= 1) {
 			super.onBackPressed();
 		} else {
 			removeFragment();
 		}
-
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (hashMapTabs.get(currentSelectedTab).size() == 0) 
-		{
+		if (hashMapTabs.get(currentSelectedTab).size() == 0) {
 			return;
 		}
 		hashMapTabs.get(currentSelectedTab)
@@ -268,14 +251,11 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	@Override
-	public void onTabChanged(String tabName) 
-	{
-		
+	public void onTabChanged(String tabName) {
 		currentSelectedTab = tabName;
 
 		// Iterates unselected tab and gives them regular bg colour
-		for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) 
-		{
+		for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
 			TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i)
 					.findViewById(TEXT_ID);
 
@@ -287,63 +267,49 @@ public class MainActivity extends FragmentActivity implements
 
 		View iv = (View) tabHost.getCurrentTabView();
 
-		if (hashMapTabs.get(tabName).size() == 0) 
-		{
-
-			if (tabName.equals(Const.TAB_FIRST)) 
-			{
+		if (hashMapTabs.get(tabName).size() == 0) {
+			if (tabName.equals(Const.TAB_FIRST)) {
 				addFragments(tabName, new GlossaryCategoriesListFragment(),
 						 true);
 			} 
-			else if (tabName.equals(Const.TAB_SECOND)) 
-			{
+			else if (tabName.equals(Const.TAB_SECOND)) {
 				addFragments(tabName, new QuestionFragment(), true);
 			} 
-			else if (tabName.equals(Const.TAB_THIRD)) 
-			{
+			else if (tabName.equals(Const.TAB_THIRD)) {
 				addFragments(tabName, new VideoFragment(), true);
 			} 
-			else if (tabName.equals(Const.TAB_FORTH)) 
-			{
+			else if (tabName.equals(Const.TAB_FORTH)) {
 				addFragments(tabName, new VideoFragment(),  true);
 			}
-		} 
-		else 
-		{
+		} else {
 			addFragments(
 					tabName,
 					hashMapTabs.get(tabName).get(hashMapTabs.get(tabName).size() - 1),
 					 false);
 		}
 
-		switch (tabHost.getCurrentTab()) 
-		{
+		switch (tabHost.getCurrentTab()) {
 			case 0:
-				iv.setBackgroundResource(R.color.twitter);
+				iv.setBackgroundColor(getResources().getColor(R.color.twitter));
 				break;
 			case 1:
-				iv.setBackgroundResource(R.color.twitter);
+				iv.setBackgroundColor(getResources().getColor(R.color.twitter));
 				break;
 			case 2:
-				iv.setBackgroundResource(R.color.twitter);
+				iv.setBackgroundColor(getResources().getColor(R.color.twitter));
 				break;
 			case 3:
-				iv.setBackgroundResource(R.color.twitter);
+				iv.setBackgroundColor(getResources().getColor(R.color.twitter));
 				break;
-
 		}
-
 	}
 
-	private class MyTabView extends LinearLayout
-	{
+	private class MyTabView extends LinearLayout {
 		TextView tv;
-
 		public MyTabView(Context c, String label, int id) {
 			super(c);
 			ImageView iv = new ImageView(c);
 			tv = new TextView(c);
-			
 			tv.setGravity(Gravity.CENTER_HORIZONTAL);
 			tv.setTextSize(11.0f);
 			tv.setId(TEXT_ID);
@@ -354,5 +320,4 @@ public class MainActivity extends FragmentActivity implements
 			addView(tv);
 		}
 	}
-
 }
