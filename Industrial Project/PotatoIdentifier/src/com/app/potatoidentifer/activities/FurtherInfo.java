@@ -101,7 +101,7 @@ public class FurtherInfo extends BaseFragment {
         TextView symptomTitleTextView = (TextView) v.findViewById(R.id.titleTextView);
         symptomTitleTextView.setText(symptomTitle);
 
-        SlideshowViewPagerAdapter adapter = new SlideshowViewPagerAdapter(getActivity(), slideshowImageArray);
+        SlideshowViewPagerAdapter adapter = new SlideshowViewPagerAdapter(getActivity(), slideshowImageArray, context);
         myViewPager = (ViewPager) v.findViewById(R.id.slideshowviewpager);
         myViewPager.setAdapter(adapter);
         myViewPager.setCurrentItem(0);
