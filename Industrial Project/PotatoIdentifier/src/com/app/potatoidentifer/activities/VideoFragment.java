@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.MediaController;
+import android.widget.ScrollView;
 import android.widget.VideoView;
 
 import com.example.potatoidentifier.R;
@@ -28,6 +29,7 @@ public class VideoFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.video_fragment_layout, container, false);
         splashPlayer();
+        
         return v;
     }
     
@@ -52,6 +54,11 @@ public class VideoFragment extends BaseFragment {
     	 mediaControls.setAnchorView(videoHolderTest1);
     	 videoHolderTest1.setMediaController(mediaControls);
     	 videoHolderTest1.setVideoURI(video1);
+    	 videoHolderTest1.setFocusable(false);
+    	 mediaControls2.setAnchorView(videoHolderTest2);
+    	 videoHolderTest2.setMediaController(mediaControls2);
+    	 videoHolderTest2.setVideoURI(video2);
+    	 videoHolderTest2.setFocusable(false);
     	 playButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -70,9 +77,7 @@ public class VideoFragment extends BaseFragment {
     	  }
     	 });
     	 
-    	 mediaControls2.setAnchorView(videoHolderTest2);
-    	 videoHolderTest2.setMediaController(mediaControls2);
-    	 videoHolderTest2.setVideoURI(video2);
+    	 
     	 playButton2.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -90,6 +95,6 @@ public class VideoFragment extends BaseFragment {
     	    playButton2.setVisibility(View.VISIBLE);
     	  }
     	 });
-   
+       
     	}
 }

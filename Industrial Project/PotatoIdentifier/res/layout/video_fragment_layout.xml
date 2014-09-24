@@ -2,12 +2,15 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
   android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
+  android:layout_height="fill_parent"
+  android:id="@+id/scrollview"
+  >
   
-	<LinearLayout 
+    <LinearLayout  
 	              android:orientation="vertical"
 	              android:layout_width="match_parent"
-	              android:layout_height="match_parent">
+	              android:layout_height="match_parent"
+	              android:focusableInTouchMode="true" >
 	
 		<TextView
 			        android:id="@+id/titleTextView"
@@ -17,14 +20,15 @@
 			        android:text="Video Tutorials"
 			        android:textSize="22sp"
 			        android:textStyle="bold"
-			        android:padding="10dp" />
+			        android:padding="10dp"
+			       />
 		
 		<TextView
 			        android:id="@+id/test1TextView"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:text="Lateral Flow Device Test"
-			        android:textSize="22sp"
+					android:textSize="22sp"
 			        android:textStyle="bold"
 			        android:paddingBottom ="10dp" />
 		
@@ -33,20 +37,22 @@
 		  android:layout_width="fill_parent"
 		  android:layout_height="200dp"
 		  android:background="#000"
+		
 		  >
-  
-			<VideoView
-			    android:id="@+id/videoView1"
-			    android:layout_width="match_parent"
-			    android:layout_height="200dp"
-			    android:gravity="center" />
+  				
+		    	<VideoView
+		    android:id="@+id/videoView1"
+		    android:layout_width="match_parent"
+		    android:layout_height="200dp"
+		    
+	 /> 
 			
 			 <ImageButton
 			    android:id="@+id/play_button"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:layout_gravity="center_vertical|center_horizontal"
-			    android:src="@drawable/button_play_blue"
+			    android:src="@drawable/ic_video_tab"
 			    android:background="@null"
 			    />
 		 
@@ -59,7 +65,8 @@
 	        android:text="Description"
 	        android:textSize="22sp"
 	        android:textStyle="bold"
-	        android:paddingBottom ="10dp" />
+	        android:paddingBottom ="10dp"
+	       />
 		 
 		  <TextView
 	        android:id="@+id/descTextView"
@@ -86,22 +93,25 @@
   
 	    
 	    
-		<VideoView
+	  	<VideoView
 		    android:id="@+id/videoView2"
 		    android:layout_width="match_parent"
 		    android:layout_height="200dp"
-		    android:gravity="center" />
+		    
+	 /> 
 		
 		 <ImageButton
 		    android:id="@+id/play_button2"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_gravity="center_vertical|center_horizontal"
-		    android:src="@drawable/button_play_blue"
+		    android:src="@drawable/ic_video_tab"
 		    android:background="@null"
 		    />
 		 
     </FrameLayout>
+    
+	       
     
 	<TextView
 	        android:id="@+id/descriptionTitleTextView"
@@ -118,9 +128,5 @@
 	        android:layout_height="wrap_content"
 	        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis libero consectetur, hendrerit est ut, fringilla quam. Mauris varius, nisi non interdum dapibus, nisl velit pretium eros, nec venenatis sapien risus id dolor. Proin sit amet dolor sagittis, finibus ex nec, auctor tortor. Duis eu tristique sapien, eget placerat urna. Nulla facilisi. Suspendisse ac erat dolor. In hac " 
 	        android:paddingBottom ="10dp"/>
-		
-	
-	
-	
-	</LinearLayout>
+		  </LinearLayout>
 </ScrollView>

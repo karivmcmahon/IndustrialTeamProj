@@ -18,7 +18,6 @@ public class BaseFragment extends Fragment {
 		//Sets up the tabs for the activity in the application
 		fragmentTabActivity = (MainActivity) this.getActivity();
 	}
-	
 
 	public boolean onBackPressed() {
 		return false;

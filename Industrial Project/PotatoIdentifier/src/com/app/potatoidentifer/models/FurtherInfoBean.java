@@ -4,12 +4,12 @@ public class FurtherInfoBean {
     private int id;
     private String symptom;
     private String type;
-    private int imageID1;
-    private int imageID2;
-    private int imageID3;
-    private int imageID4;
-    private int imageID5;
-    private int imageID6;
+    private String imageID1;
+    private String imageID2;
+    private String imageID3;
+    private String imageID4;
+    private String imageID5;
+    private String imageID6;
     private String basicFacts;
     private String control;
     private String diagnostics;
@@ -38,51 +38,51 @@ public class FurtherInfoBean {
         return type;
     }
 
-    public void setImageID(int imageID1) {
+    public void setImageID(String imageID1) {
         this.imageID1 = imageID1;
     }
 
-    public int getImageID() {
+    public String getImageID() {
         return imageID1;
     }
 
-    public void setImageID2(int imageID2) {
+    public void setImageID2(String imageID2) {
         this.imageID2 = imageID2;
     }
 
-    public int getImageID2() {
+    public String getImageID2() {
         return imageID2;
     }
 
-    public void setImageID3(int imageID3) {
+    public void setImageID3(String imageID3) {
         this.imageID3 = imageID3;
     }
 
-    public int getImageID3() {
+    public String getImageID3() {
         return imageID3;
     }
 
-    public void setImageID4(int imageID4) {
+    public void setImageID4(String imageID4) {
         this.imageID4 = imageID4;
     }
 
-    public int getImageID4() {
+    public String getImageID4() {
         return imageID4;
     }
 
-    public void setImageID5(int imageID5) {
+    public void setImageID5(String imageID5) {
         this.imageID5 = imageID5;
     }
 
-    public int getImageID5() {
+    public String getImageID5() {
         return imageID5;
     }
 
-    public void setImageID6(int imageID6) {
+    public void setImageID6(String imageID6) {
         this.imageID6 = imageID6;
     }
 
-    public int getImageID6() {
+    public String getImageID6() {
         return imageID6;
     }
 
@@ -91,7 +91,7 @@ public class FurtherInfoBean {
     }
 
     public String getBasicFacts() {
-        return type;
+        return basicFacts;
     }
 
     public void setDiagnostics(String diagnostics) {
@@ -109,6 +109,4 @@ public class FurtherInfoBean {
     public String getControl() {
         return control;
     }
-
-
 }

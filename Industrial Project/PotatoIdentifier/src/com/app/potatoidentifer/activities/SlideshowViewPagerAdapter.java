@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,7 +19,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import android.widget.TextView;
 
 import com.example.potatoidentifier.R;
 
@@ -89,7 +87,7 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 				img.setBackground(resizedBitmap);
 
 				final Button next = (Button) dialog.findViewById(R.id.button1);
-				next.setBackgroundResource(R.drawable.closebutton);
+				next.setBackgroundResource(R.drawable.ic_image_zoom_cross);
 
 				next.setOnClickListener(new OnClickListener() {
 
