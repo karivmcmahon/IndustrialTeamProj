@@ -4,20 +4,22 @@
     android:layout_height="match_parent"
  >
 
-    <com.app.potatoidentifer.activities.TouchImageView
+    <com.app.potatoidentifer.activities.TouchImageView 
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+      	 android:scaleType="fitXY"
+      	 android:background="@android:color/transparent"
+         />
     
-     <Button
+     <Button 
         android:id="@+id/button1"
-        android:layout_height="20dp"
-        android:layout_width="20dp"
-        android:layout_marginTop="-3dp"
+        android:layout_height="25dp"
+        android:layout_width="25dp"
+        android:layout_marginTop="-2dp"
         android:layout_gravity="top|right"
        />
-     
-
-</FrameLayout>
+    
+    </FrameLayout>
 
 
