@@ -1,8 +1,10 @@
 package com.app.potatoidentifer.activities;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.app.potatoidentifer.models.BitmapScaler;
 import com.example.potatoidentifier.R;
 
 /**
@@ -31,26 +34,18 @@ public class CustomListView extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-    	    	
-    	System.out.println("We also go here?");
-    	
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.custom_list_view, null, false);
-        
         TextView glossaryListText = (TextView) rowView.findViewById(R.id.txt);
+        ImageView glossaryListImage = (ImageView) rowView.findViewById(R.id.img);
         glossaryListText.setText( glossarySymptomNames.get(position));
-
-        ImageView glossaryListImage = (ImageView) rowView.findViewById(R.id.img);        
-        
-        System.out.println("This is the imageID " + imageId.get(position).toString() + " And the position " + position);
-        
-        /*
-         * This is where the issue is.
-         * Leaf image is of too high quality.
-         */
-        glossaryListImage.setImageResource(0);
-        
-        //glossaryListImage.setImageResource( imageId.get(position));
+        Resources res = context.getResources();
+        try {
+            BitmapScaler scaler = new BitmapScaler(res, imageId.get(position), 200);
+            glossaryListImage.setImageBitmap(scaler.getScaled());
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
         return rowView;
     }
 }

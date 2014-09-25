@@ -25,6 +25,7 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
     Button btnYes, btnNo;
     QuestionEngine<String, String> QE; 
     String currentQuestion;
+    boolean displayingAnswer = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,12 +82,14 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
         if (QE.getPossibleAnswers().size() == 1)
         {
             textQuestion.setText("It is a " + QE.getPossibleAnswers().get(0));
+            displayingAnswer = true;
             QE.ForgetAll();
         }
         else
         {
+            displayingAnswer = false;
             currentQuestion = QE.determineNextQuestion();
-            String q = currentQuestion + "?";
+            String q = "Does it have " + currentQuestion + "?";
 
             textQuestion.setText(q.toCharArray(), 0, q.length());
         }
@@ -95,18 +98,16 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
 
 
     @Override
-    public void onClick(View v)
-    {
-        if (btnYes.equals(v))
-        {
-            QE.Inform(currentQuestion, true);
-        }
-        else if (btnNo.equals(v))
-        {
-            QE.Inform(currentQuestion, false);
-        }else
-        {
+    public void onClick(View v) {
 
+        if (!displayingAnswer) {
+            if (btnYes.equals(v)) {
+                QE.Inform(currentQuestion, true);
+            } else if (btnNo.equals(v)) {
+                QE.Inform(currentQuestion, false);
+            } else {
+
+            }
         }
         refresh();
     }
