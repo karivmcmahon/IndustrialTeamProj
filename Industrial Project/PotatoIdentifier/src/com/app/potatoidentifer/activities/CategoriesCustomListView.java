@@ -36,7 +36,16 @@ public class CategoriesCustomListView extends ArrayAdapter<String>  {
         glossaryListText.setText(glossaryNames[position]);
         
         ImageView glossaryListImage = (ImageView) rowView.findViewById(R.id.img);
-        glossaryListImage.setImageResource(imageId[position]);
+        
+        
+        //System.out.println("This is the imageID " + imageId[position].toString() + " And the position " + position);
+        
+        /*
+         * This is where the issue is.
+         * Leaf image is of too high quality.
+         */
+        glossaryListImage.setImageResource(2130837541);
+        //glossaryListImage.setImageResource(imageId[position]);
         
         return rowView;
     }

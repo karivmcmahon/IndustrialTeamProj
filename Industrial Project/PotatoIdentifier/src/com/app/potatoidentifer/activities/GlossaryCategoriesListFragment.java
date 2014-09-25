@@ -19,10 +19,9 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
     private Integer[] categoryId;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		final View v = inflater.inflate(R.layout.glossary_fragment_layout,
-				container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		
+		final View v = inflater.inflate(R.layout.glossary_fragment_layout, container, false);
 
         Context context = this.getActivity();
         GlossaryCategoriesDataSource ds = new GlossaryCategoriesDataSource(context);
@@ -42,11 +41,15 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
             int resID = getResources().getIdentifier(mDrawableName , "drawable", context.getPackageName());
             imageId[i] =  resID;
             glossary_list[i] = categories.get(i).getTitle();
+            
+
         }
 
 		//Sets up custom list view for categories
 		CategoriesCustomListView adapter = new CategoriesCustomListView(getActivity(), glossary_list, imageId);
+		System.out.println("This is the size of the image List " + imageId.length);
 		list = (ListView) v.findViewById(R.id.glossary_listview);
+		
 		list.setAdapter(adapter);
 		//Sets up on an item click listener - to check for when a click occurs on the item list
 		list.setOnItemClickListener(listViewListenerHandler);

@@ -31,6 +31,8 @@ public class GlossaryFragment extends BaseFragment {
         Bundle bundle = this.getArguments();
         String category = bundle.getString("symptom");
 
+        System.out.println("We go here?");
+        
         Context context = this.getActivity();
         GlossaryDataSource gs = new GlossaryDataSource(context);
         gs.open();
