@@ -8,6 +8,7 @@ public class GlossaryBean {
     private String symptom;
     private String type;
     private String imageId;
+    private String imageId2;
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -20,4 +21,9 @@ public class GlossaryBean {
 
     public String getImageId() { return imageId; }
     public void setImageId(String imageId) { this.imageId = imageId; }
+    
+    public String getImageId2() { return imageId2; }
+    public void setImageId2(String imageId2) { this.imageId2 = imageId2; }
+    
+
 }

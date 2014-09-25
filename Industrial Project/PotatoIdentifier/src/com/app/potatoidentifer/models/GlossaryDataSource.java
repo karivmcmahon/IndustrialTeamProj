@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Mark on 23/09/2014.
  */
 public class GlossaryDataSource extends BaseDataSource {
-    private String[] categoryColumnsInfoQuery = { GLOSSARY_ID, GLOSSARY_SYMPTOM, GLOSSARY_TYPE, GLOSSARY_IMAGE1};
+    private String[] categoryColumnsInfoQuery = { GLOSSARY_ID, GLOSSARY_SYMPTOM, GLOSSARY_TYPE, GLOSSARY_IMAGE1, GLOSSARY_IMAGE2};
 
     public GlossaryDataSource(Context context) {
         super(context);
@@ -35,6 +35,7 @@ public class GlossaryDataSource extends BaseDataSource {
         gi.setSymptom(cursor.getString(getIndex(GLOSSARY_SYMPTOM, cursor)));
         gi.setType(cursor.getString(getIndex(GLOSSARY_TYPE, cursor)));
         gi.setImageId(cursor.getString(getIndex(GLOSSARY_IMAGE1, cursor)));
+        gi.setImageId2(cursor.getString(getIndex(GLOSSARY_IMAGE2, cursor)));
         return gi;
     }
 }
