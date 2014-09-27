@@ -2,6 +2,8 @@ package com.app.potatoidentifer.models;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -14,6 +16,23 @@ public class GlossaryCategoriesDataSource extends BaseDataSource {
         super(context);
     }
 
+    public boolean doesDieaseExist(String disease)
+    {
+    	Log.v("disease","disease " + disease);
+    	boolean exist = false;
+    	Cursor cursor = database.query(GLOSSARY_TABLE, null, GLOSSARY_SYMPTOM+"=?", new String[] { disease }, null, null, null);
+    	if(cursor.getCount() > 0)
+    	{
+    		exist = true;
+    	}
+    	else
+     	{
+    		exist = false;
+    	}
+    	cursor.close();
+        close();
+        return exist;
+    }
     //Searches the database for the information required for the categories page.
     public ArrayList<GlossaryCategoriesBean> getGlossaryCategoryInfo() {
         ArrayList<GlossaryCategoriesBean> glossaryList = new ArrayList<GlossaryCategoriesBean>();

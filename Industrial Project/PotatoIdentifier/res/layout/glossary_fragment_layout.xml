@@ -14,21 +14,43 @@
          android:textStyle="bold"
         android:text="Glossary" />
         
-         <TextView
+        <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
   		android:layout_below="@id/textView1"
-        android:text="Please select from categories below:" />
+        android:text="Please search or select from categories below:" />
+        
+          <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/textView2"
+        android:layout_alignParentRight="true"
+        android:text="Search" />
+        
+         <EditText
+             android:id="@+id/editText1"
+             android:layout_width="match_parent"
+             android:layout_height="40dp"
+             android:layout_below="@+id/textView2"
+             android:layout_toLeftOf="@+id/button1"
+             android:ems="10"
+             android:hint="Search disease here.." >
+
+   		 </EditText>
+   		 
+        
+         
     <ListView
-            android:id="@+id/glossary_listview"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView2"
-  >
+        android:id="@+id/glossary_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText1" >
+
     </ListView>
 
-
+   
 
 </RelativeLayout>

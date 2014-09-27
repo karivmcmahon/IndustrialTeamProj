@@ -1,16 +1,24 @@
 package com.app.potatoidentifer.activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+
 import com.app.potatoidentifer.models.GlossaryCategoriesBean;
 import com.app.potatoidentifer.models.GlossaryCategoriesDataSource;
 import com.example.potatoidentifier.R;
+
 import java.util.List;
 
 public class GlossaryCategoriesListFragment extends BaseFragment {
@@ -24,10 +32,44 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		final View v = inflater.inflate(R.layout.glossary_fragment_layout,
 				container, false);
-
-        Context context = this.getActivity();
-        GlossaryCategoriesDataSource ds = new GlossaryCategoriesDataSource(context);
+		
+		final Context context = this.getActivity();
+        final GlossaryCategoriesDataSource ds = new GlossaryCategoriesDataSource(context);
         ds.open();
+        final EditText srchText =(EditText) v.findViewById(R.id.editText1);
+		Button btn = (Button) v.findViewById(R.id.button1);
+		btn.setOnClickListener(new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				ds.open();
+				boolean exists =	ds.doesDieaseExist(srchText.getText().toString());
+				Log.v("Exists","Exist " + exists);
+				if (exists == true)
+				{
+					    Bundle bundle = new Bundle();
+			            bundle.putString("category", srchText.getText().toString());
+			            FurtherInfo fi = new FurtherInfo();
+			            fi.setArguments(bundle);
+			            fragmentTabActivity.addFragments(Const.TAB_FIRST, fi, true);
+				}
+				else
+				{
+					AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+					builder.setMessage("The disease you searched doesn't exist in the application");
+					builder.setTitle("Error");
+					builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+					}
+					});
+					builder.show();
+					
+				}
+			}
+			
+		});
 
         List<GlossaryCategoriesBean> categories = ds.getGlossaryCategoryInfo();
         //Set sizes of arrays when we know the size of the list.
