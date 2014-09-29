@@ -28,12 +28,12 @@ public class FurtherInfoDataSource extends BaseDataSource {
         FurtherInfoBean gb = new FurtherInfoBean();
         gb.setID(cursor.getInt(getIndex(GLOSSARY_ID, cursor)));
         gb.setSymptom(cursor.getString(getIndex(GLOSSARY_SYMPTOM, cursor)));
-        gb.setImageID(cursor.getString(getIndex(GLOSSARY_IMAGE1, cursor)));
-        gb.setImageID2(cursor.getString(getIndex(GLOSSARY_IMAGE2, cursor)));
-        gb.setImageID3(cursor.getString(getIndex(GLOSSARY_IMAGE3, cursor)));
-        gb.setImageID4(cursor.getString(getIndex(GLOSSARY_IMAGE4, cursor)));
-        gb.setImageID5(cursor.getString(getIndex(GLOSSARY_IMAGE5, cursor)));
-        gb.setImageID6(cursor.getString(getIndex(GLOSSARY_IMAGE6, cursor)));
+        gb.setImageID(cursor.getBlob(getIndex(GLOSSARY_IMAGE1, cursor)));
+        gb.setImageID2(cursor.getBlob(getIndex(GLOSSARY_IMAGE2, cursor)));
+        gb.setImageID3(cursor.getBlob(getIndex(GLOSSARY_IMAGE3, cursor)));
+        gb.setImageID4(cursor.getBlob(getIndex(GLOSSARY_IMAGE4, cursor)));
+        gb.setImageID5(cursor.getBlob(getIndex(GLOSSARY_IMAGE5, cursor)));
+        gb.setImageID6(cursor.getBlob(getIndex(GLOSSARY_IMAGE6, cursor)));
         gb.setDiagnostics(cursor.getString(getIndex(GLOSSARY_DIAGNOSTICS, cursor)));
         gb.setBasicFacts(cursor.getString(getIndex(GLOSSARY_BASIC_FACTS, cursor)));
         gb.setControl(cursor.getString(getIndex(GLOSSARY_CONTROL, cursor)));

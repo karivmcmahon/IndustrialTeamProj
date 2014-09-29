@@ -1,6 +1,8 @@
 package com.app.potatoidentifer.activities;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import com.app.potatoidentifer.models.GlossaryBean;
 import com.app.potatoidentifer.models.GlossaryDataSource;
 import com.example.potatoidentifier.R;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +29,7 @@ public class GlossaryFragment extends BaseFragment {
     GridView grid;
     ArrayList<String> glossaryList;
     ArrayList<Integer> glossaryId;
-    ArrayList<Integer> imageId;
+    ArrayList<Bitmap> imageId;
     Context context;
 
     @Override
@@ -41,36 +44,36 @@ public class GlossaryFragment extends BaseFragment {
 
         //Set sizes of arrays when we know the size of the list.
         glossaryList = new ArrayList<String>(categoryInfo.size());
-        imageId = new ArrayList<Integer>();
+        imageId = new ArrayList<Bitmap>();
         glossaryId = new ArrayList<Integer>(categoryInfo.size());
 
         //Convert and add the list to the appropriate arrays.
         for (int i = 0; i < categoryInfo.size(); i++) {
             glossaryId.add(i, categoryInfo.get(i).getId());
             //Converting strings to a drawable.
-            String mDrawableName = categoryInfo.get(i).getImageId();
-            int resID1 = getResource(mDrawableName);
-            String mDrawableName2 = categoryInfo.get(i).getImageId2();
-            int resID2 = getResource(mDrawableName2);
-            imageId.add( i, resID1);
-            glossaryList.add(i, categoryInfo.get(i).getSymptom());
-            imageId.add( i, resID2);
+
+            if(categoryInfo.get(i).getImageId() != null) {
+                byte[] blob = categoryInfo.get(i).getImageId();
+                ByteArrayInputStream imageStream = new ByteArrayInputStream(blob);
+                imageId.add(BitmapFactory.decodeStream(imageStream));
+            }
+
+            if(categoryInfo.get(i).getImageId2() != null) {
+                byte[] blob = categoryInfo.get(i).getImageId2();
+                ByteArrayInputStream imageStream = new ByteArrayInputStream(blob);
+                imageId.add(BitmapFactory.decodeStream(imageStream));
+            }
+
             glossaryList.add(i, categoryInfo.get(i).getSymptom());
         }
-
+        Log.v("FUCK", "FUCK");
         final View v = inflater.inflate(R.layout.grid_view,
                 container, false);
-        CustomGridView adapter = new CustomGridView(getActivity(),
-                glossaryList, imageId);
+        CustomGridView adapter = new CustomGridView(getActivity(), glossaryList, imageId);
         grid = (GridView) v.findViewById(R.id.grid);
         grid.setAdapter(adapter);
         grid.setOnItemClickListener(listViewListenerHandler);
         return v;
-    }
-    
-    public int getResource(String mDrawableName)
-    {
-    	return getResources().getIdentifier(mDrawableName, "drawable", context.getPackageName());
     }
 
     private AdapterView.OnItemClickListener listViewListenerHandler = new AdapterView.OnItemClickListener() {

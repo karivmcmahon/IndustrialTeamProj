@@ -3,6 +3,7 @@ package com.app.potatoidentifer.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +25,9 @@ import java.io.IOException;
 public class CategoriesCustomListView extends ArrayAdapter<String>  {
 	private final Activity context;
     private final String[] glossaryNames;
-    private final Integer[] imageId;
+    private final Bitmap[] imageId;
 
-    public CategoriesCustomListView(Activity context, String[] web, Integer[] imageId) {
+    public CategoriesCustomListView(Activity context, String[] web, Bitmap[] imageId) {
         super(context, R.layout.glossary_fragment_layout, web);
         this.context = context;
         this.glossaryNames = web;
@@ -42,16 +43,7 @@ public class CategoriesCustomListView extends ArrayAdapter<String>  {
         glossaryListText.setText(glossaryNames[position]);
 
         ImageView glossaryListImage = (ImageView) rowView.findViewById(R.id.img);
-//        glossaryListImage.setImageResource(imageId[position]);
-
-        Resources res = context.getResources();
-        try {
-            BitmapScaler scaler = new BitmapScaler(res, imageId[position], 200);
-            glossaryListImage.setImageBitmap(scaler.getScaled());
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
-
+        glossaryListImage.setImageBitmap(imageId[position]);
 
         return rowView;
     }

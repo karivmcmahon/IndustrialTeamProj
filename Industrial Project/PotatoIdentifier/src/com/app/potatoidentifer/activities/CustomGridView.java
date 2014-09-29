@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +24,9 @@ import com.example.potatoidentifier.R;
 public class CustomGridView extends ArrayAdapter<String> {
     private final Activity context;
     private final  ArrayList<String> glossarySymptomNames;
-    private final ArrayList<Integer> imageId;
+    private final ArrayList<Bitmap> imageId;
 
-    public CustomGridView(Activity context,  ArrayList<String> glossarySymptomNames, ArrayList<Integer> imageId) {
+    public CustomGridView(Activity context,  ArrayList<String> glossarySymptomNames, ArrayList<Bitmap> imageId) {
         super(context, R.layout.glossary_fragment_layout, glossarySymptomNames);
         this.context = context;
         this.glossarySymptomNames = glossarySymptomNames;
@@ -37,13 +38,7 @@ public class CustomGridView extends ArrayAdapter<String> {
         LayoutInflater inflater = context.getLayoutInflater();
         View gridView = inflater.inflate(R.layout.grid_single, null, false);
         ImageView glossaryListImage = (ImageView) gridView.findViewById(R.id.grid_image);
-        Resources res = context.getResources();
-        try {
-            BitmapScaler scaler = new BitmapScaler(res, imageId.get(position), 200);
-            glossaryListImage.setImageBitmap(scaler.getScaled());
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+        glossaryListImage.setImageBitmap(imageId.get(position));
         return gridView;
     }
 }

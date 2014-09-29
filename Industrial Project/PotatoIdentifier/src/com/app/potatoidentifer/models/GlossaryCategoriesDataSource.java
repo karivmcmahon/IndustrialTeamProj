@@ -52,7 +52,7 @@ public class GlossaryCategoriesDataSource extends BaseDataSource {
         GlossaryCategoriesBean gi = new GlossaryCategoriesBean();
         gi.setID(cursor.getInt(getIndex(GLOSSARY_ID, cursor)));
         gi.setTitle(cursor.getString(getIndex(GLOSSARY_TYPE, cursor)));
-        gi.setImageID(cursor.getString(getIndex(GLOSSARY_IMAGE1, cursor)));
+        gi.setImageID(cursor.getBlob(getIndex(GLOSSARY_IMAGE1, cursor)));
         return gi;
     }
 }

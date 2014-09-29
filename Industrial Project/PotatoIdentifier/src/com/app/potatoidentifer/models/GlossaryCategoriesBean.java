@@ -3,7 +3,7 @@ package com.app.potatoidentifer.models;
 public class GlossaryCategoriesBean {
     private int id;
     private String title;
-    private String imageID;
+    private byte[] imageID;
 
     public int getID() {
         return id;
@@ -21,11 +21,11 @@ public class GlossaryCategoriesBean {
         this.title = title;
     }
 
-    public String getImageID() {
+    public byte[] getImageID() {
         return imageID;
     }
 
-    public void setImageID(String imageID) {
+    public void setImageID(byte[] imageID) {
         this.imageID = imageID;
     }
 }
