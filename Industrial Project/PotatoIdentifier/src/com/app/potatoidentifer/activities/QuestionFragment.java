@@ -46,7 +46,7 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
         btnNo.setOnClickListener(this);
 
 
-        String[] people = {
+     /*   String[] people = {
                 new String("Bob"),
                 new String("Dave"),
                 new String("Ian"),
@@ -67,7 +67,15 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
         relations.add(Pair.create(people[2], blondeHair));
         relations.add(Pair.create(people[2], greenEyes));
         relations.add(Pair.create(people[3], greenEyes));
-        relations.add(Pair.create(people[3], blackHair));
+        relations.add(Pair.create(people[3], blackHair)); */
+
+        List<Pair<String, String>> relations = new ArrayList<Pair<String, String>>();
+
+        for (int i = 0; i < QuestionEngine.symptoms.length; i += 2)
+        {
+         relations.add(Pair.create(QuestionEngine.symptoms[i], QuestionEngine.symptoms[i+1]));
+        }
+
 
         QE = new QuestionEngine<String, String>(relations);
 

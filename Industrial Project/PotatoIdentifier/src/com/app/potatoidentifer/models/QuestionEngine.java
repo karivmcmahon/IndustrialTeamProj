@@ -102,5 +102,65 @@ public class QuestionEngine<Entity, Property> {
     public void Forget(Property P) { knowledge.remove(P); }
     public void ForgetAll() { knowledge.clear(); }
 
+    public static String[] symptoms = new String[]
+            {
+                    "Pectobacterium atrosepticum", "yellow colouring",
+                    "Pectobacterium atrosepticum", "slimy base",
+                    "Pectobacterium atrosepticum", "wilting",
+                    "Dickeya solani", "brown colouring in stem",
+                    "Dickeya solani", "wilting",
+                    "Brown rot", "yellow colouring",
+                    "Brown rot", "wilting",
+                    "Brown rot", "brown streaks",
+                    "Brown rot", "ooze in cut stems",
+                    "Early blight","small black spots",
+                    "Early blight", "circular brown patches",
+                    "Early blight", "leaf curling",
+                    "Late blight", "pale green spots",
+                    "Late blight", "irregular black/brown patches",
+                    "Late blight", "white mycelium",
+                    "Potassium deficiency", "fewer stems",
+                    "Potassium deficiency", "leaf curling",
+                    "Potassium deficiency", "necrotic leaf edges",
+                    "Nitrogen deficiency", "leaf curling",
+                    "Nitrogen deficiency", "stunting",
+                    "Nitrogen deficiency", "yellow leaves",
+                    "Phosphorus deficiency", "stunting",
+                    "Phosphorus deficiency", "leaf crinkling",
+                    "Phosphorus deficiency", "necrotic leaf edges",
+                    "Phosphorus deficiency", "chlorisis",
+                    "Potato virus Y", "yellow colouring",
+                    "Potato virus Y", "mosaic leaves",
+                    "Potato virus Y", "leaf curling",
+                    "Potato virus X", "mosaic leaves",
+                    "Potato virus X", "green colouring",
+                    "Potato virus X", "blotchy leaves",
+                    "Leafroll virus", "leaf curling",
+                    "Leafroll virus", "crisp/hard leaves",
+                    "Common scab", "raised/pitted brown tuber lesions",
+                    "Black scurf", "stunting",
+                    "Black scurf", "stem lesions",
+                    "Black scurf", "black patches on tubers",
+                    "Black scurf", "misshapen tubers",
+                    "Fusarium dry rot", "wilting",
+                    "Fusarium dry rot", "stunting",
+                    "Fusarium dry rot", "large black/brown patches",
+                    "Fusarium dry rot", "white mycelium",
+                    "Root knot nematode", "wilting",
+                    "Root knot nematode", "large root knots",
+                    "Root knot nematode", "chlorea",
+                    "Root knot nematode", "root damage",
+                    "Late blight", "Pale green spots",
+                    "Late blight", "white mercelium",
+                    "Late blight", "irregular black/brown patches",
+                    "Aphids", "feeding damage",
+                    "Aphids", "wilting",
+                    "Tuber moth", "holes/tunnels in tubers"
+            };
+
+
+
+
+
 
 }
