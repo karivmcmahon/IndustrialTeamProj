@@ -1,26 +1,37 @@
 package com.app.potatoidentifer.activities;
 
 
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
 
-import com.app.potatoidentifer.models.GlossaryCategoriesBean;
-import com.app.potatoidentifer.models.GlossaryCategoriesDataSource;
-import com.example.potatoidentifier.R;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
+
+import com.example.potatoidentifier.R;
 
 public class SearchTest extends BaseFragment{
 
 	private Button testBut;
+	static InputStream is = null;
+	//  static JSONObject jObj = null;
+	  static String json = "";
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,15 +50,53 @@ public class SearchTest extends BaseFragment{
 			
 			@Override
 			public void onClick(View v) {	
+				 StrictMode.ThreadPolicy policy = new   
+						    StrictMode.ThreadPolicy.Builder().permitAll().build();
+						    StrictMode.setThreadPolicy(policy);
+			         
+			         
+			    
+			         
+			        JSONObject json = null;
+			        String str = "";
+			        HttpResponse response;
+			        HttpClient myClient = new DefaultHttpClient();
+			        HttpPost myConnection = new HttpPost("https://zeno.computing.dundee.ac.uk/2014-projects/team1/admin_portal/sync.php");
+			         
+			        try {
+			            response = myClient.execute(myConnection);
+			            str = EntityUtils.toString(response.getEntity(), "UTF-8");
+			             
+			        } catch (ClientProtocolException e) {
+			            e.printStackTrace();
+			        } catch (IOException e) {
+			            e.printStackTrace();
+			        }
+			         
+			         
+			        try{
+			            JSONArray jArray = new JSONArray(str);
+			            json = jArray.getJSONObject(0);
+			             
+			         Log.v("json","json " + json);
+			         Log.v("id","id" + json.getString("_id"));
+			             
+			             
+			        } catch ( JSONException e) {
+			            e.printStackTrace();               
+			        }
+			         
 				
-				//onSearchRequested();
-			 //FragmentActivity.this.onSearchRequested();				
-			}
+			} 
+			
 		});	
         
 		return v;
 
 	}
+	
+	
+
 
 	
 	

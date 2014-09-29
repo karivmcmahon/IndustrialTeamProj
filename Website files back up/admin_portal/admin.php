@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php 
+session_start();
+if(empty($_SESSION['username'])) {
+ $incorrectLogin = true;
+}
+?> 
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -20,10 +26,15 @@
   <body>
   	<div class="container">
   		<h1 class="text-center">The James Hutton Institute Diagnosis Tool <small>Admin Portal</small></h1>
-  		<form class="form-signin login-form" role="form">
+  		<form class="form-signin login-form" role="form" action="signInData.php" method="post">
         	<h3 class="form-signin-heading">Please sign in.</h3>
-        	<input type="email" class="form-control" placeholder="Email address" required autofocus>
-        	<input type="password" class="form-control" placeholder="Password" required>
+        	<input type="email" class="form-control" placeholder="Email address" required autofocus name="email">
+        	<input type="password" class="form-control" placeholder="Password" required name="password">
+			<?php if($incorrectLogin == true) { ?>
+				<p> incorrect username/ password please try again. </p>
+			<?php 
+			}
+			?>
         	<button class="btn btn-lg btn-primary btn-block submit-btn" type="submit">Sign in</button>
       	</form>
 	</div>

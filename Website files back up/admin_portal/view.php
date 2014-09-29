@@ -1,11 +1,22 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if ($_SESSION["loggedIn"] != true)
+{
+	header("Location: https://zeno.computing.dundee.ac.uk/2014-projects/team1/admin_portal/admin.php");
+}
+if($_SESSION["success"] == false)
+{
+	$sucess = false;
+}
+?>
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Portal</title>
-
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/insert.css" rel="stylesheet">
@@ -19,7 +30,14 @@
   </head>
   <body>
   	<div class="container">
-  		<h1 class="text-center">The James Hutton Institute Diagnosis Tool <small>Admin Portal</small></h1>
+  				<form action="SignOut.php" method="post">
+  		<h1 class="text-center">The James Hutton Institute Diagnosis Tool <small>Admin Portal</small>
+		<button type="submit" class="btn  btn-lg; background-color: Transparent;">
+			<span class="glyphicon glyphicon-off"></span> 
+		</button>
+		
+		</h1>
+		</form>
   		<div class="col-sm-3 left-container">
   	    	<ul class="nav nav-stacked custom">
   				<li class="active"><a href="view.php">View Current Data<span class="glyphicon glyphicon-chevron-right pull-right glyph"></span></a></li>
@@ -34,7 +52,6 @@
             		<tr>
                 		<th>Disease</th>
                 		<th>Type</th>
-            
             		</tr>
         		</thead>
         		<tbody>
@@ -46,12 +63,11 @@
 						<tr href="detail.php" class="clickableRow">
 							<td > <?php echo $row['symptom']; ?> </td>
 							<td> <?php echo $row['type']; ?> </td>
+							<td><span class="glyphicon glyphicon-chevron-right pull-right glyph"></span></td>
 						</tr>
 						<?php 
 						} 
 						?>			
-				
-            	
         		</tbody>
     		</table>
 		</div>

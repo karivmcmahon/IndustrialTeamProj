@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if ($_SESSION["loggedIn"] != true)
+{
+	header("Location: https://zeno.computing.dundee.ac.uk/2014-projects/team1/admin_portal/admin.php");
+}
+if($_SESSION["success"] == false)
+{
+	$sucess = false;
+}
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -19,7 +30,14 @@
   </head>
   <body>
   	<div class="container">
-  		<h1 class="text-center">The James Hutton Institute Diagnosis Tool <small>Admin Portal</small></h1>
+		<form action="SignOut.php" method="post">
+  		<h1 class="text-center">The James Hutton Institute Diagnosis Tool <small>Admin Portal</small>
+		<button type="submit" class="btn  btn-lg; background-color: Transparent;">
+			<span class="glyphicon glyphicon-off"></span> 
+		</button>
+		
+		</h1>
+		</form>
   		<div class="col-sm-3 left-container">
   	    	<ul class="nav nav-stacked custom">
   				<li><a href="view.php">View Current Data<span class="glyphicon glyphicon-chevron-right pull-right glyph"></span></a></li>

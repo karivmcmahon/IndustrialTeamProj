@@ -27,12 +27,15 @@
 	        />
         </activity>
         <uses-library android:name="android.test.runner" /> 
+        
     </application>
     
     <instrumentation 
         android:name="android.test.InstrumentationTestRunner" 
         android:targetPackage="com.app.potatoidentifer.activities"
         android:label="potatoidentifier" /> 
+        
+   <uses-permission android:name="android.permission.INTERNET"/>
      
      
 </manifest>
