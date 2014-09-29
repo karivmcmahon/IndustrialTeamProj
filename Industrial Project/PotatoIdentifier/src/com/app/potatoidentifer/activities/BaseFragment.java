@@ -27,4 +27,12 @@ public class BaseFragment extends Fragment {
 
 		
 	}
+	
+	private SearchRequestedCallback mSearchRequestedCallback;
+	public void setSearchRequestedCallback(SearchRequestedCallback callback) {
+	    mSearchRequestedCallback = callback;
+	}
+	public interface SearchRequestedCallback {
+	    void onSearchRequested();
+	}
 }

@@ -269,8 +269,7 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 
 		if (hashMapTabs.get(tabName).size() == 0) {
 			if (tabName.equals(Const.TAB_FIRST)) {
-				addFragments(tabName, new GlossaryCategoriesListFragment(),
-						 true);
+				addFragments(tabName, new GlossaryCategoriesListFragment(), true);
 			} 
 			else if (tabName.equals(Const.TAB_SECOND)) {
 				addFragments(tabName, new QuestionFragment(), true);
@@ -279,7 +278,7 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 				addFragments(tabName, new VideoFragment(), true);
 			} 
 			else if (tabName.equals(Const.TAB_FORTH)) {
-				addFragments(tabName, new VideoFragment(),  true);
+				addFragments(tabName, new SearchTest(),  true);
 			}
 		} else {
 			addFragments(
