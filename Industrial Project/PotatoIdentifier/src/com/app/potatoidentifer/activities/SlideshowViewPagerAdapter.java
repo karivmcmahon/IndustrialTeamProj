@@ -23,24 +23,21 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-
 import com.app.potatoidentifer.models.BitmapScaler;
-import com.example.potatoidentifier.R;
 
 /**
  * This class creates the scrollable slideshow for the app
- * 
+ *
  * @author Kari
- * 
+ *
  */
 public class SlideshowViewPagerAdapter extends PagerAdapter {
 
 	Activity activity;
-	ArrayList<Integer> imageArray;
+	ArrayList<Bitmap> imageArray;
 	Context context;
 
-	public SlideshowViewPagerAdapter(Activity activity,
-			ArrayList<Integer> imageArray, Context context) {
+	public SlideshowViewPagerAdapter(Activity activity, ArrayList<Bitmap> imageArray, Context context) {
 		this.imageArray = imageArray;
 		this.activity = activity;
 		this.context = context;
@@ -56,74 +53,65 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
 		view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 				LayoutParams.MATCH_PARENT));
 		view.setScaleType(ScaleType.FIT_XY);
-		// view.setBackgroundResource(imageArray.get(position));
-
-		Resources res = context.getResources();
-		try {
-			scaler = new BitmapScaler(res, imageArray.get(position), 750);
-			view.setImageBitmap(scaler.getScaled());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		view.setImageBitmap(imageArray.get(position));
 
 		collection.addView(view, 0);
-		view.setOnClickListener(new OnClickListener() {
-
-			@SuppressLint("NewApi")
-			@Override
-			public void onClick(View arg0) {
-				DisplayMetrics dm = new DisplayMetrics();
-				activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-				int width = dm.widthPixels;
-				int height = dm.heightPixels;
-
-				final Dialog dialog = new Dialog(activity);
-				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				dialog.setContentView(R.layout.full_screen_image);
-				dialog.getWindow().setBackgroundDrawableResource(
-						android.R.color.transparent);
-				dialog.setCancelable(true);
-
-				Resources res = context.getResources();
-				// TODO set up image view with pinch for zoom - Needs tested on
-				// device not sure it works
-				TouchImageView img = (TouchImageView) dialog
-						.findViewById(R.id.imageView1);
-				try {
-					BitmapScaler scaler2 = new BitmapScaler(res, imageArray
-							.get(position), 750);
-					int bitmapHeight = scaler2.getHeight();
-					int bitmapWidth = scaler2.getWidth();
-					BitmapDrawable resizedBitmap = new BitmapDrawable(activity
-							.getResources(), Bitmap.createScaledBitmap(
-							scaler2.getScaled(), width, width * bitmapHeight
-									/ bitmapWidth, false));
-					dialog.getWindow().setLayout(
-							resizedBitmap.getMinimumWidth(),
-							resizedBitmap.getMinimumHeight());
-					img.setImageDrawable(resizedBitmap);
-					img.setBackgroundColor(Color.TRANSPARENT);
-
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				final Button next = (Button) dialog.findViewById(R.id.button1);
-				next.setBackgroundResource(R.drawable.ic_image_zoom_cross);
-
-				next.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						dialog.dismiss();
-					}
-				});
-				// now that the dialog is set up, it's time to show it
-				dialog.show();
-			}
-
-		});
+//		view.setOnClickListener(new OnClickListener() {
+//
+//			@SuppressLint("NewApi")
+//			@Override
+//			public void onClick(View arg0) {
+//				DisplayMetrics dm = new DisplayMetrics();
+//				activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+//				int width = dm.widthPixels;
+//				int height = dm.heightPixels;
+//
+//				final Dialog dialog = new Dialog(activity);
+//				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//				dialog.setContentView(R.layout.full_screen_image);
+//				dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+//				dialog.setCancelable(true);
+//
+//				Resources res = context.getResources();
+//				// TODO set up image view with pinch for zoom - Needs tested on
+//				// device not sure it works
+//				TouchImageView img = (TouchImageView) dialog
+//						.findViewById(R.id.imageView1);
+//				try {
+//					BitmapScaler scaler2 = new BitmapScaler(res, imageArray
+//							.get(position), 750);
+//					int bitmapHeight = scaler2.getHeight();
+//					int bitmapWidth = scaler2.getWidth();
+//					BitmapDrawable resizedBitmap = new BitmapDrawable(activity
+//							.getResources(), Bitmap.createScaledBitmap(
+//							scaler2.getScaled(), width, width * bitmapHeight
+//									/ bitmapWidth, false));
+//					dialog.getWindow().setLayout(
+//							resizedBitmap.getMinimumWidth(),
+//							resizedBitmap.getMinimumHeight());
+//					img.setImageDrawable(resizedBitmap);
+//					img.setBackgroundColor(Color.TRANSPARENT);
+//
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//				final Button next = (Button) dialog.findViewById(R.id.button1);
+//				next.setBackgroundResource(R.drawable.ic_image_zoom_cross);
+//
+//				next.setOnClickListener(new OnClickListener() {
+//
+//					@Override
+//					public void onClick(View v) {
+//						dialog.dismiss();
+//					}
+//				});
+//				// now that the dialog is set up, it's time to show it
+//				dialog.show();
+//			}
+//
+//		});
 		return view;
 	}
 

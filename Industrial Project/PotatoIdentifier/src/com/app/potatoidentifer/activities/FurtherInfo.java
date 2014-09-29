@@ -1,6 +1,8 @@
 package com.app.potatoidentifer.activities;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -14,6 +16,7 @@ import com.app.potatoidentifer.models.FurtherInfoBean;
 import com.app.potatoidentifer.models.FurtherInfoDataSource;
 import com.example.potatoidentifier.R;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +26,7 @@ import java.util.List;
  * @author Kari
  */
 public class FurtherInfo extends BaseFragment {
-    ArrayList<Integer> slideshowImageArray;
+    ArrayList<Bitmap> slideshowImageArray;
     private int buttonIds[] = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6};
     private List<Button> buttonArray;
     private View v;
@@ -44,44 +47,44 @@ public class FurtherInfo extends BaseFragment {
         FurtherInfoDataSource gs = new FurtherInfoDataSource(context);
         gs.open();
         List<FurtherInfoBean> furtherInfo = gs.getFurtherInfo(category);
-        slideshowImageArray = new ArrayList<Integer>(6);
+        slideshowImageArray = new ArrayList<Bitmap>(6);
         for (int i = 0; i < furtherInfo.size(); i++) {
             symptomTitle = furtherInfo.get(i).getSymptom();
 
-            String id1 = furtherInfo.get(i).getImageID();
+            byte[] id1 = furtherInfo.get(i).getImageID();
             if (id1 != null) {
-                int resID = getResources().getIdentifier(id1, "drawable", context.getPackageName());
-                slideshowImageArray.add(resID);
+                ByteArrayInputStream imageStream = new ByteArrayInputStream(id1);
+                slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
             }
 
-            String id2 = furtherInfo.get(i).getImageID2();
+            byte[] id2 = furtherInfo.get(i).getImageID2();
             if (id2 != null) {
-                int resID = getResources().getIdentifier(id2, "drawable", context.getPackageName());
-                slideshowImageArray.add(resID);
+                ByteArrayInputStream imageStream = new ByteArrayInputStream(id2);
+                slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
             }
 
-            String id3 = furtherInfo.get(i).getImageID3();
+            byte[] id3 = furtherInfo.get(i).getImageID3();
             if (id3 != null) {
-                int resID = getResources().getIdentifier(id3, "drawable", context.getPackageName());
-                slideshowImageArray.add(resID);
+                ByteArrayInputStream imageStream = new ByteArrayInputStream(id3);
+                slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
             }
 
-            String id4 = furtherInfo.get(i).getImageID4();
+            byte[] id4 = furtherInfo.get(i).getImageID4();
             if (id4 != null) {
-                int resID = getResources().getIdentifier(id4, "drawable", context.getPackageName());
-                slideshowImageArray.add(resID);
+                ByteArrayInputStream imageStream = new ByteArrayInputStream(id4);
+                slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
             }
 
-            String id5 = furtherInfo.get(i).getImageID5();
+            byte[] id5 = furtherInfo.get(i).getImageID5();
             if (id5 != null) {
-                int resID = getResources().getIdentifier(id5, "drawable", context.getPackageName());
-                slideshowImageArray.add(resID);
+                ByteArrayInputStream imageStream = new ByteArrayInputStream(id5);
+                slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
             }
 
-            String id6 = furtherInfo.get(i).getImageID6();
+            byte[] id6 = furtherInfo.get(i).getImageID6();
             if (id6 != null) {
-                int resID = getResources().getIdentifier(id6, "drawable", context.getPackageName());
-                slideshowImageArray.add(resID);
+                ByteArrayInputStream imageStream = new ByteArrayInputStream(id6);
+                slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
             }
 
             basicFacts = furtherInfo.get(i).getBasicFacts();

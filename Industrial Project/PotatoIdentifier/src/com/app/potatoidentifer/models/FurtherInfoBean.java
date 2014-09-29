@@ -4,12 +4,12 @@ public class FurtherInfoBean {
     private int id;
     private String symptom;
     private String type;
-    private String imageID1;
-    private String imageID2;
-    private String imageID3;
-    private String imageID4;
-    private String imageID5;
-    private String imageID6;
+    private byte[] imageID1;
+    private byte[] imageID2;
+    private byte[] imageID3;
+    private byte[] imageID4;
+    private byte[] imageID5;
+    private byte[] imageID6;
     private String basicFacts;
     private String control;
     private String diagnostics;
@@ -38,51 +38,51 @@ public class FurtherInfoBean {
         return type;
     }
 
-    public void setImageID(String imageID1) {
+    public void setImageID(byte[] imageID1) {
         this.imageID1 = imageID1;
     }
 
-    public String getImageID() {
+    public byte[] getImageID() {
         return imageID1;
     }
 
-    public void setImageID2(String imageID2) {
+    public void setImageID2(byte[] imageID2) {
         this.imageID2 = imageID2;
     }
 
-    public String getImageID2() {
+    public byte[] getImageID2() {
         return imageID2;
     }
 
-    public void setImageID3(String imageID3) {
+    public void setImageID3(byte[] imageID3) {
         this.imageID3 = imageID3;
     }
 
-    public String getImageID3() {
+    public byte[] getImageID3() {
         return imageID3;
     }
 
-    public void setImageID4(String imageID4) {
+    public void setImageID4(byte[] imageID4) {
         this.imageID4 = imageID4;
     }
 
-    public String getImageID4() {
+    public byte[] getImageID4() {
         return imageID4;
     }
 
-    public void setImageID5(String imageID5) {
+    public void setImageID5(byte[] imageID5) {
         this.imageID5 = imageID5;
     }
 
-    public String getImageID5() {
+    public byte[] getImageID5() {
         return imageID5;
     }
 
-    public void setImageID6(String imageID6) {
+    public void setImageID6(byte[] imageID6) {
         this.imageID6 = imageID6;
     }
 
-    public String getImageID6() {
+    public byte[] getImageID6() {
         return imageID6;
     }
 

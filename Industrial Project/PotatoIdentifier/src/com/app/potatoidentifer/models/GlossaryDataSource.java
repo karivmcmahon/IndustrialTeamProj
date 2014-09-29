@@ -34,8 +34,8 @@ public class GlossaryDataSource extends BaseDataSource {
         gi.setId(cursor.getInt(getIndex(GLOSSARY_ID, cursor)));
         gi.setSymptom(cursor.getString(getIndex(GLOSSARY_SYMPTOM, cursor)));
         gi.setType(cursor.getString(getIndex(GLOSSARY_TYPE, cursor)));
-        gi.setImageId(cursor.getString(getIndex(GLOSSARY_IMAGE1, cursor)));
-        gi.setImageId2(cursor.getString(getIndex(GLOSSARY_IMAGE2, cursor)));
+        gi.setImageId(cursor.getBlob(getIndex(GLOSSARY_IMAGE1, cursor)));
+        gi.setImageId2(cursor.getBlob(getIndex(GLOSSARY_IMAGE2, cursor)));
         return gi;
     }
 }
