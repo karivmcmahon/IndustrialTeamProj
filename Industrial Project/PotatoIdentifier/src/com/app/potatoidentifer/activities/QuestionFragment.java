@@ -89,7 +89,7 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
     {
         if (QE.getPossibleAnswers().size() == 1)
         {
-            textQuestion.setText("It is a " + QE.getPossibleAnswers().get(0));
+            textQuestion.setText("It has " + QE.getPossibleAnswers().get(0));
             displayingAnswer = true;
             QE.ForgetAll();
         }

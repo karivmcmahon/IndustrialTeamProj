@@ -1,5 +1,6 @@
 package com.app.potatoidentifer.models;
 
+import android.util.Log;
 import android.util.Pair;
 
 import java.util.ArrayList;
@@ -18,6 +19,9 @@ public class QuestionEngine<Entity, Property> {
 
     public QuestionEngine(List<Pair<Entity,Property>> rels)
     {
+
+
+
         propertyMap = new HashMap<Entity, List<Property>>();
         for (Pair<Entity, Property> P : rels) {
             if (!propertyMap.containsKey(P.first))
@@ -87,8 +91,13 @@ public class QuestionEngine<Entity, Property> {
         int targetValue = candidates.size() / 2;
 
         for (Property v : counts.keySet()) {
+
+            Log.d("dict", v.toString() + " -> " + counts.get(v).toString() + " -> "+ ((Integer)Math.abs(counts.get(v) - targetValue)).toString());
+
             if (Math.abs(counts.get(v) - targetValue) < smallestDifference && candidates.size() != counts.get(v)) {
                 bestCandidate = v;
+                smallestDifference =Math.abs(counts.get(v) - targetValue);
+
             }
         }
 
