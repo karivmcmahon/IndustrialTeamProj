@@ -55,7 +55,8 @@ public class GlossaryFragment extends BaseFragment {
             if(categoryInfo.get(i).getImageId() != null) {
                 byte[] blob = categoryInfo.get(i).getImageId();
                 ByteArrayInputStream imageStream = new ByteArrayInputStream(blob);
-                imageId.add(BitmapFactory.decodeStream(imageStream));               
+                imageId.add(BitmapFactory.decodeStream(imageStream));  
+                
             }
       
             
