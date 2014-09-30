@@ -106,9 +106,13 @@ public class GlossaryCategoriesDataSource extends BaseDataSource {
     {
     	open();
     	ContentValues cv = new ContentValues();
-    	cv.put("symptom","pecto"); //These Fields should be your String values of actual column names
+    	cv.put("symptom",symptom);
+    	cv.put("type",type);
+    	cv.put("basicFacts",basicFacts);
+    	cv.put("diagnostics", diagnostics);
+    	cv.put("control", control);
     	Log.v("cv","cv " + cv);
-    	int i = database.update(GLOSSARY_TABLE, cv, "_id=?", new String[] { "1" });
+    	int i = database.update(GLOSSARY_TABLE, cv, "_id=?", new String[] { _id });
     	Log.v("i","i " + i);
     	close();
     	Log.v("update","update");

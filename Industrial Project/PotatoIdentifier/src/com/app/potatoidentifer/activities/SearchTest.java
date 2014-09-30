@@ -79,17 +79,21 @@ public class SearchTest extends BaseFragment{
 			        try{
 			            JSONArray jArray = new JSONArray(str);
 			            json = jArray.getJSONObject(0);
-			             
-			         Log.v("json","json " + json);
-			         Log.v("id","id" + json.getString("_id"));
-			         ds.open();
-				        boolean exists = ds.doesDieaseExistByID(json.getString("_id"));
-				        Log.v("exists", "exists " + exists);
-				        if( exists == true)
-				        {
-				        	ds.open();
-				        	ds.update( json.getString("_id"),json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
-				        }
+			            for(int i = 0; i < jArray.length(); i++ )
+			            {
+			            	json = jArray.getJSONObject(i);
+			            	ds.open();
+					        boolean exists = ds.doesDieaseExistByID(json.getString("_id"));
+					        Log.v("exists", "exists " + exists);
+					        if( exists == true)
+					        {
+					        	ds.open();
+					        	ds.update( json.getString("_id"),json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
+					        }
+			            	
+			            }
+			
+			         		         	
 			             
 			        } catch ( JSONException e) {
 			            e.printStackTrace();               
