@@ -16,21 +16,56 @@ public class GlossaryCategoriesDataSource extends BaseDataSource {
         super(context);
     }
 
+    public Cursor doesDisexist(String disease)
+    {
+    	String args = "%" + disease + "%";
+		
+    	Cursor dbSelect = database.query(
+    			GLOSSARY_TABLE, // Table Name
+    			null, // Columns
+    			GLOSSARY_SYMPTOM + " like ?", // Rows ('selection')
+    			new String[] { args }, // If selection has a '?' it is replaced by what this value, passed as a string
+    			null, // group by
+    			null, // having
+    			null, // order by
+    			null // limit
+    			);
+    		
+    	return dbSelect;
+    }
+   
     public boolean doesDieaseExist(String disease)
     {
     	Log.v("disease","disease " + disease);
+    	
+    	String a = "%" + disease + "%";
+    	//System.out.println(a);
+    	Log.v("disease" , a);
+    	
     	boolean exist = false;
-    	Cursor cursor = database.query(GLOSSARY_TABLE, null, GLOSSARY_SYMPTOM+"=?", new String[] { disease }, null, null, null);
+    	Cursor cursor = database.query(
+			    			GLOSSARY_TABLE, // Table Name
+			    			null, // Columns
+			    			GLOSSARY_SYMPTOM + " like ?", // Rows ("selection")
+			    			new String[] { a }, // If selection has a '?' it is replaced by what this value, passed as a string
+			    			null, // group by
+			    			null, // having
+			    			null, // order by
+			    			null // limit
+			    			);
+    	
     	if(cursor.getCount() > 0)
     	{
+    		Log.v("disease" , Integer.toString(cursor.getCount()));
     		exist = true;
     	}
     	else
      	{
+    		Log.v("disease" , Integer.toString(cursor.getCount()));
     		exist = false;
     	}
     	cursor.close();
-        close();
+        //close();
         return exist;
     }
     //Searches the database for the information required for the categories page.
