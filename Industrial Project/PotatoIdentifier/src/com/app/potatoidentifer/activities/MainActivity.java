@@ -187,7 +187,6 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 
 	public void buildDatabase() {
         DatabaseHelper myDbHelper = new DatabaseHelper(this);
-        myDbHelper.deleteDatabase();
         try {
             myDbHelper.createDataBase();
         } catch (IOException ioe) {
