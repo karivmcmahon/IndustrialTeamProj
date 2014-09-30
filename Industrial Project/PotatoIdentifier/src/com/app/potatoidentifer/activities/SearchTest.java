@@ -21,10 +21,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -33,15 +30,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import com.app.potatoidentifer.models.GlossaryCategoriesDataSource;
 import com.example.potatoidentifier.R;
 
 public class SearchTest extends BaseFragment {
     private Button testBut;
-    public static final String MyPREFERENCES = "MyPrefs" ;
-	SharedPreferences sharedpreferences;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,8 +44,6 @@ public class SearchTest extends BaseFragment {
         ds.open();
 
         testBut = (Button) v.findViewById(R.id.btn_search);
-        sharedpreferences = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        Log.v("SHARED","SHARED " + sharedpreferences.getString("Date","DEFAULT"));
         testBut.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,10 +62,9 @@ public class SearchTest extends BaseFragment {
                 Date today = Calendar.getInstance().getTime();
                 String currentDate = dateToString(today);
                 String lastUpdated = dateToString(today);
-               
+
                 nameValuePairs.add(new BasicNameValuePair("currentDate", currentDate));
-                nameValuePairs.add(new BasicNameValuePair("lastUpdated", sharedpreferences.getString("Date","DEFAULT")));
-                Log.v("SHARED","SHARED " + sharedpreferences.getString("Date","DEFAULT"));
+                nameValuePairs.add(new BasicNameValuePair("lastUpdated", lastUpdated));
                 try {
                     myConnection.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                     response = myClient.execute(myConnection);
@@ -105,10 +95,6 @@ public class SearchTest extends BaseFragment {
                 } catch ( JSONException e) {
                     e.printStackTrace();
                 }
-                Editor editor = sharedpreferences.edit();
-			    editor.putString("Date", lastUpdated);
-			    editor.commit();
-                Log.v("SHARED","SHARED " + sharedpreferences.getString("Date","DEFAULT"));
             }
         });
         return v;
