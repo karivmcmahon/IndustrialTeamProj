@@ -1,5 +1,6 @@
 package com.app.potatoidentifer.models;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
@@ -81,6 +82,36 @@ public class GlossaryCategoriesDataSource extends BaseDataSource {
         cursor.close();
         close();
         return glossaryList;
+    }
+    
+    public boolean doesDieaseExistByID(String _id)
+    {
+    	//Log.v("disease","disease " + disease);
+    	boolean exist = false;
+    	Cursor cursor = database.query(GLOSSARY_TABLE, null, "_id=?", new String[] {  _id }, null, null, null);
+    	if(cursor.getCount() > 0)
+    	{
+    		exist = true;
+    	}
+    	else
+     	{
+    		exist = false;
+    	}
+    	cursor.close();
+        close();
+        return exist;
+    }
+    
+    public void update(String _id,String symptom, String type, String basicFacts, String diagnostics, String control)
+    {
+    	open();
+    	ContentValues cv = new ContentValues();
+    	cv.put("symptom","pecto"); //These Fields should be your String values of actual column names
+    	Log.v("cv","cv " + cv);
+    	int i = database.update(GLOSSARY_TABLE, cv, "_id=?", new String[] { "1" });
+    	Log.v("i","i " + i);
+    	close();
+    	Log.v("update","update");
     }
 
     private GlossaryCategoriesBean cursorToGlossary(Cursor cursor) {

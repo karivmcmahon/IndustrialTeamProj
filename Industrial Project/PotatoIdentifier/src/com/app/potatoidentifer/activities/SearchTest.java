@@ -24,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.app.potatoidentifer.models.GlossaryCategoriesDataSource;
 import com.example.potatoidentifier.R;
 
 public class SearchTest extends BaseFragment{
@@ -35,10 +36,11 @@ public class SearchTest extends BaseFragment{
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		
+		 Context context = this.getActivity();
 		final View v = inflater.inflate(R.layout.search_test, container, false);
+        final GlossaryCategoriesDataSource ds = new GlossaryCategoriesDataSource(context);
+        ds.open();
 
-        Context context = this.getActivity();
         //GlossaryCategoriesDataSource ds = new GlossaryCategoriesDataSource(context);
         //ds.open();
 
@@ -80,7 +82,14 @@ public class SearchTest extends BaseFragment{
 			             
 			         Log.v("json","json " + json);
 			         Log.v("id","id" + json.getString("_id"));
-			             
+			         ds.open();
+				        boolean exists = ds.doesDieaseExistByID(json.getString("_id"));
+				        Log.v("exists", "exists " + exists);
+				        if( exists == true)
+				        {
+				        	ds.open();
+				        	ds.update( json.getString("_id"),json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
+				        }
 			             
 			        } catch ( JSONException e) {
 			            e.printStackTrace();               
