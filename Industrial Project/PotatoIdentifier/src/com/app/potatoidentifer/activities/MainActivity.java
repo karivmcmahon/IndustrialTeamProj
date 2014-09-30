@@ -2,12 +2,15 @@ package com.app.potatoidentifer.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,8 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
+
 import com.app.potatoidentifer.models.DatabaseHelper;
 import com.example.potatoidentifier.R;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,11 +33,33 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 	private HashMap<String, ArrayList<Fragment>> hashMapTabs;
 	final int TEXT_ID = 100;
 	private MyTabView arrTabs[] = new MyTabView[4];
+	SharedPreferences sharedpreferences;
+	 public static final String MyPREFERENCES = "MyPrefs" ;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		sharedpreferences = this.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+		Log.v("TIME"," TIME");
+		if(sharedpreferences.getBoolean("firstTime",false) == false)
+		{
+			Log.v("FIRST TIME","FIRST TIME");
+			Editor editor = sharedpreferences.edit();
+		    editor.putBoolean("firstTime", false);
+		    editor.commit();
+		    Editor editor2 = sharedpreferences.edit();
+		    editor2.putString("Date", "25-09-2014 17:00:00");
+		    editor2.commit();
+		    Log.v("SHARED","SHARED " + sharedpreferences.getString("Date","DEFAULT"));
+			
+		}
+		else
+		{
+			Log.v("SECOND TIME","SECOND TIME");
+			Editor editor = sharedpreferences.edit();
+		    editor.putBoolean("firstTime", true);
+		    editor.commit();
+		}
 		
 		
 		hashMapTabs = new HashMap<String, ArrayList<Fragment>>();
