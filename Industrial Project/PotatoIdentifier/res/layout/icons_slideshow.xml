@@ -4,52 +4,63 @@
     android:layout_height="wrap_content"
     android:layout_gravity="bottom|center_horizontal"
     android:orientation="vertical" >
- 
-    <Button android:layout_height="10dp" android:layout_width="10dp"
-    android:id="@+id/btn1"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"
- 
-    android:background="@layout/roundedcell" />
- 
-     <Button android:layout_height="10dp" android:layout_width="10dp"
-    android:id="@+id/btn2"
-    android:layout_toRightOf="@id/btn1"
-    android:layout_marginLeft="5dip"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"
-    android:background="@layout/roundedcell" />
-     
-      <Button android:layout_height="10dp" android:layout_width="10dp"
-    android:id="@+id/btn3"
-    android:layout_toRightOf="@id/btn2"
-    android:layout_marginLeft="5dip"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"
-    android:background="@layout/roundedcell" />
-      
-    <Button android:layout_height="10dp" android:layout_width="10dp"
-    android:id="@+id/btn4"
-    android:layout_toRightOf="@id/btn3"
-    android:layout_marginLeft="5dip"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"
-    android:background="@layout/roundedcell" />
-    
-     <Button android:layout_height="10dp" android:layout_width="10dp"
-    android:id="@+id/btn5"
-    android:layout_toRightOf="@id/btn4"
-    android:layout_marginLeft="5dip"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"
-    android:background="@layout/roundedcell" />
-     
-     <Button android:layout_height="10dp" android:layout_width="10dp"
-    android:id="@+id/btn6"
-    android:layout_toRightOf="@id/btn5"
-    android:layout_marginLeft="5dip"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"
-    android:background="@layout/roundedcell" />
- 
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@layout/roundedcell" />
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dip"
+        android:layout_toRightOf="@id/btn1"
+        android:background="@layout/roundedcell" />
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dip"
+        android:layout_toRightOf="@id/btn2"
+        android:background="@layout/roundedcell" />
+
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dip"
+        android:layout_toRightOf="@id/btn3"
+        android:background="@layout/roundedcell" />
+
+    <Button
+        android:id="@+id/btn5"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dip"
+        android:layout_toRightOf="@id/btn4"
+        android:background="@layout/roundedcell" />
+
+    <Button
+        android:id="@+id/btn6"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dip"
+        android:layout_toRightOf="@id/btn5"
+        android:background="@layout/roundedcell" />
+
 </RelativeLayout>

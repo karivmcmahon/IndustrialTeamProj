@@ -49,22 +49,28 @@ public class GlossaryFragment extends BaseFragment {
 
         //Convert and add the list to the appropriate arrays.
         for (int i = 0; i < categoryInfo.size(); i++) {
-            glossaryId.add(i, categoryInfo.get(i).getId());
+          
             //Converting strings to a drawable.
 
             if(categoryInfo.get(i).getImageId() != null) {
                 byte[] blob = categoryInfo.get(i).getImageId();
                 ByteArrayInputStream imageStream = new ByteArrayInputStream(blob);
-                imageId.add(BitmapFactory.decodeStream(imageStream));
+                imageId.add(BitmapFactory.decodeStream(imageStream));  
+                
             }
+      
+            
+            glossaryId.add( categoryInfo.get(i).getId());
+            glossaryList.add( categoryInfo.get(i).getSymptom());
 
             if(categoryInfo.get(i).getImageId2() != null) {
                 byte[] blob = categoryInfo.get(i).getImageId2();
                 ByteArrayInputStream imageStream = new ByteArrayInputStream(blob);
-                imageId.add(BitmapFactory.decodeStream(imageStream));
+                imageId.add(BitmapFactory.decodeStream(imageStream));          
             }
 
-            glossaryList.add(i, categoryInfo.get(i).getSymptom());
+            glossaryId.add(categoryInfo.get(i).getId());
+            glossaryList.add(categoryInfo.get(i).getSymptom());
         }
         Log.v("FUCK", "FUCK");
         final View v = inflater.inflate(R.layout.grid_view,

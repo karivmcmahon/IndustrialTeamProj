@@ -1,11 +1,12 @@
 
 <?php
+session_start();
 insert($_REQUEST['name'], $_REQUEST['inputType'], $_REQUEST['inputfile'], $_REQUEST["inputfile2"],$_REQUEST["inputfile3"],$_REQUEST["inputfile4"],$_REQUEST["inputfile5"],$_REQUEST["inputfile6"],$_REQUEST["basicFacts"], $_REQUEST["control"], $_REQUEST["diagnostics"]);
 function insert( $symptom, $type, $imagepath, $imagepath2, $imagepath3 , $imagepath4, $imagepath5, $imagepath6, $basicFacts, $control, $diagnostics )
 {
 	try {
 
-		$dbh = new PDO("sqlite:projectDB3.sqlite");
+		$dbh = new PDO("sqlite:projectDB.sqlite");
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
 		$imageid = fopen($imagepath,'rb');
@@ -29,8 +30,8 @@ function insert( $symptom, $type, $imagepath, $imagepath2, $imagepath3 , $imagep
 		$stmt->bindParam(':control', $control, PDO::PARAM_STR);
 		$stmt->bindParam(':diagnostics', $diagnostics, PDO::PARAM_STR);
 		
-		//$stmt->execute();
-		header("Location: ".$_SERVER["HTTP_REFERER"]."?id=success");#
+		$stmt->execute();
+		header("Location: ".$_SERVER["HTTP_REFERER"]."?id=success");
 		
 		$dbh = null;
 	} catch(PDOException $e) {
