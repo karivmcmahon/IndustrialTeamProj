@@ -2,6 +2,7 @@ package com.app.potatoidentifer.models;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import com.app.potatoidentifer.activities.FurtherInfo;
 
 import java.util.ArrayList;
@@ -26,13 +27,15 @@ public class FurtherInfoDataSource extends BaseDataSource {
         return glossaryInfo;
     }
 
-    public List<FurtherInfoBean> getAllFurtherInfos()
-    {
+    public List<FurtherInfoBean> getAllFurtherInfos() {
+
         List<FurtherInfoBean> glossaryInfo = new ArrayList<FurtherInfoBean>();
         Cursor cursor = database.query(GLOSSARY_TABLE, furtherInfoColumnsQuery, null, null, null, null, null);
-        if (cursor != null && cursor.getCount() > 0) {
-            cursor.moveToFirst();
+
+        cursor.moveToFirst();
+        while (cursor != null && !cursor.isAfterLast()) {
             glossaryInfo.add(cursorToGlossary(cursor));
+            cursor.moveToNext();
         }
         cursor.close();
         close();

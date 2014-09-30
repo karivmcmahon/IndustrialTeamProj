@@ -1,18 +1,22 @@
 package com.app.potatoidentifer.activities;
 
+import android.app.FragmentTransaction;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import com.app.potatoidentifer.models.QuestionEngine;
+import com.app.potatoidentifer.models.*;
 import com.example.potatoidentifier.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.app.potatoidentifer.models.DatabaseHelper;
+
 
 /**
  * This class sets up the fragment for the expert system
@@ -23,7 +27,7 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
 
     TextView textQuestion;
     Button btnYes, btnNo;
-    QuestionEngine<String, String> QE; 
+    QuestionEngine<FurtherInfoBean, String> QE;
     String currentQuestion;
     boolean displayingAnswer = false;
 
@@ -46,38 +50,17 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
         btnNo.setOnClickListener(this);
 
 
-     /*   String[] people = {
-                new String("Bob"),
-                new String("Dave"),
-                new String("Ian"),
-                new String("Alan"),
-        };
-
-        String blueEyes = new String("blue eyes");
-        String blackHair = new String("black hair");
-        String blondeHair = new String("blonde hair");
-        String greenEyes = new String("green eyes");
-
-
-        List<Pair<String, String>> relations = new ArrayList<Pair<String, String>>();
-        relations.add(Pair.create(people[0], blueEyes));
-        relations.add(Pair.create(people[0], blackHair));
-        relations.add(Pair.create(people[1], blueEyes));
-        relations.add(Pair.create(people[1], blondeHair));
-        relations.add(Pair.create(people[2], blondeHair));
-        relations.add(Pair.create(people[2], greenEyes));
-        relations.add(Pair.create(people[3], greenEyes));
-        relations.add(Pair.create(people[3], blackHair)); */
-
         List<Pair<String, String>> relations = new ArrayList<Pair<String, String>>();
 
-        for (int i = 0; i < QuestionEngine.symptoms.length; i += 2)
-        {
-         relations.add(Pair.create(QuestionEngine.symptoms[i], QuestionEngine.symptoms[i+1]));
+        for (int i = 0; i < QuestionEngine.symptoms.length; i += 2) {
+            relations.add(Pair.create(QuestionEngine.symptoms[i], QuestionEngine.symptoms[i + 1]));
         }
 
+        QuestionDataSource ds = new QuestionDataSource(this.getActivity());
 
-        QE = new QuestionEngine<String, String>(relations);
+        List<Pair<FurtherInfoBean, String>> kno = ds.getKnowledge();
+
+        QE = new QuestionEngine<FurtherInfoBean, String>(kno);
 
         refresh();
 
@@ -89,7 +72,7 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
     {
         if (QE.getPossibleAnswers().size() == 1)
         {
-            textQuestion.setText("It has " + QE.getPossibleAnswers().get(0));
+            textQuestion.setText("It has " + QE.getPossibleAnswers().get(0).getSymptom());
             displayingAnswer = true;
             QE.ForgetAll();
         }
