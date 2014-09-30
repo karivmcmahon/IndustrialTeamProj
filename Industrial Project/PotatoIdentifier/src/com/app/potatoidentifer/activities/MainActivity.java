@@ -33,8 +33,6 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		
-		
 		hashMapTabs = new HashMap<String, ArrayList<Fragment>>();
 		hashMapTabs.put(Const.TAB_FIRST, new ArrayList<Fragment>());
 		hashMapTabs.put(Const.TAB_SECOND, new ArrayList<Fragment>());

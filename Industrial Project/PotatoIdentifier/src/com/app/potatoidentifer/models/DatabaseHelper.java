@@ -33,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if (checkDataBase()) {
                 Log.v("Database Debug", "Database has already been created.");
             } else {
-                this.getReadableDatabase();
+                this.getWritableDatabase();
                 this.close();
                 try {
                     copyDataBase();
@@ -66,7 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase checkDB = null;
         try {
             String myPath = DB_PATH + DB_NAME;
-            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
             Log.v("Database Debug", "Database does exist");
 
         } catch (SQLiteException e) {
@@ -106,7 +106,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public SQLiteDatabase openDataBase() throws SQLException {
         //Open the database
         String myPath = DB_PATH + DB_NAME;
-        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         myDataBase.close();
         SQLiteDatabase.releaseMemory();
         Log.v("Database Debug", "Database opened successfully.");
