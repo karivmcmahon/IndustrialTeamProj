@@ -45,7 +45,6 @@ public class SearchTest extends BaseFragment {
 
         testBut = (Button) v.findViewById(R.id.btn_search);
         testBut.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 StrictMode.ThreadPolicy policy = new
@@ -82,21 +81,17 @@ public class SearchTest extends BaseFragment {
                     Log.v("TESTing:", str);
                     JSONArray jArray = new JSONArray(str);
                     json = jArray.getJSONObject(0);
-                    for(int i = 0; i < jArray.length(); i++)
-                    {
+                    for(int i = 0; i < jArray.length(); i++) {
                         json = jArray.getJSONObject(i);
                         ds.open();
                         boolean exists = ds.doesDieaseExistByID(json.getString("_id"));
                         Log.v("exists", "exists " + exists);
                         Log.v("ID", "ID: "+json.getString("_id"));
-                        if( exists == true)
-                        {
+                        if( exists == true) {
                             ds.open();
                             ds.update( json.getString("_id"),json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
                         }
-
                     }
-
                 } catch ( JSONException e) {
                     e.printStackTrace();
                 }
