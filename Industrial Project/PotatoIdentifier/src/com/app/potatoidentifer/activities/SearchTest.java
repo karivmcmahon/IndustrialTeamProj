@@ -101,6 +101,11 @@ public class SearchTest extends BaseFragment {
                             ds.open();
                             ds.update( json.getString("_id"),json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
                         }
+                        else
+                        {
+                        	 ds.open();
+                             ds.insert( json.getString("_id"),json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
+                        }
                     }
                 } catch ( JSONException e) {
                     e.printStackTrace();
