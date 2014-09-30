@@ -1,18 +1,24 @@
 package com.app.potatoidentifer.activities;
 
+//import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import com.app.potatoidentifer.models.QuestionEngine;
+import com.app.potatoidentifer.models.*;
 import com.example.potatoidentifier.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.app.potatoidentifer.models.DatabaseHelper;
+
 
 /**
  * This class sets up the fragment for the expert system
@@ -23,7 +29,7 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
 
     TextView textQuestion;
     Button btnYes, btnNo;
-    QuestionEngine<String, String> QE; 
+    QuestionEngine<FurtherInfoBean, String> QE;
     String currentQuestion;
     boolean displayingAnswer = false;
 
@@ -38,6 +44,8 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
 
         View v = inflater.inflate(R.layout.question_fragment_layout, container, false);
 
+        //savedInstanceState.pu
+
         btnYes = (Button) v.findViewById(R.id.buttonYes);
         btnNo = (Button) v.findViewById(R.id.buttonNo);
         textQuestion = (TextView) v.findViewById(R.id.textQuestion);
@@ -46,38 +54,11 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
         btnNo.setOnClickListener(this);
 
 
-     /*   String[] people = {
-                new String("Bob"),
-                new String("Dave"),
-                new String("Ian"),
-                new String("Alan"),
-        };
+        QuestionDataSource ds = new QuestionDataSource(this.getActivity());
 
-        String blueEyes = new String("blue eyes");
-        String blackHair = new String("black hair");
-        String blondeHair = new String("blonde hair");
-        String greenEyes = new String("green eyes");
+        List<Pair<FurtherInfoBean, String>> kno = ds.getKnowledge();
 
-
-        List<Pair<String, String>> relations = new ArrayList<Pair<String, String>>();
-        relations.add(Pair.create(people[0], blueEyes));
-        relations.add(Pair.create(people[0], blackHair));
-        relations.add(Pair.create(people[1], blueEyes));
-        relations.add(Pair.create(people[1], blondeHair));
-        relations.add(Pair.create(people[2], blondeHair));
-        relations.add(Pair.create(people[2], greenEyes));
-        relations.add(Pair.create(people[3], greenEyes));
-        relations.add(Pair.create(people[3], blackHair)); */
-
-        List<Pair<String, String>> relations = new ArrayList<Pair<String, String>>();
-
-        for (int i = 0; i < QuestionEngine.symptoms.length; i += 2)
-        {
-         relations.add(Pair.create(QuestionEngine.symptoms[i], QuestionEngine.symptoms[i+1]));
-        }
-
-
-        QE = new QuestionEngine<String, String>(relations);
+        QE = new QuestionEngine<FurtherInfoBean, String>(kno);
 
         refresh();
 
@@ -89,9 +70,15 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
     {
         if (QE.getPossibleAnswers().size() == 1)
         {
-            textQuestion.setText("It has " + QE.getPossibleAnswers().get(0));
             displayingAnswer = true;
             QE.ForgetAll();
+
+            FurtherInfoBean ans =  QE.getPossibleAnswers().get(0);
+            Bundle bundle = new Bundle();
+            bundle.putString("category", ans.getSymptom());
+            FurtherInfo gf = new FurtherInfo();
+            gf.setArguments(bundle);
+            fragmentTabActivity.addFragments(Const.TAB_FIRST, gf, true);
         }
         else
         {

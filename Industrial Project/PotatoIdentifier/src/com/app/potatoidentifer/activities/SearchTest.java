@@ -1,17 +1,21 @@
 package com.app.potatoidentifer.activities;
 
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.ConnectivityManager;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
+import com.app.potatoidentifer.models.GlossaryCategoriesDataSource;
+import com.example.potatoidentifier.R;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -24,25 +28,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.os.Bundle;
-import android.os.StrictMode;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.Button;
-
-import com.app.potatoidentifer.models.GlossaryCategoriesDataSource;
-import com.example.potatoidentifier.R;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class SearchTest extends BaseFragment {
     private Button testBut;
-    public static final String MyPREFERENCES = "MyPrefs" ;
-	SharedPreferences sharedpreferences;
+    public static final String MyPREFERENCES = "MyPrefs";
+    SharedPreferences sharedpreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,12 +50,12 @@ public class SearchTest extends BaseFragment {
 
         testBut = (Button) v.findViewById(R.id.btn_search);
         sharedpreferences = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        Log.v("SHARED","SHARED " + sharedpreferences.getString("Date","DEFAULT"));
+        Log.v("SHARED", "SHARED " + sharedpreferences.getString("Date", "DEFAULT"));
         testBut.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(checkInternetConnection(context)) {
+                if (checkInternetConnection(context)) {
                     Toast.makeText(context, "Updating App....", Toast.LENGTH_LONG).show();
                     StrictMode.ThreadPolicy policy = new
                             StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -109,6 +106,9 @@ public class SearchTest extends BaseFragment {
                             if (exists == true) {
                                 ds.open();
                                 ds.update(json.getString("_id"), json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
+                            } else {
+                                ds.open();
+                                ds.insert(json.getString("_id"), json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
                             }
                         }
                     } catch (JSONException e) {
