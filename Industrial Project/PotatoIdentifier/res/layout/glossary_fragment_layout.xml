@@ -1,56 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/RelativeLayout1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-                
-        <TextView
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
+
+    <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-         android:textSize="22dp"
-         android:textStyle="bold"
-        android:text="Glossary" />
-        
-        <TextView
+        android:text="@string/glossary"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/textView1"
         android:layout_centerHorizontal="true"
-  		android:layout_below="@id/textView1"
-        android:text="Please search or select from categories below:" />
-        
-          <Button
+        android:text="@string/glossary_desc" />
+
+    <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_below="@id/textView2"
         android:layout_alignParentRight="true"
-        android:text="Search" />
-        
-         <EditText
-             android:id="@+id/editText1"
-             android:layout_width="match_parent"
-             android:layout_height="40dp"
-             android:layout_below="@+id/textView2"
-             android:layout_toLeftOf="@+id/button1"
-             android:ems="10"
-             android:hint="Search disease here.." >
+        android:layout_below="@id/textView2"
+        android:text="@string/search_bar" />
 
-   		 </EditText>
-   		 
-        
-         
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView2"
+        android:layout_toLeftOf="@+id/button1"
+        android:ems="10"
+        android:hint="@string/search_bar" >
+    </EditText>
+
     <ListView
         android:id="@+id/glossary_listview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText1" >
 
+        <requestFocus />
     </ListView>
-
-   
 
 </RelativeLayout>

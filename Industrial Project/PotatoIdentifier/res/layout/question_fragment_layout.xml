@@ -1,35 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" android:gravity="center_vertical|center_horizontal"
-              android:weightSum="1">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical"
+    android:weightSum="1" >
 
     <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/diagnose_question_title"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    	<Space
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.5" />
+
+        <TextView
+            android:id="@+id/textQuestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Question?"
-            android:id="@+id/textQuestion"/>
-    <Space
+            android:gravity="center_horizontal"
+            android:text="@string/question"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.10" />
+
+        <LinearLayout
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.10"/>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:baselineAligned="false"
-            android:divider="@color/red" android:gravity="center_horizontal">
-        <Button
+            android:baselineAligned="false"
+            android:divider="@color/red"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/buttonYes"
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/buttonYes" android:layout_gravity="center_vertical" android:capitalize="words"
-                android:clickable="true" android:enabled="true" android:focusable="false" android:text="Yes"/>
-        <Button
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/button_padding"
+                android:background="@color/gray"
+                android:clickable="true"
+                android:enabled="true"
+                android:focusable="false"
+                android:text="@string/yes" />
+
+            <Button
+                android:id="@+id/buttonNo"
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No"
-                android:id="@+id/buttonNo" android:layout_gravity="center_vertical"/>
-    </LinearLayout>
+                android:layout_gravity="center_vertical"
+                android:background="@color/gray"
+                android:text="@string/no" />
+        </LinearLayout>
+    
+
 </LinearLayout>
