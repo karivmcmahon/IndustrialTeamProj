@@ -23,7 +23,6 @@ import android.widget.ListView;
 import com.app.potatoidentifer.models.GlossaryBean;
 import com.app.potatoidentifer.models.GlossaryCategoriesBean;
 import com.app.potatoidentifer.models.GlossaryCategoriesDataSource;
-import com.app.potatoidentifer.models.YourClass;
 import com.example.potatoidentifier.R;
 
 import java.io.ByteArrayInputStream;

@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
 import com.app.potatoidentifer.models.GlossaryBean;
-import com.app.potatoidentifer.models.YourClass;
 import com.example.potatoidentifier.R;
 
 import android.graphics.Bitmap;
