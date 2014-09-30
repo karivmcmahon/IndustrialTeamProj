@@ -1,6 +1,8 @@
 package com.app.potatoidentifer.activities;
 
+//import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +44,8 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
 
         View v = inflater.inflate(R.layout.question_fragment_layout, container, false);
 
+        //savedInstanceState.pu
+
         btnYes = (Button) v.findViewById(R.id.buttonYes);
         btnNo = (Button) v.findViewById(R.id.buttonNo);
         textQuestion = (TextView) v.findViewById(R.id.textQuestion);
@@ -49,12 +53,6 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
         btnYes.setOnClickListener(this);
         btnNo.setOnClickListener(this);
 
-
-        List<Pair<String, String>> relations = new ArrayList<Pair<String, String>>();
-
-        for (int i = 0; i < QuestionEngine.symptoms.length; i += 2) {
-            relations.add(Pair.create(QuestionEngine.symptoms[i], QuestionEngine.symptoms[i + 1]));
-        }
 
         QuestionDataSource ds = new QuestionDataSource(this.getActivity());
 
@@ -72,9 +70,15 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
     {
         if (QE.getPossibleAnswers().size() == 1)
         {
-            textQuestion.setText("It has " + QE.getPossibleAnswers().get(0).getSymptom());
             displayingAnswer = true;
             QE.ForgetAll();
+
+            FurtherInfoBean ans =  QE.getPossibleAnswers().get(0);
+            Bundle bundle = new Bundle();
+            bundle.putString("category", ans.getSymptom());
+            FurtherInfo gf = new FurtherInfo();
+            gf.setArguments(bundle);
+            fragmentTabActivity.addFragments(Const.TAB_FIRST, gf, true);
         }
         else
         {
