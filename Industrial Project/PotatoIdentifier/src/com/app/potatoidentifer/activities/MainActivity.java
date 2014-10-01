@@ -51,6 +51,7 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		    editor2.putString("Date", "2014-09-25 17:00:00");
 		    editor2.commit();
 		    Log.v("SHARED","SHARED " + sharedpreferences.getString("Date","DEFAULT"));
+		    
 			
 		}
 		else
@@ -214,6 +215,7 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 
 	public void buildDatabase() {
         DatabaseHelper myDbHelper = new DatabaseHelper(this);
+        myDbHelper.deleteDatabase();
         try {
             myDbHelper.createDataBase();
         } catch (IOException ioe) {

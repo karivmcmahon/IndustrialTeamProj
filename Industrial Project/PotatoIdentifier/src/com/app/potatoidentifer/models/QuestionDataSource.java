@@ -38,7 +38,7 @@ public class QuestionDataSource extends BaseDataSource {
 
         List<Pair<FurtherInfoBean,String>> output = new ArrayList<Pair<FurtherInfoBean,String>>();
 
-        Cursor cursor = database.query("knowledgeTable", new String[]{"glossary_id", "characteristic"}, null, null, null, null, null, null);
+        Cursor cursor = database.query("knowledge", new String[]{"glossary_id", "characteristic"}, null, null, null, null, null, null);
         if (cursor == null) throw new IllegalStateException();
 
         cursor.moveToFirst();

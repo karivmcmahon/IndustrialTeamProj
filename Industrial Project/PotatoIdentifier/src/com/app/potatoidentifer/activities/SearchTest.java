@@ -4,9 +4,12 @@ package com.app.potatoidentifer.activities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +17,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.app.potatoidentifer.models.GlossaryCategoriesDataSource;
 import com.example.potatoidentifier.R;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -82,6 +87,7 @@ public class SearchTest extends BaseFragment {
                         response = myClient.execute(myConnection);
                         str = EntityUtils.toString(response.getEntity(), "UTF-8");
                     } catch (UnsupportedEncodingException e) {
+                    	
                         Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     } catch (ClientProtocolException e) {
@@ -108,8 +114,12 @@ public class SearchTest extends BaseFragment {
                                 ds.update(json.getString("_id"), json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
                             } else {
                                 ds.open();
-                                ds.insert(json.getString("_id"), json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
+                           	 Log.v("INSERT","INSERT");
+                           	 byte[] decodedString = Base64.decode(json.getString("imageid"), Base64.DEFAULT);
+                            	Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                                ds.insert( json.getString("_id"),json.getString("symptom"), json.getString("type"), decodedByte, json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
                             }
+                            
                         }
                     } catch (JSONException e) {
                         Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();

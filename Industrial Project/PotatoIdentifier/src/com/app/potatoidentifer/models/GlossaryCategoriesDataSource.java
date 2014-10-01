@@ -125,11 +125,11 @@ public class GlossaryCategoriesDataSource extends BaseDataSource {
     	Log.v("update","update");
     }
 
-    public void insert(String _id,String symptom, String type, String basicFacts, String diagnostics, String control)
+    public void insert(String _id,String symptom, String type, Bitmap image, String basicFacts, String diagnostics, String control)
     {
-    	Bitmap icon = BitmapFactory.decodeResource(con.getResources(),
-                R.drawable.jhi);
-    	byte[] data = getBitmapAsByteArray(icon);
+    	
+    
+    	byte[] data = getBitmapAsByteArray(image);
     	open();
     	ContentValues cv = new ContentValues();
     	cv.put("_id",_id);
