@@ -5,9 +5,20 @@
     android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical"
     android:weightSum="1" >
-
+    
+    
     <TextView
         android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Expert System"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -17,7 +28,7 @@
     	<Space
             android:layout_width="match_parent"
             android:layout_height="0dip"
-            android:layout_weight="0.5" />
+            android:layout_weight="0.3" />
 
         <TextView
             android:id="@+id/textQuestion"
@@ -63,6 +74,12 @@
                 android:background="@color/gray"
                 android:text="@string/no" />
         </LinearLayout>
-    
+    <android.support.v4.view.ViewPager
+            android:id="@+id/slideshowviewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:paddingBottom="10dp" />
+
+    <include layout="@layout/icons_slideshow" />
 
 </LinearLayout>

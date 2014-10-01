@@ -3,18 +3,25 @@ package com.app.potatoidentifer.models;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+
+import com.example.potatoidentifier.R;
 
 /**
  * Created by Mark on 22/09/2014.
  */
 public class GlossaryCategoriesDataSource extends BaseDataSource {
     private String[] categoryColumnsInfoQuery = { GLOSSARY_ID, GLOSSARY_TYPE, GLOSSARY_IMAGE1};
-
+    Context con;
     public GlossaryCategoriesDataSource(Context context) {
         super(context);
+        con = context;
     }
 
     public Cursor doesDisexist(String disease)
@@ -118,6 +125,31 @@ public class GlossaryCategoriesDataSource extends BaseDataSource {
     	Log.v("update","update");
     }
 
+    public void insert(String _id,String symptom, String type, Bitmap image, String basicFacts, String diagnostics, String control)
+    {
+    	
+    
+    	byte[] data = getBitmapAsByteArray(image);
+    	open();
+    	ContentValues cv = new ContentValues();
+    	cv.put("_id",_id);
+    	cv.put("symptom",symptom);
+    	cv.put("type",type);
+    	cv.put("imageid", data);
+    	cv.put("imageid2",data);
+    	cv.put("basicFacts",basicFacts);
+    	cv.put("diagnostics", diagnostics);
+    	cv.put("control", control);
+    	Log.v("cv","cv " + cv);
+        database.insert(GLOSSARY_TABLE, null,cv);
+    	close();
+    	Log.v("insert","insert");
+    }
+    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(CompressFormat.PNG, 0, outputStream);       
+        return outputStream.toByteArray();
+    }
     private GlossaryCategoriesBean cursorToGlossary(Cursor cursor) {
         GlossaryCategoriesBean gi = new GlossaryCategoriesBean();
         gi.setID(cursor.getInt(getIndex(GLOSSARY_ID, cursor)));
