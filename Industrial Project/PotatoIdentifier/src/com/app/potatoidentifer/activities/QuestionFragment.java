@@ -2,9 +2,12 @@ package com.app.potatoidentifer.activities;
 
 //import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentManager;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 import com.app.potatoidentifer.models.*;
 import com.example.potatoidentifier.R;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import com.app.potatoidentifer.models.DatabaseHelper;
@@ -27,6 +31,8 @@ import com.app.potatoidentifer.models.DatabaseHelper;
  */
 public class QuestionFragment extends BaseFragment implements View.OnClickListener {
 
+    View v;
+    ViewPager myViewPager;
     TextView textQuestion;
     Button btnYes, btnNo;
     QuestionEngine<FurtherInfoBean, String> QE;
@@ -42,7 +48,7 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.question_fragment_layout, container, false);
+        v = inflater.inflate(R.layout.question_fragment_layout, container, false);
 
         //savedInstanceState.pu
 
@@ -52,7 +58,6 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
 
         btnYes.setOnClickListener(this);
         btnNo.setOnClickListener(this);
-
 
         QuestionDataSource ds = new QuestionDataSource(this.getActivity());
 
@@ -78,18 +83,93 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
             bundle.putString("category", ans.getSymptom());
             FurtherInfo gf = new FurtherInfo();
             gf.setArguments(bundle);
-            fragmentTabActivity.addFragments(Const.TAB_FIRST, gf, true);
+            fragmentTabActivity.addFragments(Const.TAB_SECOND, gf, true);
         }
         else
         {
             displayingAnswer = false;
             currentQuestion = QE.determineNextQuestion();
             String q = "Does it have " + currentQuestion + "?";
-
             textQuestion.setText(q.toCharArray(), 0, q.length());
+
+            ArrayList<Bitmap> slideshowImageArray = new ArrayList<Bitmap>();
+
+            List<FurtherInfoBean> furtherInfo = QE.getPossibleAnswers();
+
+            for (int i = 0; i < furtherInfo.size(); i++) {
+
+                byte[] id1 = furtherInfo.get(i).getImageID();
+                if (id1 != null) {
+                    ByteArrayInputStream imageStream = new ByteArrayInputStream(id1);
+                    slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
+                }
+
+                byte[] id2 = furtherInfo.get(i).getImageID2();
+                if (id2 != null) {
+                    ByteArrayInputStream imageStream = new ByteArrayInputStream(id2);
+                    slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
+                }
+
+                byte[] id3 = furtherInfo.get(i).getImageID3();
+                if (id3 != null) {
+                    ByteArrayInputStream imageStream = new ByteArrayInputStream(id3);
+                    slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
+                }
+
+                byte[] id4 = furtherInfo.get(i).getImageID4();
+                if (id4 != null) {
+                    ByteArrayInputStream imageStream = new ByteArrayInputStream(id4);
+                    slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
+                }
+
+                byte[] id5 = furtherInfo.get(i).getImageID5();
+                if (id5 != null) {
+                    ByteArrayInputStream imageStream = new ByteArrayInputStream(id5);
+                    slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
+                }
+
+                byte[] id6 = furtherInfo.get(i).getImageID6();
+                if (id6 != null) {
+                    ByteArrayInputStream imageStream = new ByteArrayInputStream(id6);
+                    slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
+                }
+
+
+            }
+
+            SlideshowViewPagerAdapter adapter = new SlideshowViewPagerAdapter(getActivity(), slideshowImageArray, this.getActivity());
+            myViewPager = (ViewPager) v.findViewById(R.id.slideshowviewpager);
+            myViewPager.setAdapter(adapter);
+            myViewPager.setCurrentItem(0);
+            myViewPager.setOnPageChangeListener(viewPagerListenerHandler);
+            initButton();
         }
     }
 
+
+    private List<Button> buttonArray;
+    private int buttonIds[] = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6};
+
+    private void initButton() {
+        buttonArray = new ArrayList<Button>();
+        for (int id : buttonIds) {
+            Button button = (Button) v.findViewById(id);
+            if (id == 0) {
+                setButton(button, "round_cell_off");
+            } else {
+                setButton(button, "round_cell_on");
+            }
+            buttonArray.add(button);
+        }
+    }
+
+    private void setButton(Button btn, String layoutType) {
+        if (layoutType.equals("round_cell_on")) {
+            btn.setBackgroundResource(R.drawable.round_cell_on);
+        } else {
+            btn.setBackgroundResource(R.drawable.round_cell_off);
+        }
+    }
 
 
     @Override
@@ -105,6 +185,33 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
             }
         }
         refresh();
+    }
+
+    private ViewPager.OnPageChangeListener viewPagerListenerHandler = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrollStateChanged(int position) {}
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {}
+
+        @Override
+        public void onPageSelected(int position) {
+            btnAction(position);
+        }
+    };
+
+
+    private void btnAction(int position) {
+        Button btn;
+        for (int id = 0; id < buttonIds.length; id++) {
+            if (id == position) {
+                btn = buttonArray.get(id);
+                setButton(btn, "round_cell_off");
+            } else {
+                btn = buttonArray.get(id);
+                setButton(btn, "round_cell_on");
+            }
+        }
     }
 
 }

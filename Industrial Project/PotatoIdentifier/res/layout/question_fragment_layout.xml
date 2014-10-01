@@ -17,7 +17,7 @@
     	<Space
             android:layout_width="match_parent"
             android:layout_height="0dip"
-            android:layout_weight="0.5" />
+            android:layout_weight="0.3" />
 
         <TextView
             android:id="@+id/textQuestion"
@@ -63,6 +63,12 @@
                 android:background="@color/gray"
                 android:text="@string/no" />
         </LinearLayout>
-    
+    <android.support.v4.view.ViewPager
+            android:id="@+id/slideshowviewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:paddingBottom="10dp" />
+
+    <include layout="@layout/icons_slideshow" />
 
 </LinearLayout>
