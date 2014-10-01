@@ -46,7 +46,7 @@ if($_SESSION["success"] == false) {
 		<div class="col-sm-9 right-container" style="border:1px solid grey;">
 			<h3>Insert New Potato Disease</h3>
 		
-    		<form role="form" action="insertData.php" method="post">
+    		<form role="form" action="insertData.php" method="post" enctype="multipart/form-data">
    				<div class="form-group">
       				<label for="inputSymptom">Disease</label>
       				<input type="text" class="form-control" name="name" placeholder="Enter disease...">
@@ -55,7 +55,7 @@ if($_SESSION["success"] == false) {
 				<div class="form-group">
 					<label for="inputType">Type:</label>
 					<select name="inputType" class="form-control">
-						<option value="Tuber">Tuber</option>
+						<option value="Tubers">Tubers</option>
 						<option value="Leaf">Leaf</option>
 						<option value="Insects + Pests">Insects + Pests</option>
 					</select>
@@ -67,27 +67,27 @@ if($_SESSION["success"] == false) {
    				</div>
    				
    				<div class="form-group">
-      				<label for="inputfile">File input: Image 2</label>
+      				<label for="inputfile2">File input: Image 2</label>
       				<input type="file" name="inputfile2">
    				</div>
    				
    				<div class="form-group">
-      				<label for="inputfile">File input: Image 3</label>
+      				<label for="inputfile3">File input: Image 3</label>
       				<input type="file" name="inputfile3">
    				</div>
    				
    				<div class="form-group">
-      				<label for="inputfile">File input: Image 4</label>
+      				<label for="inputfile4">File input: Image 4</label>
       				<input type="file" name="inputfile4">
    				</div>
    				
    				<div class="form-group">
-      				<label for="inputfile">File input: Image 5</label>
+      				<label for="inputfile5">File input: Image 5</label>
       				<input type="file" name="inputfile5">
    				</div>
    				
    				<div class="form-group">
-      				<label for="inputfile">File input: Image 6</label>
+      				<label for="inputfile6">File input: Image 6</label>
       				<input type="file" name="inputfile6">
    				</div>
    				
