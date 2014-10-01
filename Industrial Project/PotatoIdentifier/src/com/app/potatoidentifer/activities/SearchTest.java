@@ -1,6 +1,5 @@
 package com.app.potatoidentifer.activities;
 
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -40,14 +39,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 public class SearchTest extends BaseFragment {
     private Button testBut;
     private static final String MyPREFERENCES = "MyPrefs";
@@ -85,10 +76,8 @@ public class SearchTest extends BaseFragment {
                     cal.setTime(new Date()); // sets calendar time/date
                     cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
                     Date today = cal.getTime();
-                    String currentDate = dateToString(today);
                     String lastUpdated = dateToString(today);
 
-                    nameValuePairs.add(new BasicNameValuePair("currentDate", currentDate));
                     nameValuePairs.add(new BasicNameValuePair("lastUpdated", sharedpreferences.getString("Date", "DEFAULT")));
                     Log.v("SHARED", "SHARED " + sharedpreferences.getString("Date", "DEFAULT"));
                     try {
@@ -127,7 +116,23 @@ public class SearchTest extends BaseFragment {
                                     Log.v("INSERT", "INSERT");
                                     byte[] decodedString = Base64.decode(json.getString("imageid"), Base64.DEFAULT);
                                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                                    ds.insert(json.getString("_id"), json.getString("symptom"), json.getString("type"), decodedByte, json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
+
+                                    byte[] decodedString2 = Base64.decode(json.getString("imageid2"), Base64.DEFAULT);
+                                    Bitmap decodedByte2 = BitmapFactory.decodeByteArray(decodedString2, 0, decodedString2.length);
+
+                                    byte[] decodedString3 = Base64.decode(json.getString("imageid3"), Base64.DEFAULT);
+                                    Bitmap decodedByte3 = BitmapFactory.decodeByteArray(decodedString3, 0, decodedString2.length);
+
+                                    byte[] decodedString4 = Base64.decode(json.getString("imageid4"), Base64.DEFAULT);
+                                    Bitmap decodedByte4 = BitmapFactory.decodeByteArray(decodedString4, 0, decodedString2.length);
+
+                                    byte[] decodedString5 = Base64.decode(json.getString("imageid4"), Base64.DEFAULT);
+                                    Bitmap decodedByte5 = BitmapFactory.decodeByteArray(decodedString5, 0, decodedString2.length);
+
+                                    byte[] decodedString6 = Base64.decode(json.getString("imageid5"), Base64.DEFAULT);
+                                    Bitmap decodedByte6 = BitmapFactory.decodeByteArray(decodedString6, 0, decodedString2.length);
+
+                                    ds.insert(json.getString("_id"), json.getString("symptom"), json.getString("type"), decodedByte, decodedByte2, decodedByte3, decodedByte4, decodedByte5, decodedByte6, json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
                                 }
                             }
                         } else {

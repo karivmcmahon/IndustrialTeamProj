@@ -125,18 +125,25 @@ public class GlossaryCategoriesDataSource extends BaseDataSource {
     	Log.v("update","update");
     }
 
-    public void insert(String _id,String symptom, String type, Bitmap image, String basicFacts, String diagnostics, String control)
+    public void insert(String _id,String symptom, String type, Bitmap image1, Bitmap image2, Bitmap image3, Bitmap image4, Bitmap image5, Bitmap image6, String basicFacts, String diagnostics, String control)
     {
-    	
-    
-    	byte[] data = getBitmapAsByteArray(image);
+       	byte[] data1 = getBitmapAsByteArray(image1);
+        byte[] data2 = getBitmapAsByteArray(image2);
+        byte[] data3 = getBitmapAsByteArray(image3);
+        byte[] data4 = getBitmapAsByteArray(image4);
+        byte[] data5 = getBitmapAsByteArray(image5);
+        byte[] data6 = getBitmapAsByteArray(image6);
     	open();
     	ContentValues cv = new ContentValues();
     	cv.put("_id",_id);
     	cv.put("symptom",symptom);
     	cv.put("type",type);
-    	cv.put("imageid", data);
-    	cv.put("imageid2",data);
+    	cv.put("imageid", data1);
+    	cv.put("imageid2",data2);
+        cv.put("imageid3",data3);
+        cv.put("imageid4",data4);
+        cv.put("imageid5",data5);
+        cv.put("imageid6",data6);
     	cv.put("basicFacts",basicFacts);
     	cv.put("diagnostics", diagnostics);
     	cv.put("control", control);
