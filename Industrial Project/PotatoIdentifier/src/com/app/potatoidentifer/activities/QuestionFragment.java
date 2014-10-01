@@ -94,42 +94,44 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
 
             ArrayList<Bitmap> slideshowImageArray = new ArrayList<Bitmap>();
 
+            QE.Inform(currentQuestion, true);
             List<FurtherInfoBean> furtherInfo = QE.getPossibleAnswers();
+            QE.Forget(currentQuestion);
 
             for (int i = 0; i < furtherInfo.size(); i++) {
 
                 byte[] id1 = furtherInfo.get(i).getImageID();
-                if (id1 != null) {
+                if (id1 != null && id1.length > 100) {
                     ByteArrayInputStream imageStream = new ByteArrayInputStream(id1);
                     slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
                 }
 
-                byte[] id2 = furtherInfo.get(i).getImageID2();
-                if (id2 != null) {
+               byte[] id2 = furtherInfo.get(i).getImageID2();
+                if (id2 != null && id2.length > 100) {
                     ByteArrayInputStream imageStream = new ByteArrayInputStream(id2);
                     slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
                 }
 
                 byte[] id3 = furtherInfo.get(i).getImageID3();
-                if (id3 != null) {
+                if (id3 != null&& id3.length > 100) {
                     ByteArrayInputStream imageStream = new ByteArrayInputStream(id3);
                     slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
                 }
 
                 byte[] id4 = furtherInfo.get(i).getImageID4();
-                if (id4 != null) {
+                if (id4 != null&& id4.length > 100 ) {
                     ByteArrayInputStream imageStream = new ByteArrayInputStream(id4);
                     slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
                 }
 
                 byte[] id5 = furtherInfo.get(i).getImageID5();
-                if (id5 != null) {
+                if (id5 != null && id5.length > 100) {
                     ByteArrayInputStream imageStream = new ByteArrayInputStream(id5);
                     slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
                 }
 
                 byte[] id6 = furtherInfo.get(i).getImageID6();
-                if (id6 != null) {
+                if (id6 != null&& id6.length > 100 ) {
                     ByteArrayInputStream imageStream = new ByteArrayInputStream(id6);
                     slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
                 }
