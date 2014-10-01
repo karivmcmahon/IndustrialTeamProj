@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.potatoidentifer.models.GlossaryCategoriesDataSource;
@@ -54,6 +56,8 @@ public class SearchTest extends BaseFragment {
         testBut = (Button) v.findViewById(R.id.btn_search);
         sharedpreferences = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         Log.v("SHARED", "SHARED " + sharedpreferences.getString("Date", "DEFAULT"));
+        final TextView tv = (TextView)v.findViewById(R.id.GlossaryThirdTextTitle);
+        tv.setText("Last Updated : " + sharedpreferences.getString("Date", "DEFAULT"));
         testBut.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +138,14 @@ public class SearchTest extends BaseFragment {
 
                                     ds.insert(json.getString("_id"), json.getString("symptom"), json.getString("type"), decodedByte, decodedByte2, decodedByte3, decodedByte4, decodedByte5, decodedByte6, json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
                                 }
+                                
                             }
+                            Editor editor = sharedpreferences.edit();
+                            editor.putString("Date", lastUpdated);
+                            editor.commit();
+                            Log.v("SHARED", "SHARED " + sharedpreferences.getString("Date", "DEFAULT"));
+                            Toast.makeText(context, "Update Complete.", Toast.LENGTH_LONG).show();
+                            tv.setText("Last Updated : " + sharedpreferences.getString("Date", "DEFAULT"));
                         } else {
                             Toast.makeText(context, "App is already up-to-date.", Toast.LENGTH_LONG).show();
                         }
@@ -142,11 +153,7 @@ public class SearchTest extends BaseFragment {
                         Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
-                    Editor editor = sharedpreferences.edit();
-                    editor.putString("Date", lastUpdated);
-                    editor.commit();
-                    Log.v("SHARED", "SHARED " + sharedpreferences.getString("Date", "DEFAULT"));
-                    Toast.makeText(context, "Update Complete.", Toast.LENGTH_LONG).show();
+                   
                 } else {
                     Toast.makeText(context, "We can't connect to the Internet right now.", Toast.LENGTH_LONG).show();
                 }

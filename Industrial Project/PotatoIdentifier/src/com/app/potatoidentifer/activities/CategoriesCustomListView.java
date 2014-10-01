@@ -25,6 +25,7 @@ public class CategoriesCustomListView extends ArrayAdapter<String> {
 	private final String[] symptoms;
 	private final Bitmap[] imageId;
 
+	
 	public CategoriesCustomListView(Activity context, String[] symptoms, Bitmap[] imageId) {
 		super(context, R.layout.glossary_fragment_layout, symptoms);
 		this.context = context;
