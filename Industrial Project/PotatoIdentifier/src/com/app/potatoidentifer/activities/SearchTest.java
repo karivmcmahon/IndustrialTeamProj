@@ -43,8 +43,8 @@ import java.util.List;
 
 public class SearchTest extends BaseFragment {
     private Button testBut;
-    public static final String MyPREFERENCES = "MyPrefs";
-    SharedPreferences sharedpreferences;
+    private static final String MyPREFERENCES = "MyPrefs";
+    private SharedPreferences sharedpreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,7 +87,7 @@ public class SearchTest extends BaseFragment {
                         response = myClient.execute(myConnection);
                         str = EntityUtils.toString(response.getEntity(), "UTF-8");
                     } catch (UnsupportedEncodingException e) {
-                    	
+
                         Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     } catch (ClientProtocolException e) {
@@ -101,25 +101,28 @@ public class SearchTest extends BaseFragment {
                     try {
                         Log.v("TESTing:", str);
                         JSONArray jArray = new JSONArray(str);
-                        json = jArray.getJSONObject(0);
-                        for (int i = 0; i < jArray.length(); i++) {
-                            json = jArray.getJSONObject(i);
-                            Log.v("testing", Integer.toString(jArray.length()));
-                            ds.open();
-                            boolean exists = ds.doesDieaseExistByID(json.getString("_id"));
-                            Log.v("exists", "exists " + exists);
-                            Log.v("ID", "ID: " + json.getString("_id"));
-                            if (exists == true) {
+                        if (jArray.length() != 0) {
+                            json = jArray.getJSONObject(0);
+                            for (int i = 0; i < jArray.length(); i++) {
+                                json = jArray.getJSONObject(i);
+                                Log.v("testing", Integer.toString(jArray.length()));
                                 ds.open();
-                                ds.update(json.getString("_id"), json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
-                            } else {
-                                ds.open();
-                           	 Log.v("INSERT","INSERT");
-                           	 byte[] decodedString = Base64.decode(json.getString("imageid"), Base64.DEFAULT);
-                            	Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                                ds.insert( json.getString("_id"),json.getString("symptom"), json.getString("type"), decodedByte, json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
+                                boolean exists = ds.doesDieaseExistByID(json.getString("_id"));
+                                Log.v("exists", "exists " + exists);
+                                Log.v("ID", "ID: " + json.getString("_id"));
+                                if (exists == true) {
+                                    ds.open();
+                                    ds.update(json.getString("_id"), json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
+                                } else {
+                                    ds.open();
+                                    Log.v("INSERT", "INSERT");
+                                    byte[] decodedString = Base64.decode(json.getString("imageid"), Base64.DEFAULT);
+                                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                                    ds.insert(json.getString("_id"), json.getString("symptom"), json.getString("type"), decodedByte, json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
+                                }
                             }
-                            
+                        } else {
+                            Toast.makeText(context, "App is already up-to-date.", Toast.LENGTH_LONG).show();
                         }
                     } catch (JSONException e) {
                         Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();
