@@ -1,8 +1,6 @@
 <?php
-function selectSpecific($name)
-{
-	try
-	{
+function selectSpecific($name) {
+	try {
 		$dbh = new PDO("sqlite:projectDB.sqlite");
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$stmt = $dbh->prepare("SELECT * FROM glossary WHERE symptom = :symptom");
@@ -11,17 +9,9 @@ function selectSpecific($name)
 		$result = $stmt->fetchAll();
 		return $result;
 		$dbh = null;
-						
-		
-						
-						
-        
-		
 	}
-	catch(PDOException $e)
-	{
+	catch(PDOException $e) {
 		echo $e->getMessage();
 	}
 }
-
 ?>

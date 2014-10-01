@@ -1,0 +1,13 @@
+body {
+	background: rgba(234, 234, 234, 1);
+}
+
+.login-form {
+	margin: 0 auto;
+	margin-top: 60px;
+	width:30%;
+}
+
+.submit-btn {
+	margin-top:10px;
+}

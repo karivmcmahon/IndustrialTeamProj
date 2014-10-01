@@ -16,7 +16,11 @@ function insert( $symptom, $type, $imagepath, $imagepath2, $imagepath3 , $imagep
 		$imageid5 = fopen($imagepath5,'rb');
 		$imageid6 = fopen($imagepath6,'rb');
 		
-		$stmt = $dbh->prepare("INSERT INTO glossary(symptom,type,imageid,imageid2,imageid3,imageid4,imageid5,imageid6,basicFacts,control,diagnostics) VALUES (:symptom, :type, :imageid,:imageid2,:imageid3,:imageid4,:imageid5,:imageid6,:basicFacts,:control,:diagnostics)");
+		//Get current date
+		date_default_timezone_set("Europe/London");
+		$timestamp = date('Y-m-d H:i:s');
+		
+		$stmt = $dbh->prepare("INSERT INTO glossary(symptom,type,imageid,imageid2,imageid3,imageid4,imageid5,imageid6,basicFacts,control,diagnostics,timestamp) VALUES (:symptom, :type, :imageid,:imageid2,:imageid3,:imageid4,:imageid5,:imageid6,:basicFacts,:control,:diagnostics, datetime(:timestamp))");
 		
 		$stmt->bindParam(':symptom', $symptom, PDO::PARAM_STR);
 		$stmt->bindParam(':type', $type, PDO::PARAM_STR);
@@ -29,6 +33,7 @@ function insert( $symptom, $type, $imagepath, $imagepath2, $imagepath3 , $imagep
 		$stmt->bindParam(':basicFacts', $basicFacts, PDO::PARAM_STR);
 		$stmt->bindParam(':control', $control, PDO::PARAM_STR);
 		$stmt->bindParam(':diagnostics', $diagnostics, PDO::PARAM_STR);
+		$stmt->bindParam(':timestamp', $timestamp, PDO::PARAM_STR);
 		
 		$stmt->execute();
 		header("Location: ".$_SERVER["HTTP_REFERER"]."?id=success");

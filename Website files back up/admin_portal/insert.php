@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <?php
 session_start();
-if ($_SESSION["loggedIn"] != true)
-{
+if ($_SESSION["loggedIn"] != true) {
 	header("Location: https://zeno.computing.dundee.ac.uk/2014-projects/team1/admin_portal/admin.php");
 }
-if($_SESSION["success"] == false)
-{
+if($_SESSION["success"] == false) {
 	$sucess = false;
 }
 ?>
@@ -19,7 +17,7 @@ if($_SESSION["success"] == false)
 
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/insert.css" rel="stylesheet">
+    <link href="css/global.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

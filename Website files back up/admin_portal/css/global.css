@@ -1,0 +1,49 @@
+body {
+	background: rgba(234, 234, 234, 1);
+}
+
+.left-container, .right-container{
+	margin-top: 30px;
+}
+
+.right-container {
+	padding: 30px;
+}
+ 
+h3 {
+	padding-bottom: 20px;
+	margin: 0;
+}
+
+.left-container li { 
+	border: 1px solid grey;
+}
+
+.footer {
+	margin-top: 20px;
+	text-align: center;
+	border-top: 1px solid grey;
+}
+
+.footer p {
+	margin-top: 10px;
+}
+
+.custom > li > a:hover {
+    color: white;
+    background:rgba(50, 117, 193, 1);
+    
+}
+
+.active, .active a {
+	color: white!important;
+    background:rgba(50, 117, 193, 1);
+}
+
+.glyph, .glyph-detail {
+	margin-top: 2px;
+}
+
+.glyph-detail {
+	margin-right: 10px;
+}

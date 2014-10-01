@@ -2,9 +2,8 @@
 <?php 
 session_start();
 if(empty($_SESSION['username'])) {
- $incorrectLogin = true;
-}
-?> 
+	$incorrectLogin = false;
+} ?> 
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -32,9 +31,7 @@ if(empty($_SESSION['username'])) {
         	<input type="password" class="form-control" placeholder="Password" required name="password">
 			<?php if($incorrectLogin == true) { ?>
 				<p> incorrect username/ password please try again. </p>
-			<?php 
-			}
-			?>
+			<?php } ?>
         	<button class="btn btn-lg btn-primary btn-block submit-btn" type="submit">Sign in</button>
       	</form>
 	</div>
