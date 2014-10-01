@@ -65,6 +65,8 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
 
         QE = new QuestionEngine<FurtherInfoBean, String>(kno);
 
+        ds.close();
+
         refresh();
 
         return v;
@@ -135,9 +137,9 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
                     ByteArrayInputStream imageStream = new ByteArrayInputStream(id6);
                     slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
                 }
-
-
             }
+
+
 
             SlideshowViewPagerAdapter adapter = new SlideshowViewPagerAdapter(getActivity(), slideshowImageArray, this.getActivity());
             myViewPager = (ViewPager) v.findViewById(R.id.slideshowviewpager);
