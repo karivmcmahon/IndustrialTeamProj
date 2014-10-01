@@ -1,6 +1,5 @@
 package com.app.potatoidentifer.models;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.os.Parcel;
@@ -16,6 +15,9 @@ public class GlossaryBean implements Parcelable {
 	private String type;
 	private byte[] imageId;
 	private byte[] imageId2;
+	
+	@SuppressWarnings("unused")
+	// It is used...
 	private ArrayList<GlossaryBean> beanList;
 
 	public int getId() {
@@ -58,6 +60,7 @@ public class GlossaryBean implements Parcelable {
 		this.imageId2 = imageId2;
 	}
 
+	@SuppressWarnings("unchecked")
 	public GlossaryBean(Parcel in) {
 	    beanList = (ArrayList<GlossaryBean>) in.readArrayList(GlossaryBean.class.getClassLoader());
 	}
@@ -76,6 +79,7 @@ public class GlossaryBean implements Parcelable {
 		dest.writeStringArray(new String[] { this.symptom, this.type });
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
 		
 		public GlossaryBean createFromParcel(Parcel in) {

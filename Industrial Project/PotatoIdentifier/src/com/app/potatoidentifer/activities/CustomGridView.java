@@ -1,19 +1,15 @@
 package com.app.potatoidentifer.activities;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.app.potatoidentifer.models.BitmapScaler;
 import com.example.potatoidentifier.R;
 
 /**
@@ -22,8 +18,12 @@ import com.example.potatoidentifier.R;
  *
  */
 public class CustomGridView extends ArrayAdapter<String> {
+	
     private final Activity context;
+    @SuppressWarnings("unused")
+	// Don't know if this is used anymore?
     private final  ArrayList<String> glossarySymptomNames;
+    
     private final ArrayList<Bitmap> imageId;
 
     public CustomGridView(Activity context,  ArrayList<String> glossarySymptomNames, ArrayList<Bitmap> imageId) {

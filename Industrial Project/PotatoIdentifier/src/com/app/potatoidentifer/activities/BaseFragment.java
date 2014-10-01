@@ -3,7 +3,6 @@ package com.app.potatoidentifer.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 
 /**
  * This class is the base fragment class which all the fragments inherit from
@@ -11,7 +10,12 @@ import android.support.v4.app.FragmentActivity;
  *
  */
 public class BaseFragment extends Fragment {
+	
+	@SuppressWarnings("unused")
+	private SearchRequestedCallback mSearchRequestedCallback;
+	
 	protected MainActivity fragmentTabActivity;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,12 +27,8 @@ public class BaseFragment extends Fragment {
 		return false;
 	}
 
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-		
-	}
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {}
 	
-	private SearchRequestedCallback mSearchRequestedCallback;
 	public void setSearchRequestedCallback(SearchRequestedCallback callback) {
 	    mSearchRequestedCallback = callback;
 	}

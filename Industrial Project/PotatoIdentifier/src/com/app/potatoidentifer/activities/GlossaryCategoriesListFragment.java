@@ -1,15 +1,10 @@
 package com.app.potatoidentifer.activities;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +21,6 @@ import com.app.potatoidentifer.models.GlossaryCategoriesDataSource;
 import com.example.potatoidentifier.R;
 
 import java.io.ByteArrayInputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,18 +33,22 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 	ArrayList<GlossaryBean> glossarraylist = new ArrayList<GlossaryBean>();
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		final View v = inflater.inflate(R.layout.glossary_fragment_layout,
-				container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+		final View v = inflater.inflate(R.layout.glossary_fragment_layout, container, false);
 
 		final Context context = this.getActivity();
-		final GlossaryCategoriesDataSource ds = new GlossaryCategoriesDataSource(
-				context);
+
+		// open a connection to the database
+		final GlossaryCategoriesDataSource ds = new GlossaryCategoriesDataSource(context);
+		final GlossaryCategoriesDataSource dssearch = new GlossaryCategoriesDataSource(context);
+
+		
 		ds.open();
-		
+
+		// make sure that the list is empty every time it is used.
 		glossarraylist.clear();
-		
+
 		// Search Code
 		final EditText srchText = (EditText) v.findViewById(R.id.editText1);
 		Button btn = (Button) v.findViewById(R.id.button1);
@@ -58,46 +56,49 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				ds.open();
-				boolean exists = ds.doesDieaseExist(srchText.getText()
-						.toString());
-				Log.v("Exists", "Exist " + exists);
-				if (exists == true) {
-					Log.v("disease", "What we have found is: ");
+				dssearch.open();
+
+				// Search Query Call
+				Cursor searchQuery = ds.doesDisexist(srchText.getText().toString());
+				
+				
+				if (searchQuery.getCount() == 0) {
+					// Change to be more productive.
+					// Can be a simple reset of text and a toast.
+					Log.i("disease" , "Nothing found.");
 				} else {
-					Log.v("disease", "hmmm");
+					//If there is a search result
+					
+					// Move to the start, first row of the result.
+					searchQuery.moveToFirst();
+					// get the row count.
+					int counter = searchQuery.getCount();
+
+					// for each result put it in a bean
+					for (int i = 0; i < counter; i++) {
+						GlossaryBean gb = new GlossaryBean();
+						gb.setId(searchQuery.getInt(searchQuery.getColumnIndex(searchQuery.getColumnName(0))));
+						gb.setSymptom(searchQuery.getString(searchQuery.getColumnIndex(searchQuery.getColumnName(1))));
+						gb.setType(searchQuery.getString(searchQuery.getColumnIndex(searchQuery.getColumnName(2))));
+						gb.setImageId(searchQuery.getBlob(searchQuery.getColumnIndex(searchQuery.getColumnName(3))));
+						gb.setImageId2(searchQuery.getBlob(searchQuery.getColumnIndex(searchQuery.getColumnName(4))));
+
+						// add each bean to an arraylist
+						glossarraylist.add(gb);
+
+						// move to next row
+						searchQuery.moveToNext();
+					}
+
+					// pass the array list to a new fragment which will display the information in a list view
+					Bundle extras1 = new Bundle();
+					extras1.putParcelableArrayList("arraylist", glossarraylist);
+					SearchResultFragment srf = new SearchResultFragment();
+					srf.setArguments(extras1);
+					fragmentTabActivity.addFragments(Const.TAB_FIRST, srf, true);
 				}
-
-				Cursor searchQuery = ds.doesDisexist(srchText.getText()
-						.toString());
-				searchQuery.moveToFirst();
-				int counter = searchQuery.getCount();
-
-				for (int i = 0; i < counter; i++) {
-					GlossaryBean gb = new GlossaryBean();
-					gb.setId(searchQuery.getInt(searchQuery
-							.getColumnIndex(searchQuery.getColumnName(0))));
-					gb.setSymptom(searchQuery.getString(searchQuery
-							.getColumnIndex(searchQuery.getColumnName(1))));
-					gb.setType(searchQuery.getString(searchQuery
-							.getColumnIndex(searchQuery.getColumnName(2))));
-					gb.setImageId(searchQuery.getBlob(searchQuery
-							.getColumnIndex(searchQuery.getColumnName(3))));
-					gb.setImageId2(searchQuery.getBlob(searchQuery
-							.getColumnIndex(searchQuery.getColumnName(4))));
-
-					glossarraylist.add(gb);
-
-					searchQuery.moveToNext();
-				}
-
-				Bundle extras1 = new Bundle();
-				Log.i("disease", Integer.toString(glossarraylist.size()));
-				extras1.putParcelableArrayList("arraylist", glossarraylist);
-				SearchResultFragment srf = new SearchResultFragment();
-				srf.setArguments(extras1);
-				fragmentTabActivity.addFragments(Const.TAB_FIRST, srf, true);
+				searchQuery.close();
+				dssearch.close();
 			}
 
 		});
@@ -109,7 +110,6 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 		imageId = new Bitmap[categories.size()];
 		categoryId = new Integer[categories.size()];
 
-		Bitmap theImage = null;
 		// Convert and add the list to the appropriate arrays.
 		for (int i = 0; i < categories.size(); i++) {
 			categoryId[i] = categories.get(i).getID();
@@ -123,20 +123,30 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 		}
 
 		// Sets up custom list view for categories
-		CategoriesCustomListView adapter = new CategoriesCustomListView( getActivity(), glossary_list, imageId);
+		CategoriesCustomListView adapter = new CategoriesCustomListView(getActivity(), glossary_list, imageId);
+		
 		list = (ListView) v.findViewById(R.id.glossary_listview);
 		list.setAdapter(adapter);
 		// Sets up on an item click listener - to check for when a click occurs
 		// on the item list
 		list.setOnItemClickListener(listViewListenerHandler);
+		
+		ds.close();
+
 		return v;
 
 	}
 
 	private AdapterView.OnItemClickListener listViewListenerHandler = new AdapterView.OnItemClickListener() {
-		public void onItemClick(AdapterView parent, View v, int position,
-				long id) {
+		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 			Bundle bundle = new Bundle();
+			
+			int a = imageId.length;
+			for(int i = 0 ; i < a ; i++)
+			{
+				imageId[i].recycle();
+			}
+			
 			bundle.putString("symptom", glossary_list[position]);
 			GlossaryFragment gf = new GlossaryFragment();
 			gf.setArguments(bundle);

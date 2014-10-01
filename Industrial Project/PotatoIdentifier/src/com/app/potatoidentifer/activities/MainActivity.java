@@ -33,12 +33,13 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 	private HashMap<String, ArrayList<Fragment>> hashMapTabs;
 	final int TEXT_ID = 100;
 	private MyTabView arrTabs[] = new MyTabView[4];
-	SharedPreferences sharedpreferences;
-	 public static final String MyPREFERENCES = "MyPrefs" ;
+	private SharedPreferences sharedpreferences;
+	public static final String MyPREFERENCES = "MyPrefs";
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
 		sharedpreferences = this.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 		Log.v("TIME"," TIME");
 		if(sharedpreferences.getBoolean("firstTime",false) == false)
@@ -61,8 +62,7 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		    editor.putBoolean("firstTime", true);
 		    editor.commit();
 		}
-		
-		
+
 		hashMapTabs = new HashMap<String, ArrayList<Fragment>>();
 		hashMapTabs.put(Const.TAB_FIRST, new ArrayList<Fragment>());
 		hashMapTabs.put(Const.TAB_SECOND, new ArrayList<Fragment>());
@@ -76,10 +76,8 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		TabHost.TabSpec spec = tabHost.newTabSpec(Const.TAB_FIRST);
 		tabHost.setCurrentTab(0);
 		arrTabs[0] = new MyTabView(this, "", R.drawable.ic_glossary_tab);
-		spec.setContent(new TabHost.TabContentFactory() 
-		{
-			public View createTabContent(String tag)
-			{
+		spec.setContent(new TabHost.TabContentFactory() {
+			public View createTabContent(String tag) {
 				return findViewById(android.R.id.tabcontent);
 			}
 		});
@@ -87,11 +85,9 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		tabHost.addTab(spec);
 
 		spec = tabHost.newTabSpec(Const.TAB_SECOND);
-		arrTabs[1] = new MyTabView(this,  "",R.drawable.ic_question_tab);
-		spec.setContent(new TabHost.TabContentFactory() 
-		{
-			public View createTabContent(String tag) 
-			{
+		arrTabs[1] = new MyTabView(this, "", R.drawable.ic_question_tab);
+		spec.setContent(new TabHost.TabContentFactory() {
+			public View createTabContent(String tag) {
 				return findViewById(android.R.id.tabcontent);
 			}
 		});
@@ -99,11 +95,9 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		tabHost.addTab(spec);
 
 		spec = tabHost.newTabSpec(Const.TAB_THIRD);
-		arrTabs[2] = new MyTabView(this,  "",R.drawable.ic_video_tab);
-		spec.setContent(new TabHost.TabContentFactory() 
-		{
-			public View createTabContent(String tag) 
-			{
+		arrTabs[2] = new MyTabView(this, "", R.drawable.ic_video_tab);
+		spec.setContent(new TabHost.TabContentFactory() {
+			public View createTabContent(String tag) {
 				return findViewById(android.R.id.tabcontent);
 			}
 		});
@@ -111,11 +105,9 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		tabHost.addTab(spec);
 
 		spec = tabHost.newTabSpec(Const.TAB_FORTH);
-		arrTabs[3] = new MyTabView(this,  "",R.drawable.ic_settings_tab);
-		spec.setContent(new TabHost.TabContentFactory() 
-		{
-			public View createTabContent(String tag) 
-			{
+		arrTabs[3] = new MyTabView(this, "", R.drawable.ic_settings_tab);
+		spec.setContent(new TabHost.TabContentFactory() {
+			public View createTabContent(String tag) {
 				return findViewById(android.R.id.tabcontent);
 			}
 		});
@@ -129,15 +121,13 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		iv.setBackgroundColor(getResources().getColor(R.color.darkgray));
 
 		// Listner for Tab 1//
-		tabHost.getTabWidget().getChildAt(0).setOnClickListener(new OnClickListener() 
-		{
+		tabHost.getTabWidget().getChildAt(0).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (hashMapTabs.size() > 0) {
 
-					if (tabHost.getTabWidget().getChildAt(0)
-							.isSelected()) {
+					if (tabHost.getTabWidget().getChildAt(0).isSelected()) {
 						if (hashMapTabs.get(Const.TAB_FIRST).size() > 1) {
 							resetFragment();
 						}
@@ -149,36 +139,32 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		});
 
 		/* Listner for Tab 2 */
-		tabHost.getTabWidget().getChildAt(1).setOnClickListener(new OnClickListener() 
-		{
+		tabHost.getTabWidget().getChildAt(1).setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View arg0) {
-					// TODO Auto-generated method stub
-					if (hashMapTabs.size() > 0) {
-	
-						if (tabHost.getTabWidget().getChildAt(1)
-								.isSelected()) {
-							if (hashMapTabs.get(Const.TAB_SECOND).size() > 1) {
-								resetFragment();
-							}
-						}
-						tabHost.getTabWidget().setCurrentTab(1);
-						tabHost.setCurrentTab(1);
-					}
-				}
-		});
-
-		/* Listner for Tab 3 */
-		tabHost.getTabWidget().getChildAt(2).setOnClickListener(new OnClickListener() 
-		{
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				if (hashMapTabs.size() > 0) {
 
-					if (tabHost.getTabWidget().getChildAt(2)
-							.isSelected()) {
+					if (tabHost.getTabWidget().getChildAt(1).isSelected()) {
+						if (hashMapTabs.get(Const.TAB_SECOND).size() > 1) {
+							resetFragment();
+						}
+					}
+					tabHost.getTabWidget().setCurrentTab(1);
+					tabHost.setCurrentTab(1);
+				}
+			}
+		});
+
+		/* Listner for Tab 3 */
+		tabHost.getTabWidget().getChildAt(2).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if (hashMapTabs.size() > 0) {
+
+					if (tabHost.getTabWidget().getChildAt(2).isSelected()) {
 						if (hashMapTabs.get(Const.TAB_THIRD).size() > 1) {
 							resetFragment();
 						}
@@ -188,17 +174,15 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 				}
 			}
 		});
-		
+
 		/* Listner for Tab 4 */
-		tabHost.getTabWidget().getChildAt(3).setOnClickListener(new OnClickListener() 
-		{
+		tabHost.getTabWidget().getChildAt(3).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				if (hashMapTabs.size() > 0) {
 
-					if (tabHost.getTabWidget().getChildAt(3)
-							.isSelected()) {
+					if (tabHost.getTabWidget().getChildAt(3).isSelected()) {
 						if (hashMapTabs.get(Const.TAB_FORTH).size() > 1) {
 							resetFragment();
 						}
@@ -209,19 +193,20 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 			}
 		});
 
-        //Build the database required for the app.
-        buildDatabase();
-    }
+		// Build the database required for the app.
+		buildDatabase();
+	}
 
 	public void buildDatabase() {
-        DatabaseHelper myDbHelper = new DatabaseHelper(this);
-        myDbHelper.deleteDatabase();
-        try {
-            myDbHelper.createDataBase();
-        } catch (IOException ioe) {
-            throw new Error("Unable to create database");
-        }
-    }
+
+		DatabaseHelper myDbHelper = new DatabaseHelper(this);
+		try {
+			myDbHelper.createDataBase();
+		} catch (IOException ioe) {
+			throw new Error("Unable to create database");
+		}
+	}
+
 
 	public void addFragments(String tabName, Fragment fragment, boolean add) {
 		if (add) {
@@ -238,10 +223,8 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 	 * 
 	 */
 	public void removeFragment() {
-		Fragment fragment = hashMapTabs.get(currentSelectedTab).get(
-				hashMapTabs.get(currentSelectedTab).size() - 2);
-		hashMapTabs.get(currentSelectedTab).remove(
-				hashMapTabs.get(currentSelectedTab).size() - 1);
+		Fragment fragment = hashMapTabs.get(currentSelectedTab).get(hashMapTabs.get(currentSelectedTab).size() - 2);
+		hashMapTabs.get(currentSelectedTab).remove(hashMapTabs.get(currentSelectedTab).size() - 1);
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(android.R.id.tabcontent, fragment);
@@ -266,6 +249,9 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		if (hashMapTabs.get(currentSelectedTab).size() <= 1) {
 			super.onBackPressed();
 		} else {
+			
+			System.gc();
+			
 			removeFragment();
 		}
 	}
@@ -275,8 +261,7 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		if (hashMapTabs.get(currentSelectedTab).size() == 0) {
 			return;
 		}
-		hashMapTabs.get(currentSelectedTab)
-				.get(hashMapTabs.get(currentSelectedTab).size() - 1)
+		hashMapTabs.get(currentSelectedTab).get(hashMapTabs.get(currentSelectedTab).size() - 1)
 				.onActivityResult(requestCode, resultCode, data);
 	}
 
@@ -286,55 +271,45 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 
 		// Iterates unselected tab and gives them regular bg colour
 		for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
-			TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i)
-					.findViewById(TEXT_ID);
-
 			View iv = (View) tabHost.getTabWidget().getChildAt(i);
 			iv.setBackgroundColor(Color.parseColor("#555555"));
 		}
-		TextView tv = (TextView) tabHost.getCurrentTabView().findViewById(TEXT_ID); // for Selected Tab
-		tv.setTextColor(Color.parseColor("#ffffff"));
 
 		View iv = (View) tabHost.getCurrentTabView();
 
 		if (hashMapTabs.get(tabName).size() == 0) {
 			if (tabName.equals(Const.TAB_FIRST)) {
 				addFragments(tabName, new GlossaryCategoriesListFragment(), true);
-			} 
-			else if (tabName.equals(Const.TAB_SECOND)) {
+			} else if (tabName.equals(Const.TAB_SECOND)) {
 				addFragments(tabName, new QuestionFragment(), true);
-			} 
-			else if (tabName.equals(Const.TAB_THIRD)) {
+			} else if (tabName.equals(Const.TAB_THIRD)) {
 				addFragments(tabName, new VideoFragment(), true);
-			} 
-			else if (tabName.equals(Const.TAB_FORTH)) {
-				addFragments(tabName, new SearchTest(),  true);
+			} else if (tabName.equals(Const.TAB_FORTH)) {
+				addFragments(tabName, new SearchTest(), true);
 			}
 		} else {
-			addFragments(
-					tabName,
-					hashMapTabs.get(tabName).get(hashMapTabs.get(tabName).size() - 1),
-					 false);
+			addFragments(tabName, hashMapTabs.get(tabName).get(hashMapTabs.get(tabName).size() - 1), false);
 		}
 
 		switch (tabHost.getCurrentTab()) {
-			case 0:
-				iv.setBackgroundColor(getResources().getColor(R.color.twitter));
-				break;
-			case 1:
-				iv.setBackgroundColor(getResources().getColor(R.color.twitter));
-				break;
-			case 2:
-				iv.setBackgroundColor(getResources().getColor(R.color.twitter));
-				break;
-			case 3:
-				iv.setBackgroundColor(getResources().getColor(R.color.twitter));
-				break;
+		case 0:
+			iv.setBackgroundColor(getResources().getColor(R.color.twitter));
+			break;
+		case 1:
+			iv.setBackgroundColor(getResources().getColor(R.color.twitter));
+			break;
+		case 2:
+			iv.setBackgroundColor(getResources().getColor(R.color.twitter));
+			break;
+		case 3:
+			iv.setBackgroundColor(getResources().getColor(R.color.twitter));
+			break;
 		}
 	}
 
 	private class MyTabView extends LinearLayout {
 		TextView tv;
+
 		public MyTabView(Context c, String label, int id) {
 			super(c);
 			ImageView iv = new ImageView(c);
