@@ -42,6 +42,9 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
         QuestionDataSource ds = new QuestionDataSource(this.getActivity());
         List<Pair<FurtherInfoBean, String>> kno = ds.getKnowledge();
         QE = new QuestionEngine<FurtherInfoBean, String>(kno);
+
+        ds.close();
+
         refresh();
         return v;
     }
@@ -100,6 +103,7 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
                     slideshowImageArray.add(BitmapFactory.decodeStream(imageStream));
                 }
             }
+
             SlideshowViewPagerAdapter adapter = new SlideshowViewPagerAdapter(getActivity(), slideshowImageArray, this.getActivity());
             myViewPager = (ViewPager) v.findViewById(R.id.slideshowviewpager);
             myViewPager.setAdapter(adapter);

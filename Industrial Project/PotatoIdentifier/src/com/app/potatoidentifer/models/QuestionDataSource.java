@@ -50,6 +50,9 @@ public class QuestionDataSource extends BaseDataSource {
             cursor.moveToNext();
         }
 
+        cursor.close();
+        d.close();
+
         return output;
     }
 
