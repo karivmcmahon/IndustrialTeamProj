@@ -74,8 +74,10 @@ public class SearchTest extends BaseFragment {
                     HttpPost myConnection = new HttpPost("https://zeno.computing.dundee.ac.uk/2014-projects/team1/admin_portal/sync.php");
 
                     List nameValuePairs = new ArrayList(1);
-
-                    Date today = Calendar.getInstance().getTime();
+                    Calendar cal = Calendar.getInstance(); // creates calendar
+                    cal.setTime(new Date()); // sets calendar time/date
+                    cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
+                    Date today = cal.getTime();
                     String currentDate = dateToString(today);
                     String lastUpdated = dateToString(today);
 
