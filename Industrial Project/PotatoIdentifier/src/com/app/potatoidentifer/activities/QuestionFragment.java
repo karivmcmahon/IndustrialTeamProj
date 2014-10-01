@@ -113,7 +113,7 @@ public class QuestionFragment extends BaseFragment implements View.OnClickListen
         }
     }
     private List<Button> buttonArray;
-    private int buttonIds[] = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6};
+    private int buttonIds[] = {R.id.slideshow_btn1, R.id.slideshow_btn2, R.id.slideshow_btn3, R.id.slideshow_btn4, R.id.slideshow_btn5, R.id.slideshow_btn6};
     private void initButton() {
         buttonArray = new ArrayList<Button>();
         for (int id : buttonIds) {

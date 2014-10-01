@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/btn1"
+        android:id="@+id/slideshow_btn1"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_centerHorizontal="true"
@@ -14,53 +14,53 @@
         android:background="@layout/roundedcell" />
 
     <Button
-        android:id="@+id/btn2"
+        android:id="@+id/slideshow_btn2"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dip"
-        android:layout_toRightOf="@id/btn1"
+        android:layout_toRightOf="@id/slideshow_btn1"
         android:background="@layout/roundedcell" />
 
     <Button
-        android:id="@+id/btn3"
+        android:id="@+id/slideshow_btn3"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dip"
-        android:layout_toRightOf="@id/btn2"
+        android:layout_toRightOf="@id/slideshow_btn2"
         android:background="@layout/roundedcell" />
 
     <Button
-        android:id="@+id/btn4"
+        android:id="@+id/slideshow_btn4"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dip"
-        android:layout_toRightOf="@id/btn3"
+        android:layout_toRightOf="@id/slideshow_btn3"
         android:background="@layout/roundedcell" />
 
     <Button
-        android:id="@+id/btn5"
+        android:id="@+id/slideshow_btn5"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dip"
-        android:layout_toRightOf="@id/btn4"
+        android:layout_toRightOf="@id/slideshow_btn4"
         android:background="@layout/roundedcell" />
 
     <Button
-        android:id="@+id/btn6"
+        android:id="@+id/slideshow_btn6"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dip"
-        android:layout_toRightOf="@id/btn5"
+        android:layout_toRightOf="@id/slideshow_btn5"
         android:background="@layout/roundedcell" />
 
 </RelativeLayout>

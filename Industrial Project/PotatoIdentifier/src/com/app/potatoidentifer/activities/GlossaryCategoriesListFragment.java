@@ -50,8 +50,8 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 		glossarraylist.clear();
 
 		// Search Code
-		final EditText srchText = (EditText) v.findViewById(R.id.editText1);
-		Button btn = (Button) v.findViewById(R.id.button1);
+		final EditText srchText = (EditText) v.findViewById(R.id.searchbar);
+		Button btn = (Button) v.findViewById(R.id.searchButton);
 		btn.setOnClickListener(new OnClickListener() {
 
 			@Override

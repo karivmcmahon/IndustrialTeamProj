@@ -11,7 +11,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/titleTextView"
+            android:id="@+id/VideoTitleTextView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -21,7 +21,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/test1TextView"
+            android:id="@+id/VideoOneTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -51,7 +51,7 @@
         </FrameLayout>
 
         <TextView
-            android:id="@+id/test2TextView"
+            android:id="@+id/VideoTwoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"

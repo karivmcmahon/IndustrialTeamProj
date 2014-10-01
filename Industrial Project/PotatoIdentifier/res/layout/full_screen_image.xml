@@ -4,14 +4,14 @@
     android:layout_height="match_parent" >
 
     <com.app.potatoidentifer.activities.TouchImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/fullScreenImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:scaleType="fitXY" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/searchButton"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_gravity="top|right"

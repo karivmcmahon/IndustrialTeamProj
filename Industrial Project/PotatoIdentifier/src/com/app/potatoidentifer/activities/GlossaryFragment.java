@@ -76,7 +76,7 @@ public class GlossaryFragment extends BaseFragment {
 		final View v = inflater.inflate(R.layout.grid_view, container, false);
 		CustomGridView adapter = new CustomGridView(getActivity(),
 				glossaryList, imageId);
-		grid = (GridView) v.findViewById(R.id.grid);
+		grid = (GridView) v.findViewById(R.id.glossaryGrid);
 		grid.setAdapter(adapter);
 		grid.setOnItemClickListener(listViewListenerHandler);
 		return v;

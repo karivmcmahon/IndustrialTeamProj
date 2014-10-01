@@ -7,7 +7,7 @@
     android:paddingBottom="0.5dp" >
 
     <ImageView
-        android:id="@+id/img"
+        android:id="@+id/categoryImage"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_alignParentLeft="true"
@@ -16,16 +16,16 @@
         android:scaleType="fitXY" />
 
     <TextView
-        android:id="@+id/txt"
+        android:id="@+id/categoryText"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/img"
+        android:layout_toRightOf="@id/categoryImage"
         android:textSize="14sp"
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/imgView3"
+        android:id="@+id/categoryArrow"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"

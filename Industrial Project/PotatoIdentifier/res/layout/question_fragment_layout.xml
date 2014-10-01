@@ -5,80 +5,80 @@
     android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical"
     android:weightSum="1" >
-    
-    
+
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/GlossaryTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Expert System"
+        android:text="@string/expert_system"
         android:textSize="22sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/GlossarySecondTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/diagnose_question_title"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    	<Space
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="0.3" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.3" />
 
-        <TextView
-            android:id="@+id/textQuestion"
+    <TextView
+        android:id="@+id/textQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/question"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.10" />
+
+    <LinearLayout
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:divider="@color/red"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/buttonYes"
+            style="?android:attr/buttonBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/question"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/button_padding"
+            android:background="@color/gray"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="false"
+            android:text="@string/yes" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="0.10" />
-
-        <LinearLayout
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/buttonNo"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:divider="@color/red"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal" >
+            android:layout_gravity="center_vertical"
+            android:background="@color/gray"
+            android:text="@string/no" />
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/buttonYes"
-                style="?android:attr/buttonBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/button_padding"
-                android:background="@color/gray"
-                android:clickable="true"
-                android:enabled="true"
-                android:focusable="false"
-                android:text="@string/yes" />
-
-            <Button
-                android:id="@+id/buttonNo"
-                style="?android:attr/buttonBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@color/gray"
-                android:text="@string/no" />
-        </LinearLayout>
     <android.support.v4.view.ViewPager
-            android:id="@+id/slideshowviewpager"
-            android:layout_width="wrap_content"
-            android:layout_height="250dp"
-            android:paddingBottom="10dp" />
+        android:id="@+id/slideshowviewpager"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:paddingBottom="10dp" />
 
     <include layout="@layout/icons_slideshow" />
 

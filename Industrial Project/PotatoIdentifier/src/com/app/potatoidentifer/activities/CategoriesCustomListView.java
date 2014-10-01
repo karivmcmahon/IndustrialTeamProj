@@ -40,10 +40,10 @@ public class CategoriesCustomListView extends ArrayAdapter<String> {
 		// with an image view
 		View rowView = inflater.inflate(R.layout.custom_list_view, null, false);
 
-		TextView glossaryListText = (TextView) rowView.findViewById(R.id.txt);
+		TextView glossaryListText = (TextView) rowView.findViewById(R.id.categoryText);
 		glossaryListText.setText(symptoms[position]);
 
-		ImageView glossaryListImage = (ImageView) rowView.findViewById(R.id.img);
+		ImageView glossaryListImage = (ImageView) rowView.findViewById(R.id.categoryImage);
 		glossaryListImage.setImageBitmap(imageId[position]);
 
 		return rowView;

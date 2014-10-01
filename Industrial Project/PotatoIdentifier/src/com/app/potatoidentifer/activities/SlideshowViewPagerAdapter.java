@@ -61,7 +61,7 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog.setCancelable(true);
 
-                TouchImageView img = (TouchImageView) dialog.findViewById(R.id.imageView1);
+                TouchImageView img = (TouchImageView) dialog.findViewById(R.id.fullScreenImage);
                 Bitmap bitmap = imageArray.get(position);
                 int bitmapHeight = bitmap.getHeight();
                 int bitmapWidth = bitmap.getWidth();
@@ -70,7 +70,7 @@ public class SlideshowViewPagerAdapter extends PagerAdapter {
                 img.setBackgroundColor(Color.TRANSPARENT);
                 img.setImageBitmap(bitmap);
 
-                final Button next = (Button) dialog.findViewById(R.id.button1);
+                final Button next = (Button) dialog.findViewById(R.id.searchButton);
                 next.setBackgroundResource(R.drawable.ic_image_zoom_cross);
 
                 next.setOnClickListener(new OnClickListener() {

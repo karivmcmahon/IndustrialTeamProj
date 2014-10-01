@@ -31,7 +31,7 @@ import java.util.List;
 public class FurtherInfo extends BaseFragment {
 	
 	ArrayList<Bitmap> slideshowImageArray;
-	private int buttonIds[] = { R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6 };
+	private int buttonIds[] = { R.id.slideshow_btn1, R.id.slideshow_btn2, R.id.slideshow_btn3, R.id.slideshow_btn4, R.id.slideshow_btn5, R.id.slideshow_btn6 };
 	private List<Button> buttonArray;
 	private View v;
 	private ViewPager myViewPager;
@@ -123,7 +123,7 @@ public class FurtherInfo extends BaseFragment {
 		TextView controlTextView = (TextView) v.findViewById(R.id.controlTextView);
 		controlTextView.setText(control);
 
-		TextView symptomTitleTextView = (TextView) v.findViewById(R.id.titleTextView);
+		TextView symptomTitleTextView = (TextView) v.findViewById(R.id.VideoTitleTextView);
 		symptomTitleTextView.setText(symptomTitle);
 
 		// Creating the adapter for the slideshow.
