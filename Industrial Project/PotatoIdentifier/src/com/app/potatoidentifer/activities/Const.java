@@ -1,7 +1,7 @@
 package com.app.potatoidentifer.activities;
 
 /**
- * Class contains the constants for the tabs
+ * Class contains the constants for the tab names
  * @author Kari
  *
  */
