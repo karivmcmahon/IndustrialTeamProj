@@ -3,8 +3,6 @@ package com.app.potatoidentifer.models;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Pair;
-import com.app.potatoidentifer.activities.FurtherInfo;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +49,9 @@ public class QuestionDataSource extends BaseDataSource {
             }
             cursor.moveToNext();
         }
+
+        cursor.close();
+        d.close();
 
         return output;
     }

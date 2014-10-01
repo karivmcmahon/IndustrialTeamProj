@@ -31,4 +31,7 @@
     <string name="lat_flow">Lateral Flow Device Test</string>
     <string name="fta">FTA Test</string>
     
+    <string name="settings">Settings</string>
+    <string name="sync_instruction">Press sync to update application info: </string>
+    
 </resources>

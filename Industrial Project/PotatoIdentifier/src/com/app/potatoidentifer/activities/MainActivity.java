@@ -249,6 +249,9 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		if (hashMapTabs.get(currentSelectedTab).size() <= 1) {
 			super.onBackPressed();
 		} else {
+			
+			System.gc();
+			
 			removeFragment();
 		}
 	}

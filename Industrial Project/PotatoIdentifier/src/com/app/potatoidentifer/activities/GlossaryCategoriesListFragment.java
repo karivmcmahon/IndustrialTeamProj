@@ -41,6 +41,9 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 
 		// open a connection to the database
 		final GlossaryCategoriesDataSource ds = new GlossaryCategoriesDataSource(context);
+		final GlossaryCategoriesDataSource dssearch = new GlossaryCategoriesDataSource(context);
+
+		
 		ds.open();
 
 		// make sure that the list is empty every time it is used.
@@ -53,11 +56,12 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				ds.open();
+				dssearch.open();
 
 				// Search Query Call
 				Cursor searchQuery = ds.doesDisexist(srchText.getText().toString());
-
+				
+				
 				if (searchQuery.getCount() == 0) {
 					// Change to be more productive.
 					// Can be a simple reset of text and a toast.
@@ -93,6 +97,8 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 					srf.setArguments(extras1);
 					fragmentTabActivity.addFragments(Const.TAB_FIRST, srf, true);
 				}
+				searchQuery.close();
+				dssearch.close();
 			}
 
 		});
@@ -118,12 +124,13 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 
 		// Sets up custom list view for categories
 		CategoriesCustomListView adapter = new CategoriesCustomListView(getActivity(), glossary_list, imageId);
+		
 		list = (ListView) v.findViewById(R.id.glossary_listview);
 		list.setAdapter(adapter);
 		// Sets up on an item click listener - to check for when a click occurs
 		// on the item list
 		list.setOnItemClickListener(listViewListenerHandler);
-
+		
 		ds.close();
 
 		return v;
@@ -133,6 +140,13 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 	private AdapterView.OnItemClickListener listViewListenerHandler = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 			Bundle bundle = new Bundle();
+			
+			int a = imageId.length;
+			for(int i = 0 ; i < a ; i++)
+			{
+				imageId[i].recycle();
+			}
+			
 			bundle.putString("symptom", glossary_list[position]);
 			GlossaryFragment gf = new GlossaryFragment();
 			gf.setArguments(bundle);
