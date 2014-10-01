@@ -73,7 +73,6 @@ public class GlossaryFragment extends BaseFragment {
 			glossaryId.add(categoryInfo.get(i).getId());
 			glossaryList.add(categoryInfo.get(i).getSymptom());
 		}
-		Log.v("FUCK", "FUCK");
 		final View v = inflater.inflate(R.layout.grid_view, container, false);
 		CustomGridView adapter = new CustomGridView(getActivity(),
 				glossaryList, imageId);
@@ -86,6 +85,13 @@ public class GlossaryFragment extends BaseFragment {
 	private AdapterView.OnItemClickListener listViewListenerHandler = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
+			
+			int a = imageId.size();
+			for(int i = 0 ; i < a ; i++)
+			{
+				imageId.get(i).recycle();
+			}
+			
 			Bundle bundle = new Bundle();
 			bundle.putString("category", glossaryList.get(position).toString());
 			FurtherInfo fi = new FurtherInfo();
