@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends FragmentActivity implements OnTabChangeListener {
+
 	private TabHost tabHost;
 	private String currentSelectedTab;
 	private HashMap<String, ArrayList<Fragment>> hashMapTabs;
@@ -41,28 +41,26 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		setContentView(R.layout.activity_main);
 
 		sharedpreferences = this.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-		Log.v("TIME"," TIME");
-		if(sharedpreferences.getBoolean("firstTime",false) == false)
-		{
-			Log.v("FIRST TIME","FIRST TIME");
+
+		if (sharedpreferences.getBoolean("firstTime", false) == false) {
 			Editor editor = sharedpreferences.edit();
-		    editor.putBoolean("firstTime", false);
-		    editor.commit();
-		    Editor editor2 = sharedpreferences.edit();
-		    editor2.putString("Date", "2014-09-25 17:00:00");
-		    editor2.commit();
-		    Log.v("SHARED","SHARED " + sharedpreferences.getString("Date","DEFAULT"));
-		    
-			
-		}
-		else
-		{
-			Log.v("SECOND TIME","SECOND TIME");
+			editor.putBoolean("firstTime", false);
+			editor.commit();
+			Editor editor2 = sharedpreferences.edit();
+			editor2.putString("Date", "2014-09-25 17:00:00");
+			editor2.commit();
+		} else {
 			Editor editor = sharedpreferences.edit();
-		    editor.putBoolean("firstTime", true);
-		    editor.commit();
+			editor.putBoolean("firstTime", true);
+			editor.commit();
 		}
 
+		// The app will have four tabs, this is where they are added to the
+		// hashmap.
+		// This hashmap contains a string for the name of the tab as well as an
+		// arraylist of fragments.
+		// This allows us to stack the fragments and have more than one fragment
+		// per tab.
 		hashMapTabs = new HashMap<String, ArrayList<Fragment>>();
 		hashMapTabs.put(Const.TAB_FIRST, new ArrayList<Fragment>());
 		hashMapTabs.put(Const.TAB_SECOND, new ArrayList<Fragment>());
@@ -74,7 +72,9 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		tabHost.setup();
 
 		TabHost.TabSpec spec = tabHost.newTabSpec(Const.TAB_FIRST);
+		// App starts in tab one.
 		tabHost.setCurrentTab(0);
+		// setting the first tab up.
 		arrTabs[0] = new MyTabView(this, "", R.drawable.ic_glossary_tab);
 		spec.setContent(new TabHost.TabContentFactory() {
 			public View createTabContent(String tag) {
@@ -197,8 +197,8 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		buildDatabase();
 	}
 
+	// building the database.
 	public void buildDatabase() {
-	
 		DatabaseHelper myDbHelper = new DatabaseHelper(this);
 		myDbHelper.deleteDatabase();
 		try {
@@ -208,7 +208,7 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		}
 	}
 
-
+	// Method which handles adding a fragment to the arraylist inside the hashmap of tabs.
 	public void addFragments(String tabName, Fragment fragment, boolean add) {
 		if (add) {
 			hashMapTabs.get(tabName).add(fragment);
@@ -250,9 +250,9 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		if (hashMapTabs.get(currentSelectedTab).size() <= 1) {
 			super.onBackPressed();
 		} else {
-			
+
 			System.gc();
-			
+
 			removeFragment();
 		}
 	}

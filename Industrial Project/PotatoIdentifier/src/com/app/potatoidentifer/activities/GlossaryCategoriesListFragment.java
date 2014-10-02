@@ -5,15 +5,16 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.app.potatoidentifer.models.GlossaryBean;
 import com.app.potatoidentifer.models.GlossaryCategoriesBean;
@@ -41,7 +42,6 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 
 		// open a connection to the database
 		final GlossaryCategoriesDataSource ds = new GlossaryCategoriesDataSource(context);
-		// final GlossaryCategoriesDataSource dssearch = new
 		// GlossaryCategoriesDataSource(context);
 
 		ds.open();
@@ -51,20 +51,28 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 
 		// Search Code
 		final EditText srchText = (EditText) v.findViewById(R.id.searchbar);
+
+		// make sure that the searchbar is empty
+		srchText.setText("");
+
 		Button btn = (Button) v.findViewById(R.id.searchButton);
 		btn.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				// dssearch.open();
+
+				// Makes the keyboard disappear when the user searches.
+				InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		        mgr.hideSoftInputFromWindow(srchText.getWindowToken(), 0);
 
 				// Search Query Call
 				Cursor searchQuery = ds.doesDisexist(srchText.getText().toString());
 
 				if (searchQuery.getCount() == 0) {
-					// Change to be more productive.
-					// Can be a simple reset of text and a toast.
-					Log.i("disease", "Nothing found.");
+					// If the search provides nothing, let them know and reset
+					// the search bar
+					Toast.makeText(v.getContext(), "Your search returned found nothing. Please search again", Toast.LENGTH_LONG).show();
+					srchText.setText("");
 				} else {
 					// If there is a search result
 
@@ -91,19 +99,22 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 
 					// pass the array list to a new fragment which will display
 					// the information in a list view
-					Bundle extras1 = new Bundle();
-					extras1.putParcelableArrayList("arraylist", glossarraylist);
+					Bundle searchBundle = new Bundle();
+					searchBundle.putParcelableArrayList("arraylist", glossarraylist);
 					SearchResultFragment srf = new SearchResultFragment();
-					srf.setArguments(extras1);
+					srf.setArguments(searchBundle);
+					// Still using tab one.
 					fragmentTabActivity.addFragments(Const.TAB_FIRST, srf, true);
 				}
 				searchQuery.close();
+				srchText.setText("");
 				// dssearch.close();
 			}
 
 		});
 		// End of search code.
 
+		// List to hold all of the categories, right now this is three.
 		List<GlossaryCategoriesBean> categories = ds.getGlossaryCategoryInfo();
 		// Set sizes of arrays when we know the size of the list.
 		glossary_list = new String[categories.size()];
@@ -117,8 +128,6 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 			byte[] blob = categories.get(i).getImageID();
 			ByteArrayInputStream imageStream = new ByteArrayInputStream(blob);
 			imageId[i] = BitmapFactory.decodeStream(imageStream);
-			// int resID = getResources().getIdentifier(mDrawableName ,
-			// "drawable", context.getPackageName());
 			glossary_list[i] = categories.get(i).getTitle();
 		}
 
@@ -131,7 +140,7 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 		// on the item list
 		list.setOnItemClickListener(listViewListenerHandler);
 
-		// ds.close();
+		ds.close();
 
 		return v;
 
@@ -139,13 +148,15 @@ public class GlossaryCategoriesListFragment extends BaseFragment {
 
 	private AdapterView.OnItemClickListener listViewListenerHandler = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+			
 			Bundle bundle = new Bundle();
-
 			int a = imageId.length;
+			// recycle the bitmaps. This helps with RAM usage.
 			for (int i = 0; i < a; i++) {
 				imageId[i].recycle();
 			}
-
+			
+			// passing arguments to the next fragment.
 			bundle.putString("symptom", glossary_list[position]);
 			GlossaryFragment gf = new GlossaryFragment();
 			gf.setArguments(bundle);

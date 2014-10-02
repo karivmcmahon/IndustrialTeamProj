@@ -36,7 +36,10 @@ public class CustomGridView extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
+        
+        //Uses this layout.
         View gridView = inflater.inflate(R.layout.grid_single, null, false);
+        
         ImageView glossaryListImage = (ImageView) gridView.findViewById(R.id.grid_image);
         glossaryListImage.setImageBitmap(imageId.get(position));
         return gridView;

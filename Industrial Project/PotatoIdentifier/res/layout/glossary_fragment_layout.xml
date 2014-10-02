@@ -30,7 +30,8 @@
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:layout_below="@id/GlossarySecondTextTitle"
-        android:text="@string/search_bar" />
+        android:text="@string/search_bar" 
+        />
 
     <EditText
         android:id="@+id/searchbar"
@@ -39,7 +40,8 @@
         android:layout_below="@+id/GlossarySecondTextTitle"
         android:layout_toLeftOf="@+id/searchButton"
         android:ems="10"
-        android:hint="@string/search_bar" >
+        android:hint="@string/search_bar"
+        android:imeOptions="actionDone" >
     </EditText>
 
     <ListView

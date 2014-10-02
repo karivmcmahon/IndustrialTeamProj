@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,9 +62,7 @@ public class FurtherInfo extends BaseFragment {
 		
 		// Six photos are displayed.
 		slideshowImageArray = new ArrayList<Bitmap>(6);
-		
-		Log.i("disease" , Integer.toString(furtherInfo.size()));
-		
+				
 		// loops through for the six images
 		// This for loop is not needed, the size is only ever one.
 		for (int i = 0; i < furtherInfo.size(); i++) {
@@ -116,16 +113,16 @@ public class FurtherInfo extends BaseFragment {
 		// Setting the three text views for basic info, diagnostics and control methods.
 		TextView basicFactsTextView = (TextView) v.findViewById(R.id.basicFactTextView);
 		basicFactsTextView.setText(basicFacts);
-
+		
 		TextView diagnosticsTextView = (TextView) v.findViewById(R.id.diagnosticsTextView);
 		diagnosticsTextView.setText(diagnostics);
-
+		
 		TextView controlTextView = (TextView) v.findViewById(R.id.controlTextView);
 		controlTextView.setText(control);
-
+		
 		TextView symptomTitleTextView = (TextView) v.findViewById(R.id.VideoTitleTextView);
 		symptomTitleTextView.setText(symptomTitle);
-
+		
 		// Creating the adapter for the slideshow.
 		SlideshowViewPagerAdapter adapter = new SlideshowViewPagerAdapter(getActivity(), slideshowImageArray, context);
 		
@@ -134,6 +131,7 @@ public class FurtherInfo extends BaseFragment {
 		myViewPager.setCurrentItem(0);
 		myViewPager.setOnPageChangeListener(viewPagerListenerHandler);
 		
+		// set the slideshow button to 0 as we start at the start of the slideshow.
 		initButton();
 		
 		return v;
@@ -182,6 +180,7 @@ public class FurtherInfo extends BaseFragment {
 		}
 	}
 
+	// changing the layout of the highlighted button.
 	private void setButton(Button btn, String layoutType) {
 		if (layoutType.equals("round_cell_on")) {
 			btn.setBackgroundResource(R.drawable.round_cell_on);
