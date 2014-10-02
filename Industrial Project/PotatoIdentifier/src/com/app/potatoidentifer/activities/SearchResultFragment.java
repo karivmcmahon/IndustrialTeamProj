@@ -29,17 +29,20 @@ public class SearchResultFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		v = inflater.inflate(R.layout.search_result_layout, container, false);
 
+		// make sure that the list is empty so that you do not also display the search results from last time.
 		glossarraylistreceiver.clear();
 
+		// get arguments from the bundle.
 		Bundle bundle = this.getArguments();
 		glossarraylistreceiver = bundle.getParcelableArrayList("arraylist");
 
+		// get the length of the arraylist.
 		int listLength = glossarraylistreceiver.size();
-		Log.i("disease", Integer.toString(listLength));
 
 		symptoms = new String[listLength];
 		images = new Bitmap[listLength];
-
+		
+		// for the length of the arraylist, try and add each symptom and image to the two arrays; symptoms and images.
 		for (int i = 0; i < listLength; i++) {
 			symptoms[i] = glossarraylistreceiver.get(i).getSymptom();
 			try {
@@ -48,12 +51,10 @@ public class SearchResultFragment extends BaseFragment {
 				images[i] = BitmapFactory.decodeStream(imageStream);
 			} catch (Exception e) {
 				Log.i("disease", "Something went wrong at " + Integer.toString(i));
-			} finally {
-
-			}
+			} finally {}
 
 		}
-
+		
 		CategoriesCustomListView adapter = new CategoriesCustomListView(getActivity(), symptoms, images);
 		results = (ListView) v.findViewById(R.id.searchResultList);
 		results.setAdapter(adapter);
@@ -64,6 +65,7 @@ public class SearchResultFragment extends BaseFragment {
 		return v;
 	}
 
+	// if the user clicks on one of the search results then send them to the furtherinfo class for that result.
 	private AdapterView.OnItemClickListener listViewListenerHandler = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 			Bundle bundle = new Bundle();

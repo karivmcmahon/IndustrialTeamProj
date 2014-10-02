@@ -42,138 +42,141 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SearchTest extends BaseFragment {
-    private Button testBut;
-    private static final String MyPREFERENCES = "MyPrefs";
-    private SharedPreferences sharedpreferences;
+	private Button testBut;
+	private static final String MyPREFERENCES = "MyPrefs";
+	private SharedPreferences sharedpreferences;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final Context context = getActivity();
-        final View v = inflater.inflate(R.layout.search_test, container, false);
-        final GlossaryCategoriesDataSource ds = new GlossaryCategoriesDataSource(context);
-        ds.open();
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        testBut = (Button) v.findViewById(R.id.btn_search);
-        sharedpreferences = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        Log.v("SHARED", "SHARED " + sharedpreferences.getString("Date", "DEFAULT"));
-        final TextView tv = (TextView)v.findViewById(R.id.GlossaryThirdTextTitle);
-        tv.setText("Last Updated : " + sharedpreferences.getString("Date", "DEFAULT"));
-        testBut.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
+		final Context context = getActivity();
+		final View v = inflater.inflate(R.layout.search_test, container, false);
+		final GlossaryCategoriesDataSource ds = new GlossaryCategoriesDataSource(context);
+		ds.open();
 
-                if (checkInternetConnection(context)) {
-                    Toast.makeText(context, "Updating App....", Toast.LENGTH_LONG).show();
-                    StrictMode.ThreadPolicy policy = new
-                            StrictMode.ThreadPolicy.Builder().permitAll().build();
+		testBut = (Button) v.findViewById(R.id.btn_search);
+		sharedpreferences = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+		final TextView tv = (TextView) v.findViewById(R.id.GlossaryThirdTextTitle);
+		tv.setText("Last Updated : " + sharedpreferences.getString("Date", "DEFAULT"));
+		testBut.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
 
-                    StrictMode.setThreadPolicy(policy);
+				if (checkInternetConnection(context)) {
+					Toast.makeText(context, "Updating App....", Toast.LENGTH_LONG).show();
+					StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-                    JSONObject json;
-                    String str = "";
-                    HttpResponse response;
-                    HttpClient myClient = new DefaultHttpClient();
-                    HttpPost myConnection = new HttpPost("https://zeno.computing.dundee.ac.uk/2014-projects/team1/admin_portal/sync.php");
+					StrictMode.setThreadPolicy(policy);
 
-                    List nameValuePairs = new ArrayList(1);
-                    Calendar cal = Calendar.getInstance(); // creates calendar
-                    cal.setTime(new Date()); // sets calendar time/date
-                    cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
-                    Date today = cal.getTime();
-                    String lastUpdated = dateToString(today);
+					JSONObject json;
+					String str = "";
+					HttpResponse response;
+					HttpClient myClient = new DefaultHttpClient();
+					HttpPost myConnection = new HttpPost("https://zeno.computing.dundee.ac.uk/2014-projects/team1/admin_portal/sync.php");
 
-                    nameValuePairs.add(new BasicNameValuePair("lastUpdated", sharedpreferences.getString("Date", "DEFAULT")));
-                    Log.v("SHARED", "SHARED " + sharedpreferences.getString("Date", "DEFAULT"));
-                    try {
-                        myConnection.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                        response = myClient.execute(myConnection);
-                        str = EntityUtils.toString(response.getEntity(), "UTF-8");
-                    } catch (UnsupportedEncodingException e) {
+					List nameValuePairs = new ArrayList(1);
+					Calendar cal = Calendar.getInstance(); // creates calendar
+					cal.setTime(new Date()); // sets calendar time/date
+					cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
+					Date today = cal.getTime();
+					String lastUpdated = dateToString(today);
 
-                        Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
-                    } catch (ClientProtocolException e) {
-                        Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
-                    }
+					nameValuePairs.add(new BasicNameValuePair("lastUpdated", sharedpreferences.getString("Date", "DEFAULT")));
+					Log.v("SHARED", "SHARED " + sharedpreferences.getString("Date", "DEFAULT"));
+					try {
+						myConnection.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+						response = myClient.execute(myConnection);
+						str = EntityUtils.toString(response.getEntity(), "UTF-8");
+					} catch (UnsupportedEncodingException e) {
 
-                    try {
-                        Log.v("TESTing:", str);
-                        JSONArray jArray = new JSONArray(str);
-                        if (jArray.length() != 0) {
-                            json = jArray.getJSONObject(0);
-                            for (int i = 0; i < jArray.length(); i++) {
-                                json = jArray.getJSONObject(i);
-                                Log.v("testing", Integer.toString(jArray.length()));
-                                ds.open();
-                                boolean exists = ds.doesDieaseExistByID(json.getString("_id"));
-                                Log.v("exists", "exists " + exists);
-                                Log.v("ID", "ID: " + json.getString("_id"));
-                                if (exists == true) {
-                                    ds.open();
-                                    ds.update(json.getString("_id"), json.getString("symptom"), json.getString("type"), json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
-                                } else {
-                                    ds.open();
-                                    Log.v("INSERT", "INSERT");
-                                    byte[] decodedString = Base64.decode(json.getString("imageid"), Base64.DEFAULT);
-                                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+						Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();
+						e.printStackTrace();
+					} catch (ClientProtocolException e) {
+						Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();
+						e.printStackTrace();
+					} catch (IOException e) {
+						Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();
+						e.printStackTrace();
+					}
 
-                                    byte[] decodedString2 = Base64.decode(json.getString("imageid2"), Base64.DEFAULT);
-                                    Bitmap decodedByte2 = BitmapFactory.decodeByteArray(decodedString2, 0, decodedString2.length);
+					try {
+						Log.v("TESTing:", str);
+						JSONArray jArray = new JSONArray(str);
+						if (jArray.length() != 0) {
+							json = jArray.getJSONObject(0);
+							for (int i = 0; i < jArray.length(); i++) {
+								json = jArray.getJSONObject(i);
+								Log.v("testing", Integer.toString(jArray.length()));
+								ds.open();
+								boolean exists = ds.doesDieaseExistByID(json.getString("_id"));
+								Log.v("exists", "exists " + exists);
+								Log.v("ID", "ID: " + json.getString("_id"));
+								if (exists == true) {
+									ds.open();
+									ds.update(json.getString("_id"), json.getString("symptom"), json.getString("type"),
+											json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
+								} else {
+									ds.open();
+									Log.v("INSERT", "INSERT");
+									byte[] decodedString = Base64.decode(json.getString("imageid"), Base64.DEFAULT);
+									Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-                                    byte[] decodedString3 = Base64.decode(json.getString("imageid3"), Base64.DEFAULT);
-                                    Bitmap decodedByte3 = BitmapFactory.decodeByteArray(decodedString3, 0, decodedString2.length);
+									byte[] decodedString2 = Base64.decode(json.getString("imageid2"), Base64.DEFAULT);
+									Bitmap decodedByte2 = BitmapFactory.decodeByteArray(decodedString2, 0, decodedString2.length);
 
-                                    byte[] decodedString4 = Base64.decode(json.getString("imageid4"), Base64.DEFAULT);
-                                    Bitmap decodedByte4 = BitmapFactory.decodeByteArray(decodedString4, 0, decodedString2.length);
+									byte[] decodedString3 = Base64.decode(json.getString("imageid3"), Base64.DEFAULT);
+									Bitmap decodedByte3 = BitmapFactory.decodeByteArray(decodedString3, 0, decodedString2.length);
 
-                                    byte[] decodedString5 = Base64.decode(json.getString("imageid4"), Base64.DEFAULT);
-                                    Bitmap decodedByte5 = BitmapFactory.decodeByteArray(decodedString5, 0, decodedString2.length);
+									byte[] decodedString4 = Base64.decode(json.getString("imageid4"), Base64.DEFAULT);
+									Bitmap decodedByte4 = BitmapFactory.decodeByteArray(decodedString4, 0, decodedString2.length);
 
-                                    byte[] decodedString6 = Base64.decode(json.getString("imageid5"), Base64.DEFAULT);
-                                    Bitmap decodedByte6 = BitmapFactory.decodeByteArray(decodedString6, 0, decodedString2.length);
+									byte[] decodedString5 = Base64.decode(json.getString("imageid4"), Base64.DEFAULT);
+									Bitmap decodedByte5 = BitmapFactory.decodeByteArray(decodedString5, 0, decodedString2.length);
 
-                                    ds.insert(json.getString("_id"), json.getString("symptom"), json.getString("type"), decodedByte, decodedByte2, decodedByte3, decodedByte4, decodedByte5, decodedByte6, json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
-                                }
-                                
-                            }
-                            Editor editor = sharedpreferences.edit();
-                            editor.putString("Date", lastUpdated);
-                            editor.commit();
-                            Log.v("SHARED", "SHARED " + sharedpreferences.getString("Date", "DEFAULT"));
-                            Toast.makeText(context, "Update Complete.", Toast.LENGTH_LONG).show();
-                            tv.setText("Last Updated : " + sharedpreferences.getString("Date", "DEFAULT"));
-                        } else {
-                            Toast.makeText(context, "App is already up-to-date.", Toast.LENGTH_LONG).show();
-                        }
-                    } catch (JSONException e) {
-                        Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
-                    }
-                   
-                } else {
-                    Toast.makeText(context, "We can't connect to the Internet right now.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-        return v;
-    }
+									byte[] decodedString6 = Base64.decode(json.getString("imageid5"), Base64.DEFAULT);
+									Bitmap decodedByte6 = BitmapFactory.decodeByteArray(decodedString6, 0, decodedString2.length);
 
-    private String dateToString(Date date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String currentDate = formatter.format(date);
-        return currentDate;
-    }
+									ds.insert(json.getString("_id"), json.getString("symptom"), json.getString("type"), decodedByte,
+											decodedByte2, decodedByte3, decodedByte4, decodedByte5, decodedByte6,
+											json.getString("basicFacts"), json.getString("diagnostics"), json.getString("control"));
+								}
 
-    private boolean checkInternetConnection(Context context) {
-        ConnectivityManager conMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable() && conMgr.getActiveNetworkInfo().isConnected()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+							}
+							Editor editor = sharedpreferences.edit();
+							editor.putString("Date", lastUpdated);
+							editor.commit();
+							Log.v("SHARED", "SHARED " + sharedpreferences.getString("Date", "DEFAULT"));
+							Toast.makeText(context, "Update Complete.", Toast.LENGTH_LONG).show();
+							tv.setText("Last Updated : " + sharedpreferences.getString("Date", "DEFAULT"));
+						} else {
+							Toast.makeText(context, "App is already up-to-date.", Toast.LENGTH_LONG).show();
+						}
+					} catch (JSONException e) {
+						Toast.makeText(context, "Error with updating the app.", Toast.LENGTH_LONG).show();
+						e.printStackTrace();
+					}
+
+				} else {
+					Toast.makeText(context, "We can't connect to the Internet right now.", Toast.LENGTH_LONG).show();
+				}
+			}
+		});
+		return v;
+	}
+
+	private String dateToString(Date date) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String currentDate = formatter.format(date);
+		return currentDate;
+	}
+
+	private boolean checkInternetConnection(Context context) {
+		ConnectivityManager conMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable()
+				&& conMgr.getActiveNetworkInfo().isConnected()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

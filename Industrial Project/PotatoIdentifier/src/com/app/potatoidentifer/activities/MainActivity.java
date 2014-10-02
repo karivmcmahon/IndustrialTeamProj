@@ -208,7 +208,8 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		}
 	}
 
-	// Method which handles adding a fragment to the arraylist inside the hashmap of tabs.
+	// Method which handles adding a fragment to the arraylist inside the
+	// hashmap of tabs.
 	public void addFragments(String tabName, Fragment fragment, boolean add) {
 		if (add) {
 			hashMapTabs.get(tabName).add(fragment);
@@ -245,12 +246,15 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 		ft.commit();
 	}
 
+	// when the user presses the back button.
+	// if there is a fragment before the current one, return to it.
+	// If not close the app
 	@Override
 	public void onBackPressed() {
 		if (hashMapTabs.get(currentSelectedTab).size() <= 1) {
 			super.onBackPressed();
 		} else {
-
+			// garbage collection for keeping some control over the RAM the app will be using.
 			System.gc();
 
 			removeFragment();
@@ -276,8 +280,7 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 			iv.setBackgroundColor(Color.parseColor("#555555"));
 		}
 
-		View iv = (View) tabHost.getCurrentTabView();
-
+		// These are the classes used for the default fragments.
 		if (hashMapTabs.get(tabName).size() == 0) {
 			if (tabName.equals(Const.TAB_FIRST)) {
 				addFragments(tabName, new GlossaryCategoriesListFragment(), true);
@@ -292,20 +295,6 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 			addFragments(tabName, hashMapTabs.get(tabName).get(hashMapTabs.get(tabName).size() - 1), false);
 		}
 
-		switch (tabHost.getCurrentTab()) {
-		case 0:
-			iv.setBackgroundColor(getResources().getColor(R.color.twitter));
-			break;
-		case 1:
-			iv.setBackgroundColor(getResources().getColor(R.color.twitter));
-			break;
-		case 2:
-			iv.setBackgroundColor(getResources().getColor(R.color.twitter));
-			break;
-		case 3:
-			iv.setBackgroundColor(getResources().getColor(R.color.twitter));
-			break;
-		}
 	}
 
 	private class MyTabView extends LinearLayout {
