@@ -70,8 +70,8 @@ public class GlossaryFragment extends BaseFragment {
 				imageId.add(BitmapFactory.decodeStream(imageStream));
 			}
 
-			/*glossaryId.add(categoryInfo.get(i).getId());
-			glossaryList.add(categoryInfo.get(i).getSymptom());*/
+			glossaryId.add(categoryInfo.get(i).getId());
+			glossaryList.add(categoryInfo.get(i).getSymptom());
 		}
 		
 		// Setting up the listview and adding a on item click listener.
