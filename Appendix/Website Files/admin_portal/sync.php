@@ -7,7 +7,7 @@ function updateApp($lastupdated, $currentDate) {
 	try {
 		header('Content-Type: application/json');
 		$array = array();
-		$dbh = new PDO("sqlite:projectDB.sqlite");
+		$dbh = new PDO("sqlite:projectDB2.sqlite");
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		
 		$stmt = $dbh->prepare("SELECT * FROM glossary WHERE datetime(timestamp) > datetime(:lastUpdated);");
 		$stmt->bindParam(':lastUpdated', $lastupdated, PDO::PARAM_STR);

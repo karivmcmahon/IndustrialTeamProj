@@ -63,7 +63,7 @@ else {
 						<div class="form-group">
 							<label for="inputType">Type:</label>
 							<select name="inputType" class="form-control" id="drop">
-								<option value="Tubers"  <?php echo ($row['type'] == "Tubers" ? "selected" : ""); ?>>Tuber</option>
+								<option value="Tuber"  <?php echo ($row['type'] == "Tuber" ? "selected" : ""); ?>>Tuber</option>
 								<option value="Leaf" <?php echo ($row['type'] == "Leaf" ? "selected" : ""); ?>>Leaf</option>
 								<option value="Insects + Pests" <?php echo ($row['type'] == "Insects + Pests" ? "selected" : ""); ?>>Insects + Pests</option>
 							</select>
