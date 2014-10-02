@@ -200,7 +200,7 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 	// building the database.
 	public void buildDatabase() {
 		DatabaseHelper myDbHelper = new DatabaseHelper(this);
-		myDbHelper.deleteDatabase();
+		//myDbHelper.deleteDatabase();
 		try {
 			myDbHelper.createDataBase();
 		} catch (IOException ioe) {
@@ -289,7 +289,7 @@ public class MainActivity extends FragmentActivity implements OnTabChangeListene
 			} else if (tabName.equals(Const.TAB_THIRD)) {
 				addFragments(tabName, new VideoFragment(), true);
 			} else if (tabName.equals(Const.TAB_FORTH)) {
-				addFragments(tabName, new SearchTest(), true);
+				addFragments(tabName, new SyncFragment(), true);
 			}
 		} else {
 			addFragments(tabName, hashMapTabs.get(tabName).get(hashMapTabs.get(tabName).size() - 1), false);

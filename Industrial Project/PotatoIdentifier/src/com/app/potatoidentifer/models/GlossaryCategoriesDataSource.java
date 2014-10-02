@@ -124,25 +124,18 @@ public class GlossaryCategoriesDataSource extends BaseDataSource {
     	Log.v("update","update");
     }
 
-    public void insert(String _id,String symptom, String type, Bitmap image1, Bitmap image2, Bitmap image3, Bitmap image4, Bitmap image5, Bitmap image6, String basicFacts, String diagnostics, String control)
-    {
-       	byte[] data1 = getBitmapAsByteArray(image1);
-        byte[] data2 = getBitmapAsByteArray(image2);
-        byte[] data3 = getBitmapAsByteArray(image3);
-        byte[] data4 = getBitmapAsByteArray(image4);
-        byte[] data5 = getBitmapAsByteArray(image5);
-        byte[] data6 = getBitmapAsByteArray(image6);
+    public void insert(String _id,String symptom, String type, byte[] image1, byte[] image2, byte[] image3, byte[] image4, byte[] image5, byte[] image6, String basicFacts, String diagnostics, String control) {
     	open();
     	ContentValues cv = new ContentValues();
     	cv.put("_id",_id);
     	cv.put("symptom",symptom);
     	cv.put("type",type);
-    	cv.put("imageid", data1);
-    	cv.put("imageid2",data2);
-        cv.put("imageid3",data3);
-        cv.put("imageid4",data4);
-        cv.put("imageid5",data5);
-        cv.put("imageid6",data6);
+    	cv.put("imageid", image1);
+    	cv.put("imageid2",image2);
+        cv.put("imageid3",image3);
+        cv.put("imageid4",image4);
+        cv.put("imageid5",image5);
+        cv.put("imageid6",image6);
     	cv.put("basicFacts",basicFacts);
     	cv.put("diagnostics", diagnostics);
     	cv.put("control", control);
