@@ -23,6 +23,8 @@ public class GlossaryCategoriesDataSource extends BaseDataSource {
 
     public Cursor doesDisexist(String disease)
     {
+    	open();
+    	Log.i("disease" , "Something");
     	String args = "%" + disease + "%";
 		
     	Cursor dbSelect = database.query(
@@ -32,10 +34,10 @@ public class GlossaryCategoriesDataSource extends BaseDataSource {
     			new String[] { args }, // If selection has a '?' it is replaced by what this value, passed as a string
     			null, // group by
     			null, // having
-    			null, // order by
+    			GLOSSARY_SYMPTOM, // order by
     			null // limit
     			);
-    		
+    	//close();
     	return dbSelect;
     }
    
