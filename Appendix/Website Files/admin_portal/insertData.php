@@ -1,20 +1,38 @@
 
 <?php
 session_start();
-insert($_REQUEST['name'], $_REQUEST['inputType'], $_REQUEST['inputfile'], $_REQUEST["inputfile2"],$_REQUEST["inputfile3"],$_REQUEST["inputfile4"],$_REQUEST["inputfile5"],$_REQUEST["inputfile6"],$_REQUEST["basicFacts"], $_REQUEST["control"], $_REQUEST["diagnostics"]);
+insert($_REQUEST['name'], $_REQUEST['inputType'], $_FILES['inputfile']['tmp_name'],$_FILES['inputfile2']['tmp_name'],$_FILES['inputfile3']['tmp_name'],$_FILES['inputfile4']['tmp_name'],$_FILES['inputfile5']['tmp_name'],$_FILES['inputfile6']['tmp_name'],$_REQUEST["basicFacts"], $_REQUEST["control"], $_REQUEST["diagnostics"]);
 function insert( $symptom, $type, $imagepath, $imagepath2, $imagepath3 , $imagepath4, $imagepath5, $imagepath6, $basicFacts, $control, $diagnostics )
 {
 	try {
-
+  
 		$dbh = new PDO("sqlite:projectDB.sqlite");
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
-		$imageid = fopen($imagepath,'rb');
-		$imageid2 = fopen($imagepath2,'rb');
-		$imageid3 = fopen($imagepath3,'rb');
-		$imageid4 = fopen($imagepath4,'rb');
-		$imageid5 = fopen($imagepath5,'rb');
-		$imageid6 = fopen($imagepath6,'rb');
+		$fp      = fopen($imagepath, 'r');
+		$imageid = fread($fp,filesize($imagepath));
+		fclose($fp);
+		
+		$fp      = fopen($imagepath2, 'r');
+		$imageid2 = fread($fp,filesize($imagepath2));
+		fclose($fp);
+		
+		$fp      = fopen($imagepath3, 'r');
+		$imageid3 = fread($fp,filesize($imagepath3));
+		fclose($fp);
+		
+		$fp      = fopen($imagepath4, 'r');
+		$imageid4 = fread($fp,filesize($imagepath4));
+		fclose($fp);
+		
+		$fp      = fopen($imagepath5, 'r');
+		$imageid5 = fread($fp,filesize($imagepath5));
+		fclose($fp);
+		
+		$fp      = fopen($imagepath6, 'r');
+		$imageid6 = fread($fp,filesize($imagepath6));
+		fclose($fp);
+		
 		
 		//Get current date
 		date_default_timezone_set("Europe/London");
