@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">Diagnostic Tool</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="search">Search Potatoes</string>
+    <string name="search_hint">Search Potatoes</string>
+    <string name="flag_description">Potato Flag</string>
+    <string name="search_settings">Search Potato Names</string>
+    <string name="search_bar">Search</string>
+    <string name="glossary">Glossary</string>
+    <string name="glossary_desc">Please search or select from categories below:</string>
+    <string name="basic_facts">Basic Facts</string>
+    <string name="diag">Diagnostics</string>
+    <string name="control_methods">Control Methods</string>
+    <string name="question">Question?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    
+    <string name="image_content">This is an image</string>
+    <string name="grid_content">This is a piece of a grid</string>
+    <string name="video_content">This is an icon for the video player</string>
+    
+    <string name="diagnose_question_title">Answer These Questions for Diagnosis</string>
+    
+    <string name="sync">Sync</string>
+    
+    <string name="vid_tut">Video Tutorials</string>
+    
+    <string name="lat_flow">Lateral Flow Device Test</string>
+    <string name="fta">FTA Test</string>
+    
+    <string name="settings">Settings</string>
+    <string name="sync_instruction">Press sync to update application info: </string>
+    
+    <string name="expert_system">Expert System</string>
+    
+</resources>

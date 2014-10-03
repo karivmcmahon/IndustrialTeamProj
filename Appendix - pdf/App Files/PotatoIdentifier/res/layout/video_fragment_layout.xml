@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollview"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/VideoTitleTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/vid_tut"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/VideoOneTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/lat_flow"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:id="@+id/video_frame"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:background="#000" >
+
+            <VideoView
+                android:id="@+id/videoView1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <ImageButton
+                android:id="@+id/play_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@null"
+                android:contentDescription="@string/video_content"
+                android:src="@drawable/ic_video_tab" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/VideoTwoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/fta"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:id="@+id/video_frame2"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:background="#000" >
+
+            <VideoView
+                android:id="@+id/videoView2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <ImageButton
+                android:id="@+id/play_button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@null"
+                android:contentDescription="@string/video_content"
+                android:src="@drawable/ic_video_tab" />
+        </FrameLayout>
+    </LinearLayout>
+
+</ScrollView>
